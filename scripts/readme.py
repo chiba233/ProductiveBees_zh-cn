@@ -30,26 +30,34 @@ def table():
     k = json.loads((ROOT / 'versions' / 'keys.json').read_text(encoding='utf-8'))['lang']
     zh = json.loads((ROOT / 'src' / 'lang' / 'zh_cn.json').read_text(encoding='utf-8'))
 
+    base = ROOT / 'src' / 'books' / 'patchouli_books' / 'guide' / 'zh_cn'
+    books = {p.relative_to(base).as_posix().replace('.json.json', '')
+             for p in base.rglob('*.json')}
+    kb = json.loads((ROOT / 'versions' / 'keys.json').read_text(encoding='utf-8'))['books']
     rows = []
     for tag in sorted(t, key=lambda x: (mcver(t[x]['minecraft']), t[x]['loader']),
                       reverse=True):
         v = t[tag]
         need = [key for key, tags in k.items() if tag in tags]
         have = [key for key in need if key in zh]
-        pct = 100 * len(have) / max(1, len(need))
-        if not v.get('buildable'):
-            state = '暂无（构建工具链够不着 1.16 及更早）'
-        elif pct >= 99.95:
+        nb = [b for b, tags in kb.items() if tag in tags]
+        hb = [b for b in nb if b in books]
+        if v.get('buildable'):
             state = '✅ 可用'
         else:
-            state = '⏳ 差 %d 条' % (len(need) - len(have))
-        rows.append('| %s | %s | %d / %d（%.1f%%） | %d | %s |'
-                    % (v['minecraft'], v['loader'], len(have), len(need), pct,
-                       v['book_files'], state))
+            miss = []
+            if len(have) < len(need):
+                miss.append('%d 条词条' % (len(need) - len(have)))
+            if len(hb) < len(nb):
+                miss.append('%d 页导览书' % (len(nb) - len(hb)))
+            state = '⏳ 待补 ' + '、'.join(miss) if miss else '⏳ 待接构建'
+        rows.append('| %s | %s | %d / %d | %d / %d | %s |'
+                    % (v['minecraft'], v['loader'], len(have), len(need),
+                       len(hb), len(nb), state))
 
     out = [BEGIN,
            '',
-           '| Minecraft | 加载器 | 已汉化条目 | 导览书页数 | 状态 |',
+           '| Minecraft | 加载器 | 词条 | 导览书 | 状态 |',
            '|---|---|---|---|---|']
     out += rows
     out += ['', END]

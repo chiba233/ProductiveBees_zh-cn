@@ -186,8 +186,15 @@ def scan():
     gap()
 
 
+def have_books():
+    base = ROOT / 'src' / 'books' / 'patchouli_books' / 'guide' / 'zh_cn'
+    return {p.relative_to(base).as_posix().replace('.json.json', '')
+            for p in base.rglob('*.json')}
+
+
 def gap():
-    """报缺口——这就是待办清单。"""
+    """报缺口——这就是待办清单。lang 与导览书都要报：只报 lang 会让人以为
+    只差一点点，其实有些目标是卡在导览书上。"""
     data = json.loads((VERSIONS / 'keys.json').read_text(encoding='utf-8'))
     targets = json.loads((VERSIONS / 'targets.json').read_text(encoding='utf-8'))
     zh = json.loads((ROOT / 'src' / 'lang' / 'zh_cn.json').read_text(encoding='utf-8'))
@@ -197,15 +204,17 @@ def gap():
     print('全历史版本 lang key 并集 %d 个；我们有 %d 条译文；**缺 %d 个**'
           % (len(allkeys), len(zh), len(miss)))
     print('\n按目标看（缺几个就是那个整合包会露几处英文）：')
+    books = have_books()
     for tag in sorted(targets, key=lambda t: (mcver(targets[t]['minecraft']),
                                               targets[t]['loader']), reverse=True):
-        t = targets[tag]
         need = [k for k, v in allkeys.items() if tag in v]
         bad = [k for k in need if k not in zh]
-        flag = '✅' if not bad else ('⚠️' if len(bad) <= 5 else '❌')
-        print('  %s %-16s %4d/%-4d  %.1f%%  缺 %d'
-              % (flag, tag, len(need) - len(bad), len(need),
-                 100 * (len(need) - len(bad)) / max(1, len(need)), len(bad)))
+        nb = [k for k, v in data['books'].items() if tag in v]
+        bb = [k for k in nb if k not in books]
+        flag = '✅' if not bad and not bb else '❌'
+        print('  %s %-16s lang %4d/%-4d 缺%-4d  导览书 %3d/%-3d 缺%d'
+              % (flag, tag, len(need) - len(bad), len(need), len(bad),
+                 len(nb) - len(bb), len(nb), len(bb)))
     if miss:
         pref = defaultdict(int)
         for k in miss:

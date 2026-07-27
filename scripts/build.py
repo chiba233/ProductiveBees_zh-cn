@@ -168,6 +168,7 @@ def build_one(ver, tag, t, gradle):
     run(str(gradle), '--no-daemon', '-q', 'clean', 'build',
         '-PmodVersion=%s' % ver, '-PjavaVersion=%s' % t['java'],
         '-PloaderVersion=%s' % t['loader_version'],
+        '-Plegacy=%s' % ('true' if t.get('legacy') else 'false'),
         '-Ploader=%s' % t['loader'].lower(), '-PmcVersion=%s' % t['minecraft'],
         cwd=ROOT / 'mod', env=env)
 

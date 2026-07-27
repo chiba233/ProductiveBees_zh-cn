@@ -12,9 +12,15 @@
 //
 // 资源（lang / 导览书）与译名表都是 Python 在构建前生成到 src/main/resources 的，
 // 真源在 atm10-zh-cn，按 SOURCE.lock 的 commit 钉死。这里只负责编译与打包。
+// 两套加载器两个插件：新版 NeoForge（1.20.2+）走 moddev，
+// Forge 与 1.20.1 的 NeoForge 走 legacyforge。用哪套由 -Plegacy 决定。
 plugins {
-    id 'net.neoforged.moddev' version '2.0.142'
+    id 'net.neoforged.moddev' version '2.0.142' apply false
+    id 'net.neoforged.moddev.legacyforge' version '2.0.142' apply false
 }
+
+def legacy = ((project.findProperty('legacy') ?: 'false') as String).toBoolean()
+apply plugin: legacy ? 'net.neoforged.moddev.legacyforge' : 'net.neoforged.moddev'
 
 version = project.findProperty('modVersion') ?: 'dev'
 group = 'cn.hoshino'
@@ -27,8 +33,15 @@ java {
         (project.findProperty('javaVersion') ?: '21') as Integer)
 }
 
-neoForge {
-    version = project.findProperty('loaderVersion') ?: '21.1.241'
+// 加载器胶水各有一套（事件类的包名不同：net.minecraftforge.* vs net.neoforged.*），
+// 但真逻辑 BeeNames 不引用任何 Minecraft 类型，两边共用。
+sourceSets.main.java.srcDirs = ['src/main/java',
+                                legacy ? 'src/forge/java' : 'src/neoforge/java']
+
+if (legacy) {
+    legacyForge { version = project.findProperty('loaderVersion') ?: '1.20.1-47.4.9' }
+} else {
+    neoForge { version = project.findProperty('loaderVersion') ?: '21.1.241' }
 }
 
 // 产物字节要可复现：不写时间戳，条目按名字排序。
