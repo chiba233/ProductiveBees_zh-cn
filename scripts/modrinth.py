@@ -19,8 +19,8 @@ Modrinth 上整合包有一万七千多个。和 CurseForge 不同，它**没有
 `addons.py merge` 合并。
 
 用法:
-    python3 scripts/modrinth.py list
-    python3 scripts/modrinth.py scan [N|all] [--shard i/N]
+    python3 scripts/modrinth.py list [--mods]
+    python3 scripts/modrinth.py scan [N|all] [--shard=i/N] [--mods]
 """
 import json
 import os
@@ -76,15 +76,19 @@ def _page(facets, index, seen, out):
     return total or 0
 
 
-def fetch_list():
-    """把 Modrinth 上的整合包全部列出来。
+# 整合包与模组各自的清单文件。模组那边七万多个，比整合包还多一倍。
+LISTS = {'modpack': 'modrinth_packs.json', 'mod': 'modrinth_mods.json'}
 
-    一趟最多 10000 条，而整合包有一万七千多个——所以**按分面切**：先按不同排序
-    各来一趟（各自能覆盖前 10000），再按 Minecraft 版本逐个来一趟。每个版本的
-    子集都远小于上限，合起来才是全集。少了这一步，后面两千多个包一个都扫不到。
+
+def fetch_list(kind='modpack'):
+    """把 Modrinth 上某一类项目全部列出来（整合包或模组）。
+
+    一趟最多 10000 条，而整合包有一万七千多个、模组七万多个——所以**按分面切**：
+    先按不同排序各来一趟（各自能覆盖前 10000），再按 Minecraft 版本逐个来一趟。
+    每个版本的子集都远小于上限，合起来才是全集。少了这一步，后面那些一个都扫不到。
     """
     seen, out = set(), []
-    base = [['project_type:modpack']]
+    base = [['project_type:%s' % kind]]
     total = 0
     for index in ('downloads', 'newest', 'updated', 'follows'):
         total = max(total, _page(base, index, seen, out))
@@ -99,28 +103,30 @@ def fetch_list():
                   % (v, len(out) - before, len(out)), flush=True)
     out.sort(key=lambda r: -r['downloads'])
     VERSIONS.mkdir(exist_ok=True)
-    (VERSIONS / 'modrinth_packs.json').write_text(
+    (VERSIONS / LISTS[kind]).write_text(
         json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print('Modrinth 整合包：接口说 %d 个，列到 %d 个' % (total, len(out)))
+    print('Modrinth %s：接口说 %d 个，列到 %d 个'
+          % ('整合包' if kind == 'modpack' else '模组', total, len(out)))
     return out
 
 
-def rows():
-    p = VERSIONS / 'modrinth_packs.json'
-    return json.loads(p.read_text(encoding='utf-8')) if p.is_file() else fetch_list()
+def rows(kind='modpack'):
+    p = VERSIONS / LISTS[kind]
+    return (json.loads(p.read_text(encoding='utf-8')) if p.is_file()
+            else fetch_list(kind))
 
 
-def newest_file(row):
-    """取这个整合包最新版的 .mrpack。优先用清单里带的版本 id——一次小请求。"""
+def newest_file(row, suffix='.mrpack'):
+    """取这个项目最新版的主文件。优先用清单里带的版本 id——一次小请求。"""
     vs = ([api('/version/%s' % row['version'])] if row.get('version')
           else api('/project/%s/version' % row['id']))
     for v in vs:
         files = v.get('files') or []
         for f in files:
-            if f.get('primary') and f['filename'].endswith('.mrpack'):
+            if f.get('primary') and f['filename'].endswith(suffix):
                 return v, f
         for f in files:
-            if f['filename'].endswith('.mrpack'):
+            if f['filename'].endswith(suffix):
                 return v, f
     return None, None
 
@@ -144,14 +150,16 @@ MAX_NESTED = 8 << 20
 MAX_PACK = 24 << 20
 
 
-def scan_one(r):
-    ver, f = newest_file(r)
+def scan_one(r, kind='modpack'):
+    suffix = '.mrpack' if kind == 'modpack' else '.jar'
+    ver, f = newest_file(r, suffix)
     if not f:
-        raise RuntimeError('没有 .mrpack')
+        raise RuntimeError('没有 %s' % suffix)
     src, how = addons.remote_or_local(f['url'])
     try:
         with zipfile.ZipFile(src) as z:
-            pb = uses_pb(z)
+            # 模组自己就是一个 jar，没有 index 可看；有没有 PB 的 key 直接看内容
+            pb = uses_pb(z) if kind == 'modpack' else None
             keys, stats = addons.harvest(z, budget=[MAX_PACK],
                                          max_nested=MAX_NESTED)
     finally:
@@ -162,28 +170,30 @@ def scan_one(r):
     stats['how'] = how
     stats['pb'] = pb
     return {'file': f['filename'], 'version': ver.get('id'),
-            'keys': keys, 'stats': stats, 'platform': 'modrinth'}
+            'keys': keys, 'stats': stats,
+            'platform': 'modrinth' if kind == 'modpack' else 'modrinth-mod'}
 
 
-def scan(limit, shard=None, workers=5):
-    all_rows = rows()
+def scan(limit, shard=None, workers=5, kind='modpack'):
+    all_rows = rows(kind)
     todo = all_rows if limit is None else all_rows[:limit]
-    tag = ''
+    tag = '' if kind == 'modpack' else 'mod'
     if shard:
         i, n = shard
         todo = todo[i::n]
-        tag = '-%d' % i
+        tag += '-%d' % i
     CACHE.mkdir(parents=True, exist_ok=True)
     out_path = CACHE / ('results%s.json' % tag)
     res = json.loads(out_path.read_text(encoding='utf-8')) if out_path.is_file() else {}
     pending = [r for r in todo if r['id'] not in res]
-    print('Modrinth 整合包 %d 个，本片 %d 个，还没扫过 %d 个'
-          % (len(all_rows), len(todo), len(pending)))
+    print('Modrinth %s %d 个，本片 %d 个，还没扫过 %d 个'
+          % ('整合包' if kind == 'modpack' else '模组',
+             len(all_rows), len(todo), len(pending)), flush=True)
     done = [0]
 
     def work(r):
         try:
-            got = scan_one(r)
+            got = scan_one(r, kind)
         except Exception as e:                        # noqa: BLE001
             got = {'error': str(e)[:60], 'platform': 'modrinth'}
         with _lock:
@@ -204,7 +214,7 @@ def scan(limit, shard=None, workers=5):
     ok = sum(1 for v in res.values() if not v.get('error'))
     withpb = sum(1 for v in res.values() if (v.get('stats') or {}).get('pb'))
     withkeys = sum(1 for v in res.values() if v.get('keys'))
-    print('\n扫完 %d 个（失败 %d），其中 %d 个装了资源蜜蜂、%d 个自带蜂名'
+    print('\n扫完 %d 个（失败 %d），其中 %d 个装了资源蜜蜂、%d 个带 PB 的 key'
           % (ok, len(res) - ok, withpb, withkeys))
     return res
 
@@ -222,10 +232,12 @@ if __name__ == '__main__':
     a = sys.argv[1:]
     if not a or a[0] not in ('list', 'scan'):
         sys.exit(__doc__)
+    kind = 'mod' if '--mods' in a else 'modpack'
     if a[0] == 'list':
-        fetch_list()
+        fetch_list(kind)
     else:
         pos = [x for x in a[1:] if not x.startswith('--')]
         lim = (None if pos and pos[0] == 'all'
                else int(pos[0]) if pos else 300)
-        scan(lim, parse_shard(a), workers=int(os.environ.get('PB_WORKERS', '5')))
+        scan(lim, parse_shard(a), workers=int(os.environ.get('PB_WORKERS', '5')),
+             kind=kind)

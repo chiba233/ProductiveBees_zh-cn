@@ -82,7 +82,8 @@ def coverage():
     # 两个平台的量级差很多，分开说：CurseForge 有反向依赖接口，能直接问「谁用了
     # 资源蜜蜂」；Modrinth 没有，只能把整合包全列一遍逐个翻。
     where = '、'.join(
-        '%s %d 个' % ({'curseforge': 'CurseForge', 'modrinth': 'Modrinth'}.get(k, k), v)
+        '%s %d 个' % ({'curseforge': 'CurseForge', 'modrinth': 'Modrinth 整合包',
+                       'modrinth-mod': 'Modrinth 模组'}.get(k, k), v)
         for k, v in sorted(plat.items())) or 'CurseForge %d 个' % d['scanned']
     out = [CBEGIN, '',
            '已逐个翻过 **%d** 个整合包与模组（%s；%d 个取不到文件）。'

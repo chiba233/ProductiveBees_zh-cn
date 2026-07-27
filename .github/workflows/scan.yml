@@ -34,6 +34,10 @@ on:
         type: choice
         options: [both, curseforge, modrinth]
         default: both
+      modrinth_mod_shards:
+        description: 'Modrinth 全模组分几片（0 = 不扫模组）'
+        type: string
+        default: '20'
   schedule:
     # 每月 1 号扫一遍：整合包会更新，新蜂会冒出来
     - cron: '0 6 1 * *'
@@ -49,6 +53,7 @@ jobs:
     outputs:
       cf: ${{ steps.p.outputs.cf }}
       mr: ${{ steps.p.outputs.mr }}
+      mm: ${{ steps.p.outputs.mm }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -58,22 +63,29 @@ jobs:
         run: |
           python3 scripts/addons.py list
           python3 scripts/modrinth.py list
+          # Modrinth 那边模组也要全扫：七万多个，比整合包还多一倍。
+          # CurseForge 没法这么干——它的搜索、站点地图、按 id 查项目全是 403，
+          # 只有反向依赖那条路能走，好在声明了依赖的项目那条路是全的。
+          python3 scripts/modrinth.py list --mods
       - uses: actions/upload-artifact@v4
         with:
           name: pack-lists
           path: |
             versions/dependents.json
             versions/modrinth_packs.json
+            versions/modrinth_mods.json
           if-no-files-found: error
       - id: p
         run: |
           set -euo pipefail
           cf='${{ inputs.curseforge_shards }}'; cf="${cf:-6}"
           mr='${{ inputs.modrinth_shards }}';  mr="${mr:-10}"
-          python3 - "$cf" "$mr" <<'PY' >> "$GITHUB_OUTPUT"
+          mm='${{ inputs.modrinth_mod_shards }}'; mm="${mm:-20}"
+          python3 - "$cf" "$mr" "$mm" <<'PY' >> "$GITHUB_OUTPUT"
           import json, sys
           print('cf=' + json.dumps(list(range(int(sys.argv[1])))))
           print('mr=' + json.dumps(list(range(int(sys.argv[2])))))
+          print('mm=' + json.dumps(list(range(int(sys.argv[3])))))
           PY
 
   curseforge:
@@ -146,9 +158,44 @@ jobs:
           path: build/modrinth/results*.json
           if-no-files-found: error
 
+  modrinth-mods:
+    name: Modrinth 模组 ${{ matrix.shard }}
+    needs: plan
+    if: ${{ (inputs.platforms || 'both') != 'curseforge'
+            && needs.plan.outputs.mm != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.mm) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: build/modrinth
+          key: scan-mrmod-${{ matrix.shard }}-${{ github.run_id }}
+          restore-keys: |
+            scan-mrmod-${{ matrix.shard }}-
+      - uses: actions/download-artifact@v4
+        with:
+          name: pack-lists
+          path: versions
+      - name: 扫这一片
+        run: |
+          python3 scripts/modrinth.py scan all --mods \
+            --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scan-mrmod-${{ matrix.shard }}
+          path: build/modrinth/resultsmod-*.json
+          if-no-files-found: error
+
   merge:
     name: 合并并报缺口
-    needs: [curseforge, modrinth]
+    needs: [curseforge, modrinth, modrinth-mods]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -167,6 +214,12 @@ jobs:
         continue-on-error: true
         with:
           pattern: scan-mr-*
+          path: build/modrinth
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: scan-mrmod-*
           path: build/modrinth
           merge-multiple: true
       - name: 合并
