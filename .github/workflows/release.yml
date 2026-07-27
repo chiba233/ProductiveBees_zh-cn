@@ -111,29 +111,44 @@ jobs:
             rm -rf mod/build
           done
 
-      # Release 说明取 CHANGELOG.md 里 `## <版本>` 那一段。**整串精确比对**，
-      # 别用正则前缀匹配——`## 1.0` 会把 `## 1.0.1` 也匹上。取不到就回落到全文提示。
+      # Release 说明取 CHANGELOG.md 里 `## <版本>` 那一段。
+      #
+      # 三层，缺一不可：
+      #   1. **整串精确比对**（大小写不敏感）——别用正则前缀匹配，`## 1.0` 会把
+      #      `## 1.0.1` 也匹上，发出去的说明就是别的版本的；
+      #   2. 取不到就回落到文件里**第一个 `## ` 段**（正在写的那一段）；
+      #   3. 还是空的就**直接失败**。发一个「说明见 CHANGELOG」的占位出去，
+      #      等于没写发版说明——这次 v1.0.0-beta.1 就是这么发出去的。
+      #
+      # 而且这一步**每次构建都跑**，不看发不发布：CHANGELOG 没跟上应该在平时的
+      # 构建里就红，而不是等推了 tag 才发现。
       - name: 取 Release 说明
         id: notes
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
         run: |
           set -euo pipefail
-          v='${{ steps.release.outputs.version }}'
-          python3 - "$v" <<'PY' > release-notes.md
-          import pathlib, sys
-          want = sys.argv[1]
-          lines = pathlib.Path('CHANGELOG.md').read_text(encoding='utf-8').split('\n')
-          out, on = [], False
-          for ln in lines:
-              if ln.startswith('## '):
-                  if on:
-                      break
-                  on = ln[3:].strip() == want
-                  continue
-              if on:
-                  out.append(ln)
-          body = '\n'.join(out).strip()
-          print(body if body else '本次发布的说明见 CHANGELOG.md。')
-          PY
+          extract() {
+            awk -v ver="## $1" '
+              tolower($0) == tolower(ver) { found=1; next }
+              found && /^## / { exit }
+              found { buf = buf $0 "\n" }
+              END { sub(/^\n+/, "", buf); sub(/\n+$/, "", buf); print buf }
+            ' CHANGELOG.md
+          }
+          FROM="## $RELEASE_VERSION"
+          NOTES=$(extract "$RELEASE_VERSION")
+          if [ -z "$NOTES" ]; then
+            FIRST=$(awk '/^## /{sub(/^## /,""); print; exit}' CHANGELOG.md)
+            FROM="## $FIRST（回落）"
+            NOTES=$(extract "$FIRST")
+          fi
+          if [ -z "$NOTES" ]; then
+            echo "❌ CHANGELOG.md 里一个 ## 段都取不到，发版说明会是空的——先写 CHANGELOG" >&2
+            exit 1
+          fi
+          echo "发版说明取自 CHANGELOG 的 $FROM"
+          printf '%s\n' "$NOTES" > release-notes.md
           cat release-notes.md
 
       - name: 产物清单

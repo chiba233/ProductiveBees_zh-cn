@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/genetics/attributes.json",
- "sha1": "1215c21a80f65babeae7280ecc6943840362fa32",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/genetics/attributes.json",
+ "sha1": "da81685c8ee1fcbb4c8ea7eed0ae082f3785bb28",
  "t": [
   [
    [
@@ -21,11 +21,29 @@
   [
    [
     "pages",
+    0,
+    "text"
+   ],
+   "Bee attributes can be transferred from one bee to another. See the page on $(l:genetics/collecting#crystalline)collecting genes$(/l).",
+   "蜜蜂的属性可以从一只蜜蜂转移到另一只身上。参见$(l:genetics/collecting#crystalline)收集基因$(/l)那一页。"
+  ],
+  [
+   [
+    "pages",
     1,
     "text"
    ],
    "Bees with higher level of productivity will produce more combs per trip.$(br2)Levels are:$(br)Normal$(br)Medium$(br)High$(br)Very High",
    "产量等级越高的蜜蜂，每次外出后产出的蜜脾就越多。$(br2)等级如下：$(br)普通$(br)中等$(br)高$(br)极高"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "Bees with higher level of productivity will produce more combs per trip.$(br)Levels are:$(br)Normal$(br)Medium$(br)High$(br)Very High",
+   "产量等级越高的蜜蜂，每次外出后产出的蜜脾就越多。$(br)等级如下：$(br)正常$(br)中$(br)高$(br)极高"
   ],
   [
    [
@@ -49,6 +67,15 @@
    [
     "pages",
     2,
+    "text"
+   ],
+   "Affects the bees max health.$(br)With a high endurance the bee has a chance to not loose it's stinger when attacking.$(br)Levels are:$(br)Weak$(br)Normal$(br)Medium$(br)Strong",
+   "影响蜜蜂的最大生命值。$(br)耐力较高时，蜜蜂在攻击时有几率不会失去螫针。$(br)等级如下：$(br)脆弱$(br)正常$(br)中$(br)强"
+  ],
+  [
+   [
+    "pages",
+    2,
     "title"
    ],
    "Weather Tolerance",
@@ -66,6 +93,15 @@
   [
    [
     "pages",
+    3,
+    "text"
+   ],
+   "Normally bees will retreat to the safety of their hive during rain and thunderstorms. Bees can become tolerant to harsh weather conditions by leaving them leashed outside during bad weather. Beware though that they have a risk of taking damage and dying until they become accustomed so keep an eye on them and honey treats on hand.$(br)Levels are:$(br)None - can only work in clear weather$(br)Rain - can work during rain$(br)Any - can work in any weather",
+   "通常情况下，蜜蜂会在下雨和雷暴时回到蜂巢中避难。若在恶劣天气中把它们拴在室外，蜜蜂就有机会逐渐适应这种严酷天气。不过要小心，在适应之前它们有受伤甚至死亡的风险，所以记得时刻留意它们，并备好蜜蜂小食。$(br)等级如下：$(br)无 —— 只能在晴天工作$(br)雨 —— 可以在雨中工作$(br)任何 —— 任何天气都能工作"
+  ],
+  [
+   [
+    "pages",
     4,
     "text"
    ],
@@ -76,9 +112,27 @@
    [
     "pages",
     4,
+    "text"
+   ],
+   "Most bees operate during daytime, but a few bees are nocturnal by nature allowing them to fly around at night. Bees can become accustomed to operating at night by leaving them leashed outside during night time. Beware though that the bees can take damage when left leashed outside. Keep honey treats handy.$(br)Levels are:$(br)Diurnal - works only during daytime$(br)Nocturnal - works only during nighttime$(br)Metaturnal - works all day and night",
+   "大多数蜜蜂在白天活动，少数天生夜行，能在夜里飞行。把蜜蜂拴在室外过夜，它们也能慢慢习惯夜间作业。不过要当心，拴在外面的蜜蜂会受伤，记得备好蜜蜂小食。$(br)等级如下：$(br)昼行性 —— 只在白天工作$(br)夜行性 —— 只在夜间工作$(br)昼夜双行性 —— 不分昼夜都工作"
+  ],
+  [
+   [
+    "pages",
+    4,
     "title"
    ],
    "Beehavior",
+   "行为"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Behavior",
    "行为"
   ],
   [
@@ -98,6 +152,15 @@
    ],
    "Affects the bee's max health.$(br)With a high endurance the bee has a chance to not lose its stinger when attacking.$(br)Levels are:$(br)Weak$(br)Normal$(br)Medium$(br)Strong",
    "影响蜜蜂的最大生命值。$(br)耐久较高时，蜜蜂在攻击时有几率不会失去螫针。$(br)等级如下：$(br)脆弱$(br)普通$(br)中等$(br)强壮"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Affects the bee's max health.$(br)With a high endurance the bee has a chance to not loose its stinger when attacking.$(br)Levels are:$(br)Weak$(br)Normal$(br)Medium$(br)Strong",
+   "影响蜜蜂的最大生命值。$(br)耐力较高时，蜜蜂在攻击时有几率不会失去螫针。$(br)等级如下：$(br)脆弱$(br)正常$(br)中$(br)强"
   ],
   [
    [

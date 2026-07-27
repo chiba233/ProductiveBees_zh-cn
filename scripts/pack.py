@@ -29,6 +29,31 @@ ROOT = Path(__file__).resolve().parent.parent
 NS = 'productivebees'
 
 
+def apply_variants(lang, jar):
+    """同一个 key 在不同版本的英文不一样时，按**那一版的原文**取译文。
+
+    `nest_locator.not_found_hive` 就是例子：1.16.3/1.16.4 的原文没有参数，
+    而现在的原文有。把带 `%s` 的译文硬套上去，游戏里就是
+    TranslatableFormatException——不是少翻一句，是点一下就崩。
+    """
+    p = ROOT / 'src' / 'lang' / 'variants.json'
+    if not p.is_file():
+        return lang, 0
+    var = {k: v for k, v in json.loads(p.read_text(encoding='utf-8')).items()
+           if not k.startswith('_')}
+    z = zipfile.ZipFile(jar)
+    name = 'assets/%s/lang/en_us.json' % NS
+    if name not in z.namelist():
+        return lang, 0
+    en = json.loads(z.read(name))
+    out, n = dict(lang), 0
+    for k, per_en in var.items():
+        if k in en and en[k] in per_en:
+            out[k] = per_en[en[k]]
+            n += 1
+    return out, n
+
+
 def coverage(jar, root, floor):
     """对着 jar 的 en_us 与导览书逐个点名。"""
     z = zipfile.ZipFile(jar)
@@ -171,6 +196,11 @@ def mods_toml(man, ver, t):
     """加载器元数据。1.20.2 起 NeoForge 换了文件名与依赖 modId，别搞混。"""
     v = tuple(int(x) for x in t['minecraft'].split('.'))
     neo = t['loader'] == 'NeoForge' and v >= (1, 20, 2)
+    # `displayTest` 是后来才有的字段：1.16 及更早的 Forge 不认这个 key，
+    # 那个年代要靠代码注册 ExtensionPoint.DISPLAYTEST（见 LegacyEntry）。
+    dt = ('# 纯客户端显示层，服务端不会有这个 mod。不写这条，进服时可能被判定\n'
+          '# 「mod 不一致」而连不上——汉化把人挡在服务器外面是最不能接受的一类故障。\n'
+          'displayTest="IGNORE_ALL_VERSION"\n') if v >= (1, 17) else ''
     return '''modLoader="javafml"
 loaderVersion="[1,)"
 license="GPL-3.0-or-later"
@@ -181,10 +211,7 @@ modId="{modid}_zh_cn"
 version="{ver}"
 displayName="{zh} 汉化"
 authors="星野夢華 (Hoshino Yumeka)"
-# 纯客户端显示层，服务端不会有这个 mod。不写这条，进服时可能被判定「mod 不一致」
-# 而连不上——汉化把人挡在服务器外面是最不能接受的一类故障。
-displayTest="IGNORE_ALL_VERSION"
-description=\'\'\'
+{dt}description=\'\'\'
 {zh}（{en}）的简体中文汉化：物品、方块、蜜蜂、界面，内置导览书全部页面，
 以及基因样本 tooltip 里那行**运行期拼出来的蜂种名**（那一行资源包碰不到，
 只能在 ItemTooltipEvent 上拦）。
@@ -204,7 +231,7 @@ versionRange="[0,)"
 ordering="AFTER"
 side="CLIENT"
 '''.format(modid=man['modid'], ver=ver, zh=man['zh_name'], en=man['en_name'],
-           loader='neoforge' if neo else 'forge'), neo
+           loader='neoforge' if neo else 'forge', dt=dt), neo
 
 
 def build(man, jar, ver, t):
@@ -214,11 +241,15 @@ def build(man, jar, ver, t):
         shutil.rmtree(res)
     res.mkdir(parents=True)
 
-    lang_src = ROOT / 'src' / 'lang' / 'zh_cn.json'
+    lang = json.loads((ROOT / 'src' / 'lang' / 'zh_cn.json').read_text(encoding='utf-8'))
+    lang, n_var = apply_variants(lang, jar)
     lang_dst = res / 'assets' / NS / 'lang' / 'zh_cn.json'
     lang_dst.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(lang_src, lang_dst)
-    n_lang = len(json.loads(lang_dst.read_text(encoding='utf-8')))
+    lang_dst.write_text(json.dumps(lang, ensure_ascii=False, indent=2) + '\n',
+                        encoding='utf-8')
+    n_lang = len(lang)
+    if n_var:
+        print('  这一版有 %d 条原文和最新版不同，改用对应的译文' % n_var)
 
     n_book = books.generate(jar, res)
     tables = names.write(jar, res / 'pbzh' / 'bees.json')

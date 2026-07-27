@@ -1,0 +1,6 @@
+{
+ "_why": "同一个 key 在不同版本的英文原文不一样——多半是上游后来给那句话加了参数。译文按「key + 那一版的原文」取，取不到就用 zh_cn.json 里的默认那条。硬套默认译文会把不存在的占位符带进去，游戏里就是 TranslatableFormatException。",
+ "productivebees.nest_locator.not_found_hive": {
+  "No nests of the configured type could be found nearby.": "附近找不到所选类型的蜂巢。"
+ }
+}

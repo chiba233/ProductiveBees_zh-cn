@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/bees/wild/crystalline.json",
- "sha1": "93aeab280c7b38fd3ad74fe693cb2e120852020a",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/wild/crystalline.json",
+ "sha1": "44d028c2dab95d8781965750134bc259f2790c56",
  "t": [
   [
    [
@@ -17,6 +17,15 @@
    ],
    "Found living in nether quartz nests in the nether. Crystalline Bees prefer pollinating something containing or made from nether quartz..",
    "栖息在下界的下界石英蜂巢中。石英蜜蜂更喜欢为含有下界石英或由下界石英制成的东西授粉。"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Found living in nether quartz nests in the nether. Glowing Bees prefer pollinating something containing nether quartz..",
+   "栖息在下界的下界石英蜂巢中。发光蜜蜂偏好授粉含下界石英的东西。"
   ],
   [
    [

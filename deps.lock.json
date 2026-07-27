@@ -1,14 +1,116 @@
 {
- "_why": "构建的外部输入只有两样：目标那一版的资源蜜蜂 jar（在 versions/targets.json 里逐个记了 sha256 与不可变的 CurseForge fileID），和 Gradle 发行版。两样都按字节钉死，对不上就当场失败，不会「凑合出个包」。",
- "gradle": {
-  "_why": "不用 gradle-wrapper.jar：那是二进制，这个仓库不放二进制。发行版 zip 现下现核，哈希摆在这里看得见。",
-  "version": "8.14",
-  "url": "https://services.gradle.org/distributions/gradle-8.14-bin.zip",
-  "sha256": "61ad310d3c7d3e5da131b76bbf22b5a4c0786e9d892dae8c1658d4b484de3caa"
- },
- "toolchain": {
-  "_why": "一个 jar 跨不了全部版本，因为字节码目标就不一样：1.16 跑 Java 8、1.17 跑 16、1.18–1.20.4 跑 17、1.20.5+ 跑 21。所以按平台各出一个 jar，但**全部 jar 共用 src/ 里同一份数据源**。",
-  "moddevgradle": "2.0.142",
-  "neoforge_latest": "21.1.241"
- }
+  "_why": "构建的外部输入只有两样：目标那一版的资源蜜蜂 jar（在 versions/targets.json 里逐个记了 sha256 与不可变的 CurseForge fileID），和 Gradle 发行版。两样都按字节钉死，对不上就当场失败，不会「凑合出个包」。",
+  "gradle": {
+    "_why": "不用 gradle-wrapper.jar：那是二进制，这个仓库不放二进制。发行版 zip 现下现核，哈希摆在这里看得见。",
+    "version": "8.14",
+    "url": "https://services.gradle.org/distributions/gradle-8.14-bin.zip",
+    "sha256": "61ad310d3c7d3e5da131b76bbf22b5a4c0786e9d892dae8c1658d4b484de3caa"
+  },
+  "toolchain": {
+    "_why": "一个 jar 跨不了全部版本，因为字节码目标就不一样：1.16 跑 Java 8、1.17 跑 16、1.18–1.20.4 跑 17、1.20.5+ 跑 21。所以按平台各出一个 jar，但**全部 jar 共用 src/ 里同一份数据源**。",
+    "moddevgradle": "2.0.142",
+    "neoforge_latest": "21.1.241"
+  },
+  "forge": {
+    "1.15.2": {
+      "version": "1.15.2-31.2.57",
+      "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.15.2-31.2.57/forge-1.15.2-31.2.57-universal.jar",
+      "sha256": "415329285fca582800582f5e40d807ea6d3ba14f5d7fa7d8595f35b79b2e8c79",
+      "size": 2262896
+    },
+    "1.16.1": {
+      "version": "1.16.1-32.0.108",
+      "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.1-32.0.108/forge-1.16.1-32.0.108-universal.jar",
+      "sha256": "ff25663828fd5ba3f9d69343b0b5f4e0bc38f1de200b83119348c56768a5b893",
+      "size": 2212022
+    },
+    "1.16.3": {
+      "version": "1.16.3-34.1.0",
+      "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.3-34.1.0/forge-1.16.3-34.1.0-universal.jar",
+      "sha256": "2aea8fe6b7d91768ed90b873c300d651dd7ce1b67883aa2d2450c7e069bc44d7",
+      "size": 2244547
+    },
+    "1.16.4": {
+      "version": "1.16.4-35.1.4",
+      "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.4-35.1.4/forge-1.16.4-35.1.4-universal.jar",
+      "sha256": "c2c4b7d4ef0d7c9801edcfbe7c91c3de5aee1f311ace430fa25d86524866f269",
+      "size": 2301157
+    },
+    "1.16.5": {
+      "version": "1.16.5-36.2.34",
+      "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.5-36.2.34/forge-1.16.5-36.2.34-universal.jar",
+      "sha256": "56d2b1501c74638f07162904e61b6bdd5312f27a3ad1f1f72d40b3818ce08ed7",
+      "size": 2773337
+    }
+  },
+  "gson": {
+    "version": "2.8.0",
+    "url": "https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar",
+    "sha256": "c6221763bd79c4f1c3dc7f750b5f29a0bb38b367b81314c4f71896e340c40825",
+    "size": 231952
+  },
+  "mcp_config": {
+    "1.15.2": {
+      "version": "1.15.2",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.15.2/mcp_config-1.15.2.zip",
+      "sha256": "88b036c399625b4a62eebd42394a99f6a3e48b6bcb514783a4ece24969cbfffe",
+      "size": 675419
+    },
+    "1.16.1": {
+      "version": "1.16.1",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.16.1/mcp_config-1.16.1.zip",
+      "sha256": "62a78058a61da5e5593a7d6853f25822b77b8cc28a9ed04cadca5d02b195fa35",
+      "size": 749719
+    },
+    "1.16.3": {
+      "version": "1.16.3",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.16.3/mcp_config-1.16.3.zip",
+      "sha256": "85d81ab0d6e3cc64e217415b17a059f126523da81a92d20e82ba9c97f3116f57",
+      "size": 771584
+    },
+    "1.16.4": {
+      "version": "1.16.4",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.16.4/mcp_config-1.16.4.zip",
+      "sha256": "aa03156a543be711ea22ba306d21129683e0e89d3f4013870e6cfd76eb966f1f",
+      "size": 777641
+    },
+    "1.16.5": {
+      "version": "1.16.5",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.16.5/mcp_config-1.16.5.zip",
+      "sha256": "80216a0f4ae79d81a5e11ceccaa97582a1f6a2cf079b7703b88a99a26547b342",
+      "size": 777652
+    }
+  },
+  "mojang_mappings": {
+    "1.15.2": {
+      "version": "1.15.2",
+      "url": "https://piston-data.mojang.com/v1/objects/1fbf9f0bc9c326af859b3ccf71c2a8f5edc47ef8/client.txt",
+      "sha256": "65ad295b6cf63821f5d8f961c128128475e6d39386358d22eb238a3ce6e31777",
+      "size": 4972120
+    },
+    "1.16.1": {
+      "version": "1.16.1",
+      "url": "https://piston-data.mojang.com/v1/objects/ddf517a4f6750f4c15189de4e03246ae1f916cf5/client.txt",
+      "sha256": "6cc374f819bca44d940f8912044b07bdac3e240a02e37117ae1d4ad63c21409b",
+      "size": 5632455
+    },
+    "1.16.3": {
+      "version": "1.16.3",
+      "url": "https://piston-data.mojang.com/v1/objects/faac5028fbca3859db970cc4ca041aeec55f6d9d/client.txt",
+      "sha256": "c41c58faaf3a3b651d8883b9b1df355cb6ad59c4d6296b2e1ffc3dfe2bf9be3e",
+      "size": 5722449
+    },
+    "1.16.4": {
+      "version": "1.16.4",
+      "url": "https://piston-data.mojang.com/v1/objects/0837de813d1a6b67e23da3c520a84e872c8d2f0e/client.txt",
+      "sha256": "93f188a0038fec8c2402d78e7acca983680978d6a9237c1fab80f22caddb00fe",
+      "size": 5746047
+    },
+    "1.16.5": {
+      "version": "1.16.5",
+      "url": "https://piston-data.mojang.com/v1/objects/374c6b789574afbdc901371207155661e0509e17/client.txt",
+      "sha256": "7931ed6d723eceb1d621d05a76e10ddf643bf468c6ecf1c4ecf377bd72cf8b8c",
+      "size": 5746047
+    }
+  }
 }

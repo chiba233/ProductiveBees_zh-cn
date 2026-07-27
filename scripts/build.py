@@ -154,6 +154,10 @@ def selftest(modjar, jdk):
 
 def build_one(ver, tag, t, gradle):
     """出一个平台的 jar。**数据源只有 src/ 那一份**，各平台不分叉。"""
+    if t.get('toolchain') == 'javac':
+        # 1.16 及更早：ModDevGradle 够不着，走 javac 直编那条路
+        import legacy
+        return legacy.build_one(ver, tag, t, MAN)
     print('\n──── %s — Minecraft %s / %s / Java %d ────'
           % (tag, t['minecraft'], t['loader'], t['java']))
     import pack
@@ -196,13 +200,14 @@ def main(ver, only=None):
     skipped = sorted(k for k, v in TARGETS.items() if not v.get('buildable'))
     if not todo:
         sys.exit('❌ 没有可构建的目标（--only 写错了？）')
-    gradle = fetch_gradle()
-    print('Gradle %s 逐字节与 deps.lock.json 一致 ✅' % LOCK['gradle']['version'])
+    need_gradle = any(v.get('toolchain') != 'javac' for v in todo.values())
+    gradle = fetch_gradle() if need_gradle else None
+    if need_gradle:
+        print('Gradle %s 逐字节与 deps.lock.json 一致 ✅' % LOCK['gradle']['version'])
     print('本次要出 %d 个平台的 jar' % len(todo))
     if skipped:
         # 说出来，别让矩阵看着很宽实际出不来
-        print('跳过 %d 个：%s（当前工具链覆盖不到，ModDevGradle 建立在 NeoForm 上，'
-              '够不着 1.16 及更早）' % (len(skipped), ' '.join(skipped)))
+        print('跳过 %d 个：%s（当前工具链覆盖不到）' % (len(skipped), ' '.join(skipped)))
     made = []
     for tag in sorted(todo, key=lambda x: ([int(y) for y in
                       todo[x]['minecraft'].split('.')], todo[x]['loader']), reverse=True):

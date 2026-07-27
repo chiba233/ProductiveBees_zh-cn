@@ -1,6 +1,6 @@
 {
  "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/thermal.json",
- "sha1": "e422120665110b026fbd017847be477f675b44c1",
+ "sha1": "076a4b3c7d3d7ee520978143c12b2c112c267ca0",
  "t": [
   [
    [
@@ -35,6 +35,15 @@
    ],
    "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/diamond)Diamond Bee$(/l) spawn egg using a Smelter.",
    "这种蜜蜂无法繁殖。它的刷怪蛋需要用冶炼炉以一枚$(l:bees/hive/diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hives#diamond)Diamond Bee$(/l) spawn egg using a Smelter.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用冶炼炉以一枚$(l:bees/hives#diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
   ],
   [
    [
@@ -89,6 +98,15 @@
    ],
    "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/diamond)Diamond Bee$(/l) spawn egg using a Chiller.",
    "这种蜜蜂无法繁殖。它的刷怪蛋需要用冷凝器以一枚$(l:bees/hive/diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hives#diamond)Diamond Bee$(/l) spawn egg using a Chiller.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用冷凝器以一枚$(l:bees/hives#diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
   ],
   [
    [

@@ -110,7 +110,9 @@ public final class BeeNames {
 
         // 形态1：原始 ID
         Matcher m = RAW_ID.matcher(out);
-        StringBuilder sb = new StringBuilder();
+        // 用 StringBuffer 不用 StringBuilder：`Matcher#appendReplacement(StringBuilder,…)`
+        // 是 Java 9 才加的重载，1.16 及更早那批目标跑 Java 8，编不过。
+        StringBuffer sb = new StringBuffer();
         while (m.find()) {
             String base = m.group(1);
             String stripped = base.endsWith("_bee")
@@ -127,7 +129,7 @@ public final class BeeNames {
         // 形态2：英文整名（歧义名已在生成期剔除）
         if (EN_NAMES != null) {
             m = EN_NAMES.matcher(out);
-            sb = new StringBuilder();
+            sb = new StringBuffer();
             while (m.find()) {
                 String zh = EN2ZH.get(m.group());
                 m.appendReplacement(sb, Matcher.quoteReplacement(zh != null ? zh : m.group()));
@@ -138,7 +140,7 @@ public final class BeeNames {
 
         // 形态3：类型行 —— 整段精确匹配，不做贪婪替换
         m = TYPE_LINE.matcher(out);
-        sb = new StringBuilder();
+        sb = new StringBuffer();
         while (m.find()) {
             String zh = TYPE2ZH.get(m.group(3));
             m.appendReplacement(sb, Matcher.quoteReplacement(

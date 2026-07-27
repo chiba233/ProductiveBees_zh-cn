@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/genetics/transferring.json",
- "sha1": "ae709969b524d29816f7bc2a876fce0f56faa2ea",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/genetics/transferring.json",
+ "sha1": "8987502955cb895a2c89d430957836128447d521",
  "t": [
   [
    [
@@ -21,11 +21,29 @@
   [
    [
     "pages",
+    0,
+    "text"
+   ],
+   "To transfer genes to a bee you will need to combine the gene with a honey treat. Feed the honey treat to the bee and it will have a chance to acquire the new attribute based on the gene purity.",
+   "要把基因转移给蜜蜂，得先把基因和蜜蜂小食结合起来。把这份蜜蜂小食喂给蜜蜂，它就有几率获得新的属性，几率高低取决于基因纯度。"
+  ],
+  [
+   [
+    "pages",
     1,
     "text"
    ],
    "The purity of the gene can be increased by combining two of the same genes or by putting more of the same gene onto a treat.",
    "可以通过将两个相同的基因合并，或在一份小食上放入更多相同基因，来提高基因的纯度。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "The purity of the gene can be increased by combining two of the same genes of by putting more of the same gene onto a treat.",
+   "把两份相同的基因合在一起，或者往同一份小食上多放几份相同的基因，都能提高基因的纯度。"
   ]
  ]
 }

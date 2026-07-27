@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/blocks/incubator.json",
- "sha1": "3a765b6dbe2a72c24013df5518c42e84f89edf22",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/blocks/incubator.json",
+ "sha1": "e2e1b197638630dfeb59543777fb06b046b7983e",
  "t": [
   [
    [
@@ -26,6 +26,15 @@
    ],
    "Another use for the Incubator is to infuse an egg with a specific bee type $(l:genetics/collecting#crystalline)gene$(/l) to get a spawn egg of that bee type. The bee type gene you obtain through the genetics setup.$(br)Only the type gene will be used when making a spawn egg. Any additional genes on the honey treat will be lost",
    "孵化器的另一个用途，是将特定蜜蜂类型的$(l:genetics/collecting#crystalline)基因$(/l)灌注进一个蛋中，从而获得对应蜜蜂类型的刷怪蛋。蜜蜂类型基因可以通过基因工程流程获得。$(br)制作刷怪蛋时只会使用类型基因，蜜蜂小食上的其他额外基因都会丢失"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "Another use for the Incubator is to infuse an egg with a specific bee type gene to get a spawn egg of that bee type. Bee type gene you obtain through the genetics setup.",
+   "小蜜蜂孵化器的另一个用途，是把某个蜂种的基因注入鸡蛋，得到该蜂种的刷怪蛋。蜂种基因通过那套遗传学装置获得。"
   ]
  ]
 }

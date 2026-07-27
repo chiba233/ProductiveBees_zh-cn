@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/hives/advanced_hives.json",
- "sha1": "221760caacf2e60472d9a92e419d65a922772a44",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/hives/advanced_hives.json",
+ "sha1": "a77ec6325dc185d51e27a481ce66587c15420a15",
  "t": [
   [
    [
@@ -21,6 +21,15 @@
   [
    [
     "pages",
+    0,
+    "text"
+   ],
+   "Advanced hives gives you a better overview of what is going on in your hives as well as enabling automation. It is not required to have campfires near the hive before harvesting, the advanced hives are so comfortable they bees inside will not get angry even if you break the hive. Advanced hives has a GUI which can be accessed by right clicking the hive or any attached $(l:hives/expansion_boxes)expansion boxes$(/l).",
+   "高级蜂箱让你对箱内的状况一目了然，也让自动化成为可能。收获前不必在蜂箱旁摆营火——高级蜂箱住着太舒服，哪怕你把箱子拆了，里面的蜜蜂也不会生气。右键点击蜂箱或与之相连的$(l:hives/expansion_boxes)扩容盒$(/l)即可打开界面。"
+  ],
+  [
+   [
+    "pages",
     1,
     "text"
    ],
@@ -30,11 +39,29 @@
   [
    [
     "pages",
+    1,
+    "text"
+   ],
+   "There are many variants of advanced beehives available depending on which other mods you have installed.",
+   "高级蜂箱有许多变体，具体有哪些取决于你装了哪些别的模组。"
+  ],
+  [
+   [
+    "pages",
     2,
     "text"
    ],
    "Advanced Hives features a GUI from where you can see which bees are currently inside the hive as well as take out any produced resources. Advanced Hives can be further upgraded using an $(l:hives/expansion_boxes)expansion box$(/l). Attaching an $(l:hives/expansion_boxes)expansion box$(/l) will increase the bee capacity from 3 to 5 and allow $(l:items/upgrades)upgrades$(/l) to be installed.",
    "高级蜂箱带有一个 GUI，你可以在其中查看当前在蜂箱内的蜜蜂，并取出已产出的资源。高级蜂箱还可以通过$(l:hives/expansion_boxes)扩容盒$(/l)进一步升级。连接一个$(l:hives/expansion_boxes)扩容盒$(/l)后，蜜蜂容量会从 3 提升到 5，并允许安装$(l:items/upgrades)升级$(/l)。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Advanced Hives feature a GUI from where you can see which bees are currently inside the hive as well as take out any produced resources. Advanced Hives can be further upgraded using an $(l:hives/expansion_boxes)expansion boxe$(/l). Attaching an $(l:hives/expansion_boxes)expansion box$(/l) will increase the bee capacity from 3 to 5 and allow $(l:items/upgrades)upgrades$(/l) to be installed.",
+   "高级蜂箱带有界面，你可以从中看到蜂箱内当前住着哪些蜜蜂，也能取走产出的资源。高级蜂箱还能用$(l:hives/expansion_boxes)扩容盒$(/l)进一步升级：装上$(l:hives/expansion_boxes)扩容盒$(/l)后，蜜蜂容量会从 3 提升到 5，并且可以安装$(l:items/upgrades)升级$(/l)。"
   ],
   [
    [

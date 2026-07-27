@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/blocks/feeder.json",
- "sha1": "040e2d770464a448c1f1e8e9b3998013cbba3e22",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/blocks/feeder.json",
+ "sha1": "f0589a6bb702725914c9a5d50a170d4e5218661f",
  "t": [
   [
    [
@@ -26,6 +26,15 @@
    ],
    "Feeding slabs can be honeylogged giving the bees an excellent place to dip their toes and recover from a long day of works, aka it gives them regeneration.",
    "喂食台可以注入蜂蜜，为蜜蜂提供一个绝佳的歇脚之处，让它们在辛苦工作一天后恢复状态——也就是给予它们生命恢复效果。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "The Feeder can be honeylogged giving the bees an excellent place to dip their toes and recover from a long day of works, aka it gives them regeneration.",
+   "饲养板可以灌上蜂蜜，给蜜蜂一个泡脚解乏的好去处——说白了，就是给它们加个生命恢复。"
   ],
   [
    [

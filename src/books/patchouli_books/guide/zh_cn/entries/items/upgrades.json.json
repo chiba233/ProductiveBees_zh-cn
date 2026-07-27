@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/items/upgrades.json",
- "sha1": "38d66cfd39df0c611276e4fa4eea5612040e022f",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/items/upgrades.json",
+ "sha1": "8e9ac478a4eb0cee22eb40ab897d1488494d6cdf",
  "t": [
   [
    [
@@ -21,11 +21,29 @@
   [
    [
     "pages",
+    0,
+    "text"
+   ],
+   "Upgrades can be put into machines and hives to increase its functionality or improve its performance",
+   "升级可以安装到机器和蜂箱中，以增强它们的功能或提升性能"
+  ],
+  [
+   [
+    "pages",
     1,
     "text"
    ],
    "The base of all the other upgrades.",
    "所有其他升级的基础。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Usable in: $(l:hives/advanced_hives#expanded)Expanded Hives$(/l), $(l:blocks/catcher)Catcher$(/l).",
+   "可用于：$(l:hives/advanced_hives#expanded)扩容蜂箱$(/l)、$(l:blocks/catcher)捕捉器$(/l)。"
   ],
   [
    [
@@ -39,11 +57,38 @@
   [
    [
     "pages",
+    3,
+    "text"
+   ],
+   "When installed in a hive, the BaBee upgrade will give a small chance for the bees living inside the hive to breed and produce new offspring without your involvement. $(br)When installed in a $(l:blocks/catcher)catcher$(/l), only BaBees will be caught and put in cages.",
+   "安装在蜂箱中时，升级：繁殖会让居住在蜂箱内的蜜蜂有小概率自行繁殖并产生新的后代，无需你的参与。$(br)安装在$(l:blocks/catcher)捕手$(/l)中时，则只会捕捉 BaBee 并将其装入蜂笼。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Usable in: $(l:hives/advanced_hives#expanded)Expanded Hives$(/l).",
+   "可用于：$(l:hives/advanced_hives#expanded)扩容蜂箱$(/l)。"
+  ],
+  [
+   [
+    "pages",
     5,
     "text"
    ],
    "When installed in a hive, the productivity upgrade will increase the number of combs a bee produces per trip. Multiple productivity upgrades can be installed.",
    "安装在蜂箱中后，产量升级会提高蜜蜂每次外出产出的蜜脾数量。可以安装多个产量升级。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Usable in: $(l:hives/advanced_hives#expanded)Expanded Hives$(/l), $(l:blocks/centrifuge)Centrifuge$(/l), $(l:blocks/incubator)Incubator$(/l).",
+   "可用于：$(l:hives/advanced_hives#expanded)扩容蜂箱$(/l)、$(l:blocks/centrifuge)离心机$(/l)、$(l:blocks/incubator)小蜜蜂孵化器$(/l)。"
   ],
   [
    [
@@ -57,6 +102,15 @@
   [
    [
     "pages",
+    8,
+    "text"
+   ],
+   "Usable in: $(l:blocks/catcher)Catcher$(/l).",
+   "可用于：$(l:blocks/catcher)捕捉器$(/l)。"
+  ],
+  [
+   [
+    "pages",
     9,
     "text"
    ],
@@ -66,11 +120,29 @@
   [
    [
     "pages",
+    9,
+    "text"
+   ],
+   "When installed in a catcher, the Range upgrade will expand the area of operation by 1 block is all directions. Multiple range upgrades can be installed.",
+   "安装在捕捉器中时，升级：范围会让作业区域向各个方向扩大 1 格。可以叠装多个范围升级。"
+  ],
+  [
+   [
+    "pages",
     11,
     "text"
    ],
    "When installed in a hive, the operating range of Farmer and Collector/Hoarder bees is increased by 1 per upgrade, from default 4. When installed in a catcher, the Range upgrade will expand the area of operation by 1 block in all directions. Multiple range upgrades can be installed.",
    "安装在蜂箱中时，农夫蜜蜂和收集者/囤积者蜜蜂的工作范围每个升级增加 1 格，默认范围为 4 格。安装在捕手中时，范围升级会将工作区域向所有方向各扩大 1 格。可以安装多个范围升级。"
+  ],
+  [
+   [
+    "pages",
+    11,
+    "text"
+   ],
+   "When installed in a hive, the bees will produce comb blocks instead of honeycombs.",
+   "安装在蜂箱中时，蜜蜂会直接产出蜜脾块，而不是蜜脾。"
   ],
   [
    [
@@ -89,6 +161,15 @@
    ],
    "When installed in a hive, a small sample of pollinating bees will be extracted with each visit. It shouldn't bee hurting them at all. Multiple can be installed in the same hive for improved rate.",
    "安装在蜂箱中时，每次授粉中的蜜蜂造访时都会提取少量样本，完全不会伤害它们。可以在同一个蜂箱中安装多个，以提高提取效率。"
+  ],
+  [
+   [
+    "pages",
+    15,
+    "text"
+   ],
+   "When installed in a hive, a small sample of pollinating bees will be extracted with each visit. It shouldn't bee hurting them at all.",
+   "安装在蜂箱中时，每有蜜蜂来访，都会取走一小份样本。放心，它们一点也不「蜂」疼。"
   ],
   [
    [

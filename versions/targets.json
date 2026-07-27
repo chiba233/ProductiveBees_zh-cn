@@ -1,7 +1,7 @@
 {
  "1.15.2-forge": {
   "book_files": 31,
-  "buildable": false,
+  "buildable": true,
   "curseforge_file_id": 3231069,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.15.2-0.6.9.3.jar",
@@ -11,11 +11,12 @@
   "loader": "Forge",
   "loader_version": null,
   "minecraft": "1.15.2",
-  "sha256": "14c5a5f6f1c844a8c93fee6e7881108d05921839c5b70f31acdc2f7af3c6315a"
+  "sha256": "14c5a5f6f1c844a8c93fee6e7881108d05921839c5b70f31acdc2f7af3c6315a",
+  "toolchain": "javac"
  },
  "1.16.1-forge": {
   "book_files": 26,
-  "buildable": false,
+  "buildable": true,
   "curseforge_file_id": 3162509,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.1-0.5.2.9.jar",
@@ -25,11 +26,12 @@
   "loader": "Forge",
   "loader_version": null,
   "minecraft": "1.16.1",
-  "sha256": "007344e3cd57be748bccc74a33c64884e2fa7bb35a80d164feb26244bd026f3a"
+  "sha256": "007344e3cd57be748bccc74a33c64884e2fa7bb35a80d164feb26244bd026f3a",
+  "toolchain": "javac"
  },
  "1.16.3-forge": {
   "book_files": 84,
-  "buildable": false,
+  "buildable": true,
   "curseforge_file_id": 3381843,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.5-0.6.9.16.jar",
@@ -39,11 +41,12 @@
   "loader": "Forge",
   "loader_version": null,
   "minecraft": "1.16.3",
-  "sha256": "1a439e30b490024d618491f083dd9ce33a20248687431b13d93f483efc0762d3"
+  "sha256": "1a439e30b490024d618491f083dd9ce33a20248687431b13d93f483efc0762d3",
+  "toolchain": "javac"
  },
  "1.16.4-forge": {
   "book_files": 84,
-  "buildable": false,
+  "buildable": true,
   "curseforge_file_id": 3406686,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.5-0.6.9.18.jar",
@@ -53,11 +56,12 @@
   "loader": "Forge",
   "loader_version": null,
   "minecraft": "1.16.4",
-  "sha256": "a65c70fe6175304e44d7c298db31a8eef5ecdde51046665125d08ba9e2fe5501"
+  "sha256": "a65c70fe6175304e44d7c298db31a8eef5ecdde51046665125d08ba9e2fe5501",
+  "toolchain": "javac"
  },
  "1.16.5-forge": {
   "book_files": 86,
-  "buildable": false,
+  "buildable": true,
   "curseforge_file_id": 3845577,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.5-0.6.9.28.jar",
@@ -67,7 +71,8 @@
   "loader": "Forge",
   "loader_version": null,
   "minecraft": "1.16.5",
-  "sha256": "cd4a9b7ad8f54de51fb1bf62ae689f44f90347bcbf51d036e835daff75030229"
+  "sha256": "cd4a9b7ad8f54de51fb1bf62ae689f44f90347bcbf51d036e835daff75030229",
+  "toolchain": "javac"
  },
  "1.17.1-forge": {
   "book_files": 86,
@@ -81,7 +86,8 @@
   "loader": "Forge",
   "loader_version": "1.17.1-37.1.1",
   "minecraft": "1.17.1",
-  "sha256": "6bd0962ededff7f5367e9a8e2b9edf6fb6492415b908c234999dcdc90acf3d67"
+  "sha256": "6bd0962ededff7f5367e9a8e2b9edf6fb6492415b908c234999dcdc90acf3d67",
+  "toolchain": "gradle"
  },
  "1.18-forge": {
   "book_files": 86,
@@ -95,7 +101,8 @@
   "loader": "Forge",
   "loader_version": "1.18-38.0.8",
   "minecraft": "1.18",
-  "sha256": "124e7b038b24b97e5624982d6df6dda5dfd95b5194b0fc0d404adc149ebde7b8"
+  "sha256": "124e7b038b24b97e5624982d6df6dda5dfd95b5194b0fc0d404adc149ebde7b8",
+  "toolchain": "gradle"
  },
  "1.18.1-forge": {
   "book_files": 89,
@@ -109,7 +116,8 @@
   "loader": "Forge",
   "loader_version": "1.18.1-39.1.2",
   "minecraft": "1.18.1",
-  "sha256": "d5d6fac44d1154061a765239b732413cee90f12dfd6b8dbfabc169e441805519"
+  "sha256": "d5d6fac44d1154061a765239b732413cee90f12dfd6b8dbfabc169e441805519",
+  "toolchain": "gradle"
  },
  "1.18.2-forge": {
   "book_files": 92,
@@ -123,7 +131,8 @@
   "loader": "Forge",
   "loader_version": "1.18.2-40.3.9",
   "minecraft": "1.18.2",
-  "sha256": "03bf658b851281eaa529ba8dab8aab60ad0172cb227ca125888beae06bec9931"
+  "sha256": "03bf658b851281eaa529ba8dab8aab60ad0172cb227ca125888beae06bec9931",
+  "toolchain": "gradle"
  },
  "1.19-forge": {
   "book_files": 89,
@@ -137,7 +146,8 @@
   "loader": "Forge",
   "loader_version": "1.19-41.1.0",
   "minecraft": "1.19",
-  "sha256": "8422c085f2607ed405f519e0521fda0e3b96a7057c05ba7c59567e53230a5495"
+  "sha256": "8422c085f2607ed405f519e0521fda0e3b96a7057c05ba7c59567e53230a5495",
+  "toolchain": "gradle"
  },
  "1.19.1-forge": {
   "book_files": 89,
@@ -151,7 +161,8 @@
   "loader": "Forge",
   "loader_version": "1.19.1-42.0.9",
   "minecraft": "1.19.1",
-  "sha256": "712d950880d7a19c4db2d5538cc3273ff2c368ccf63c6f0a7d03b8b925f8b041"
+  "sha256": "712d950880d7a19c4db2d5538cc3273ff2c368ccf63c6f0a7d03b8b925f8b041",
+  "toolchain": "gradle"
  },
  "1.19.2-forge": {
   "book_files": 92,
@@ -165,7 +176,8 @@
   "loader": "Forge",
   "loader_version": "1.19.2-43.5.2",
   "minecraft": "1.19.2",
-  "sha256": "912b8193377e8bcc3db4446d5661965ce62f27a90b2d6db2119bd09850dd18fd"
+  "sha256": "912b8193377e8bcc3db4446d5661965ce62f27a90b2d6db2119bd09850dd18fd",
+  "toolchain": "gradle"
  },
  "1.19.3-forge": {
   "book_files": 92,
@@ -179,7 +191,8 @@
   "loader": "Forge",
   "loader_version": "1.19.3-44.1.9",
   "minecraft": "1.19.3",
-  "sha256": "2df34db693d29ce80a98664568ffd3b688c8e1e30954c9ce4bd4e08cf09b3820"
+  "sha256": "2df34db693d29ce80a98664568ffd3b688c8e1e30954c9ce4bd4e08cf09b3820",
+  "toolchain": "gradle"
  },
  "1.19.4-forge": {
   "book_files": 92,
@@ -193,7 +206,8 @@
   "loader": "Forge",
   "loader_version": "1.19.4-45.4.3",
   "minecraft": "1.19.4",
-  "sha256": "6e3a931e51b8d49dd426aeac353efece528bede35cf77bd523130a4175de4e0b"
+  "sha256": "6e3a931e51b8d49dd426aeac353efece528bede35cf77bd523130a4175de4e0b",
+  "toolchain": "gradle"
  },
  "1.20-forge": {
   "book_files": 92,
@@ -207,7 +221,8 @@
   "loader": "Forge",
   "loader_version": "1.20-46.0.2",
   "minecraft": "1.20",
-  "sha256": "3ddfd69426ed03eb99a32b65d436fb1bcd3bb597e3a93db80d0b819510fc6c7e"
+  "sha256": "3ddfd69426ed03eb99a32b65d436fb1bcd3bb597e3a93db80d0b819510fc6c7e",
+  "toolchain": "gradle"
  },
  "1.20-neoforge": {
   "book_files": 92,
@@ -221,7 +236,8 @@
   "loader": "NeoForge",
   "loader_version": "1.20-46.0.2",
   "minecraft": "1.20",
-  "sha256": "3ddfd69426ed03eb99a32b65d436fb1bcd3bb597e3a93db80d0b819510fc6c7e"
+  "sha256": "3ddfd69426ed03eb99a32b65d436fb1bcd3bb597e3a93db80d0b819510fc6c7e",
+  "toolchain": "gradle"
  },
  "1.20.1-forge": {
   "book_files": 81,
@@ -235,7 +251,8 @@
   "loader": "Forge",
   "loader_version": "1.20.1-47.4.9",
   "minecraft": "1.20.1",
-  "sha256": "b728e5640fcfd0bd7137cabf475455588452ace89a3dd136333a60fdf7049af4"
+  "sha256": "b728e5640fcfd0bd7137cabf475455588452ace89a3dd136333a60fdf7049af4",
+  "toolchain": "gradle"
  },
  "1.20.1-neoforge": {
   "book_files": 81,
@@ -249,7 +266,8 @@
   "loader": "NeoForge",
   "loader_version": "1.20.1-47.4.9",
   "minecraft": "1.20.1",
-  "sha256": "b728e5640fcfd0bd7137cabf475455588452ace89a3dd136333a60fdf7049af4"
+  "sha256": "b728e5640fcfd0bd7137cabf475455588452ace89a3dd136333a60fdf7049af4",
+  "toolchain": "gradle"
  },
  "1.21-neoforge": {
   "book_files": 81,
@@ -263,7 +281,8 @@
   "loader": "NeoForge",
   "loader_version": "21.0.167",
   "minecraft": "1.21",
-  "sha256": "e82b50e3a4faf0682b2d059c4d0d868b76875584877364ca509e669fb85aea8e"
+  "sha256": "e82b50e3a4faf0682b2d059c4d0d868b76875584877364ca509e669fb85aea8e",
+  "toolchain": "gradle"
  },
  "1.21.1-neoforge": {
   "book_files": 81,
@@ -277,6 +296,7 @@
   "loader": "NeoForge",
   "loader_version": "21.1.241",
   "minecraft": "1.21.1",
-  "sha256": "9d48d198bc6eacf3b7729f4d60b91e661cfa15d105264ba225dee87b1d547ba1"
+  "sha256": "9d48d198bc6eacf3b7729f4d60b91e661cfa15d105264ba225dee87b1d547ba1",
+  "toolchain": "gradle"
  }
 }

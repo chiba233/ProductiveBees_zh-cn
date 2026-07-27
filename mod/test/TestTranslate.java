@@ -37,7 +37,9 @@ public class TestTranslate {
 
     static Map.Entry<String, String> first(JsonObject o) {
         for (Map.Entry<String, com.google.gson.JsonElement> e : o.entrySet()) {
-            return Map.entry(e.getKey(), e.getValue().getAsString());
+            // 不用 Map.entry：那是 Java 9 才有的，1.16 那批目标编到 Java 8
+            return new java.util.AbstractMap.SimpleEntry<>(
+                    e.getKey(), e.getValue().getAsString());
         }
         throw new IllegalStateException("表是空的");
     }

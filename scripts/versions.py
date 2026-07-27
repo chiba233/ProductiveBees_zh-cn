@@ -63,19 +63,28 @@ def java_for(mc):
     return 21
 
 
+def toolchain(mc, ld):
+    """这个平台由哪条构建路径出包。
+
+    ModDevGradle 建立在 NeoForm 上，覆盖不到 1.16 及更早。那批不走 Gradle，
+    走 `scripts/legacy.py`：对着 Forge 官方 jar 直接 javac——这个 mod 不调任何
+    Minecraft 方法（全按类型反射），所以不需要重映射，也就不需要那一套工具链。
+    """
+    p = [int(x) for x in mc.split('.')[:3]] + [0, 0]
+    return 'gradle' if p[1] >= 17 else 'javac'
+
+
 def buildable(mc, ld):
     """我们**当前的构建工具链**能不能出这个平台的 jar。
 
-    ModDevGradle 管 NeoForge，它的 legacy 插件管 Forge，但都建立在 NeoForm 之上，
-    覆盖不到 1.16 及更早（那个年代要 ForgeGradle 那一套）。
     写进数据里而不是嘴上说，免得矩阵看着很宽、实际出不来。
     """
     p = [int(x) for x in mc.split('.')[:3]] + [0, 0]
+    if toolchain(mc, ld) == 'javac':
+        return ld == 'Forge'          # 那个年代只有 Forge
     if p[1] >= 20:
         return True
-    if p[1] >= 17:
-        return ld == 'Forge'
-    return False
+    return ld == 'Forge'              # 1.17–1.19 的 NeoForge 不存在
 
 
 def get(url, timeout=120):
@@ -162,7 +171,8 @@ def scan():
         tag = '%s-%s' % (mc, ld.lower())
         targets[tag] = {
             'minecraft': mc, 'loader': ld, 'java': java_for(mc),
-            'buildable': buildable(mc, ld),
+            'buildable': buildable(mc, ld), 'toolchain': toolchain(mc, ld),
+            'legacy': ld == 'Forge' or mcver(mc)[:2] <= [1, 20],
             'jar': jar.name, 'curseforge_project_id': PROJECT,
             'curseforge_file_id': f['id'], 'sha256': sha,
             'lang_keys': len(en), 'book_files': len(bk),
@@ -225,7 +235,34 @@ def gap():
     return miss
 
 
+def derive():
+    """把**能从版本号推出来的字段**重算一遍，不必重下 20 个 jar。
+
+    java / buildable / toolchain / legacy 全是版本的函数，手写迟早对不上。
+    `loader_version` 例外：它是外面那个加载器的发行版本，已经填了的**不动**——
+    换一个版本号就等于把一个已经绿的平台重新赌一次，不值当。
+    """
+    p = VERSIONS / 'targets.json'
+    t = json.loads(p.read_text(encoding='utf-8'))
+    changed = []
+    for tag, v in t.items():
+        for k, val in (('java', java_for(v['minecraft'])),
+                       ('buildable', buildable(v['minecraft'], v['loader'])),
+                       ('toolchain', toolchain(v['minecraft'], v['loader'])),
+                       ('legacy', v['loader'] == 'Forge'
+                        or mcver(v['minecraft'])[:2] <= [1, 20])):
+            if v.get(k) != val:
+                changed.append('%s.%s: %r → %r' % (tag, k, v.get(k), val))
+                v[k] = val
+    p.write_text(json.dumps(t, ensure_ascii=False, indent=1, sort_keys=True) + '\n',
+                 encoding='utf-8')
+    print('派生字段重算完毕，%d 处变化：' % len(changed))
+    for c in changed:
+        print('  ', c)
+    return changed
+
+
 if __name__ == '__main__':
-    if len(sys.argv) < 2 or sys.argv[1] not in ('scan', 'gap'):
+    if len(sys.argv) < 2 or sys.argv[1] not in ('scan', 'gap', 'derive'):
         sys.exit(__doc__)
-    (scan if sys.argv[1] == 'scan' else gap)()
+    {'scan': scan, 'gap': gap, 'derive': derive}[sys.argv[1]]()

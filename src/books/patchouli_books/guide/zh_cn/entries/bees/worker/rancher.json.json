@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/bees/worker/rancher.json",
- "sha1": "143bf6ff06681a4b68620b65a18a39177feac9c4",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/worker/rancher.json",
+ "sha1": "a99b319e1754b26abcb117684ca16517af57c897",
  "t": [
   [
    [
@@ -17,6 +17,15 @@
    ],
    "Will milk nearby cows, sheep or llamas to create milky combs in its hive. Sheep will also be sheared.$(br2)Many cows were harmed in the making of this bee.",
    "会挤取附近奶牛、绵羊或羊驼的奶，并在自己的蜂巢中产出乳香蜜脾。绵羊还会一并被剪毛。$(br2)许多奶牛都为培育这种蜜蜂付出了代价。"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Will milk nearby cows, sheep or llamas to create milky combs in its hive.$(br2)Many cows were harmed in the making of this bee.",
+   "会去挤附近的牛、羊或羊驼的奶，在蜂巢里酿出奶蜜脾。$(br2)本蜂研制过程中，伤害了大量奶牛。"
   ],
   [
    [

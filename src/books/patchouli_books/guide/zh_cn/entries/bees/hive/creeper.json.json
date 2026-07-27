@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/bees/hive/creeper.json",
- "sha1": "a1bfd825c72803c17ba0a4f8075004f33540159c",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/hive/creeper.json",
+ "sha1": "1e6354c566e2a27dde49295e95812c3e40bf3191",
  "t": [
   [
    [
@@ -8,6 +8,13 @@
    ],
    "CreeBee",
    "蜜蜂苦力怕"
+  ],
+  [
+   [
+    "name"
+   ],
+   "Explosive Bee",
+   "苦力怕蜜蜂"
   ],
   [
    [

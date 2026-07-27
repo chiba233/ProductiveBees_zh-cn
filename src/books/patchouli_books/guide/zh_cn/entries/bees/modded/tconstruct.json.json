@@ -1,6 +1,6 @@
 {
  "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/tconstruct.json",
- "sha1": "8ea770e1652dd8c39187ed17a4f1730bb9f3adf5",
+ "sha1": "35506bef594fc26feb8286de50b7f7b1ffc2444f",
  "t": [
   [
    [
@@ -368,6 +368,15 @@
    ],
    "Amethyst Bronze Bee",
    "紫水晶青铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Tinkers Bronze Bee",
+   "匠魂青铜蜜蜂"
   ],
   [
    [

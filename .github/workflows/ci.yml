@@ -56,6 +56,22 @@ jobs:
       - name: README 支持矩阵是最新的
         run: python3 scripts/readme.py --check
 
+      # CHANGELOG 要在**平时**就红，不能等推了 tag 才发现发版说明是空的。
+      # v1.0.0-beta.1 就是这么发出去的：CHANGELOG 里只有 `## 1.0.0-rc.1`
+      # 一个谁也没发过的版本号，精确比对落空，于是发了句「说明见 CHANGELOG」。
+      - name: CHANGELOG 顶上那段拿得出手
+        run: |
+          set -euo pipefail
+          FIRST=$(awk '/^## /{sub(/^## /,""); print; exit}' CHANGELOG.md)
+          [ -n "$FIRST" ] || { echo "❌ CHANGELOG.md 里一个 ## 段都没有" >&2; exit 1; }
+          BODY=$(awk -v ver="## $FIRST" '
+            $0 == ver { found=1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md | sed '/^[[:space:]]*$/d')
+          [ -n "$BODY" ] || { echo "❌ CHANGELOG 顶上那段（## $FIRST）是空的" >&2; exit 1; }
+          echo "✅ 发版说明会取自 ## $FIRST（$(printf '%s\n' "$BODY" | wc -l | tr -d ' ') 行）"
+
       # 编一个最新平台出来，并对着**打好的那个 jar** 跑译名自测
       - name: 编译 + 自测（1.21.1 NeoForge）
         run: python3 scripts/build.py 0.0.0-rc.1 1.21.1-neoforge

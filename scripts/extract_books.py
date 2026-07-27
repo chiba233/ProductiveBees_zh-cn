@@ -79,32 +79,44 @@ def main(jar_path, write=False):
     for n in pages:
         rel = 'patchouli_books/' + n.split('/patchouli_books/')[1].replace(
             '/en_us/', '/zh_cn/')
-        if rel in have:
-            continue
         raw = z.read(n)
         obj = json.loads(raw.decode('utf-8-sig'))
-        entries, unresolved = [], []
+        # **按条目比，不按文件比**：文件早就有映射了，可这一版的书里可能有当年
+        # 才有、后来删掉的句子。整个文件跳过就等于看不见它们——1.15.2 的书里
+        # 有 32 处英文一直没人发现，就是这么来的。
+        old = books.BOOKS / (rel + '.json')
+        doc = json.loads(old.read_text(encoding='utf-8')) if old.is_file() else None
+        covered = {en for _p, en, _zh in (doc or {}).get('t', [])}
+        entries, unresolved = list((doc or {}).get('t', [])), []
+        fresh = 0
         for path, val in books.walk(obj):
-            if not translatable(path, val):
+            if not translatable(path, val) or val in covered:
                 continue
             zh = (pairs.get(val) or en2zh.get(val)
                   or templates.apply(val, tmpl, name2zh, hand_sk, terms))
             if zh:
                 entries.append([list(path), val, zh])
+                covered.add(val)
+                fresh += 1
             else:
                 unresolved.append(val)
                 todo.setdefault(val, []).append(rel)
-        if write and not unresolved:
+        if not fresh and not unresolved:
+            continue
+        if write and fresh:
+            # 能填的先落盘，别因为同一个文件里还剩一句没译就整份丢掉——
+            # 剩下的那句由产物侧那道「还有没有英文」的闸兜底，漏不掉。
+            # sha1 记这一版的：严格校验只对「和提取时逐字节相同」的那一版生效
             books.dump(rel, {'src': n, 'sha1': books.sha1(raw), 't': entries})
             made += 1
-        print('  %-46s 自动填 %3d / 还缺 %d'
-              % (rel.split('guide/zh_cn/')[-1], len(entries), len(unresolved)))
+        print('  %-46s 新填 %3d / 还缺 %d'
+              % (rel.split('guide/zh_cn/')[-1], fresh, len(unresolved)))
 
     print('\n还要人译的**不重复**句子 %d 条：' % len(todo))
     for s in sorted(todo, key=lambda x: (-len(todo[x]), x))[:40]:
         print('  ×%-3d %s' % (len(todo[s]), s if len(s) < 110 else s[:107] + '…'))
     if write:
-        print('\n已落盘 %d 个（只落盘全部能填的那些）' % made)
+        print('\n已落盘 %d 个文件' % made)
     return todo
 
 

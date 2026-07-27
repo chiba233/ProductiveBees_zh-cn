@@ -1,6 +1,6 @@
 {
- "src": "assets/productivebees/patchouli_books/guide/en_us/entries/bees/worker/lumber.json",
- "sha1": "2ecd8c9edd7aa2fd18bbb711a7a8afc15418e101",
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/worker/lumber.json",
+ "sha1": "f86ab5b427364903347ebe2866a503516d52e492",
  "t": [
   [
    [
@@ -17,6 +17,15 @@
    ],
    "Nibble on nearby wood and collects it in its hive.",
    "会啃食附近的木头，并将其收集到自己的蜂巢中。"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Nibble on nearby wood and collects wood chips in its hive. Wood chips can be crafted into logs.",
+   "啃食附近的木头，把木头碎片收集到自己的蜂巢里。木头碎片可以合成原木。"
   ],
   [
    [
