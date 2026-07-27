@@ -1,0 +1,19 @@
+{
+ "_why": "这个包要产出什么、对着哪一份 jar 验过、覆盖率下限是多少，全写在这里。版本相关的东西一律不许在别处手写第二遍。",
+
+ "id": "productivebees-zh_cn",
+ "zh_name": "资源蜜蜂",
+ "en_name": "Productive Bees",
+ "modid": "productivebees",
+ "namespaces": ["productivebees"],
+ "homepage": "https://www.curseforge.com/minecraft/mc-mods/productive-bees",
+
+ "pack_format": 34,
+ "supported_formats": [15, 99],
+
+ "coverage_floor": {
+  "_why": "「装上去了但只翻了一半」比没翻还糟——玩家不会来报，只会觉得这包很烂。出包前拿目标 jar 的 en_us 与导览书逐个点名，够不到就直接失败。",
+  "lang_keys": 1.0,
+  "book_files": 1.0
+ }
+}

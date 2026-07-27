@@ -1,0 +1,34 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="GPL-3.0-or-later"
+issueTrackerURL="https://github.com/chiba233/ProductiveBees_zh-cn/issues"
+
+[[mods]]
+modId="productivebees_zh_cn"
+version="r12"
+displayName="资源蜜蜂 汉化"
+authors="星野夢華 (Hoshino Yumeka)"
+# 纯客户端显示层，服务端不会有这个 mod。不写这条，进服时可能被判定「mod 不一致」
+# 而连不上——汉化把人挡在服务器外面是最不能接受的一类故障。
+displayTest="IGNORE_ALL_VERSION"
+description='''
+资源蜜蜂（Productive Bees）的简体中文汉化：物品、方块、蜜蜂、界面，内置导览书全部页面，
+以及基因样本 tooltip 里那行**运行期拼出来的蜂种名**（那一行资源包碰不到，
+只能在 ItemTooltipEvent 上拦）。
+
+摘自 All the Mods 10 汉化补丁「绿油油版」，与整合包版同一份译名真源。
+'''
+
+[[dependencies.productivebees_zh_cn]]
+modId="neoforge"
+type="required"
+versionRange="[21,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.productivebees_zh_cn]]
+modId="productivebees"
+type="required"
+versionRange="[0,)"
+ordering="AFTER"
+side="CLIENT"

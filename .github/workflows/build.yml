@@ -29,6 +29,12 @@ jobs:
         with:
           python-version: '3.12'
 
+      # NeoForge 1.21.1 的工具链要 Java 21
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
       - name: 定版本号
         id: v
         run: |
@@ -44,8 +50,11 @@ jobs:
       # 模组 jar 按 sha256 核过才用，缓存命中也一样要核（build.py 自己会核）
       - uses: actions/cache@v4
         with:
-          path: build/mods
-          key: pbjar-${{ hashFiles('SOURCE.lock') }}
+          path: |
+            build/mods
+            build/gradle
+            ~/.gradle/caches
+          key: pbdeps-${{ hashFiles('SOURCE.lock') }}
 
       - name: 打包
         run: python3 scripts/build.py '${{ steps.v.outputs.version }}'

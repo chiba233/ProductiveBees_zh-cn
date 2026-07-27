@@ -1,0 +1,15 @@
+// ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化（独立发布）
+// Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+// SPDX-License-Identifier: GPL-3.0-or-later
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.neoforged.net/releases' }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+rootProject.name = 'productivebees-zh_cn'

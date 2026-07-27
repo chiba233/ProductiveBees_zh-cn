@@ -1,0 +1,50 @@
+// ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化（独立发布）
+// Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// 这是一个**真的 mod**，不是资源包套壳。
+//
+// 为什么非得是 mod：基因样本 tooltip 里那行蜂种名是运行期数据，
+//   Component.translatable("productivebees.information.attribute.type", value)
+// 的 value 是从物品 data component 里读出来的裸 String，不过任何 lang 查表。
+// 资源包碰不到，VaultPatcher 也不行（它改字节码常量池，这个串不在常量池里）。
+// 只能在 ItemTooltipEvent 上拦下来改——那就得有代码，那就得是 mod。
+//
+// 资源（lang / 导览书）与译名表都是 Python 在构建前生成到 src/main/resources 的，
+// 真源在 atm10-zh-cn，按 SOURCE.lock 的 commit 钉死。这里只负责编译与打包。
+plugins {
+    id 'net.neoforged.moddev' version '2.0.142'
+}
+
+version = project.findProperty('modVersion') ?: 'dev'
+group = 'cn.hoshino'
+base { archivesName = 'productivebees-zh_cn' }
+
+java {
+    // NeoForge 1.21.1 跑在 Java 21 上。构建机的 JDK 可以更新，
+    // 但字节码必须按 21 出，否则玩家那边 UnsupportedClassVersionError。
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+neoForge {
+    // 与 ATM10 7.2 同一版；编译期用哪版不影响兼容范围，
+    // 兼容范围由 mods.toml 里的 versionRange 决定。
+    version = project.findProperty('neoVersion') ?: '21.1.241'
+}
+
+// 产物字节要可复现：不写时间戳，条目按名字排序。
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes([
+            'Specification-Title'     : 'productivebees_zh_cn',
+            'Specification-Vendor'    : '星野夢華 (Hoshino Yumeka)',
+            'Implementation-Title'    : 'Productive Bees 简体中文汉化',
+            'Implementation-Version'  : project.version,
+        ])
+    }
+}
