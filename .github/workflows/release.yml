@@ -101,7 +101,15 @@ jobs:
           key: deps-${{ hashFiles('versions/targets.json', 'deps.lock.json') }}
 
       - name: 出全部平台的 jar
-        run: python3 scripts/build.py '${{ steps.release.outputs.version }}'
+        run: |
+          set -euo pipefail
+          # 一个个来，编完一个就把中间物清掉——每个平台 ModDevGradle 都要解一遍
+          # Minecraft，同时留着会把 runner 撑爆。
+          for t in $(python3 -c "import json;print(' '.join(sorted(k for k,v in json.load(open('versions/targets.json',encoding='utf-8')).items() if v.get('buildable'))))"); do
+            echo "───── $t ─────"
+            python3 scripts/build.py '${{ steps.release.outputs.version }}' "$t"
+            rm -rf mod/build
+          done
 
       # Release 说明取 CHANGELOG.md 里 `## <版本>` 那一段。**整串精确比对**，
       # 别用正则前缀匹配——`## 1.0` 会把 `## 1.0.1` 也匹上。取不到就回落到全文提示。

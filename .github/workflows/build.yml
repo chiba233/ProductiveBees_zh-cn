@@ -26,9 +26,32 @@ on:
       - 'manifest.json'
 
 jobs:
-  build:
-    name: 全平台构建
+  # 先把要出哪些平台读出来，下面按矩阵一个 runner 出一个。
+  # 不能在一个 job 里串着编 20 个：每个平台 ModDevGradle 都要解一遍 Minecraft，
+  # 串行既慢又吃内存（本机试过直接被 OOM 杀掉）。
+  targets:
     runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.t.outputs.list }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: t
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          t = json.load(open('versions/targets.json', encoding='utf-8'))
+          print('list=' + json.dumps(sorted(k for k, v in t.items() if v.get('buildable'))))
+          PY
+
+  build:
+    name: ${{ matrix.target }}
+    needs: targets
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJSON(needs.targets.outputs.list) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -63,16 +86,16 @@ jobs:
             build/pbjars
             build/gradle
             ~/.gradle/caches
-          key: deps-${{ hashFiles('versions/targets.json', 'deps.lock.json') }}
+          key: deps-${{ matrix.target }}-${{ hashFiles('versions/targets.json', 'deps.lock.json') }}
 
-      - name: 出全部平台的 jar
-        run: python3 scripts/build.py '${{ steps.v.outputs.version }}'
+      - name: 出这个平台的 jar
+        run: python3 scripts/build.py '${{ steps.v.outputs.version }}' '${{ matrix.target }}'
 
       - name: 产物清单
         run: ls -lh dist/
 
       - uses: actions/upload-artifact@v4
         with:
-          name: productivebees-zh_cn-${{ steps.v.outputs.version }}
+          name: productivebees-zh_cn-${{ steps.v.outputs.version }}-${{ matrix.target }}
           path: dist/*.jar
           if-no-files-found: error
