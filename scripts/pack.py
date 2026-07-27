@@ -1,24 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化（独立发布）
+# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化
 # Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""把上游的译文摊成这个 mod 的资源树，并核验覆盖率。
+"""把 `src/` 里的译文摊成 mod 的资源树，并在出包前逐项点名。
 
-**由 build.py 在装好 sys.path 之后导入**——它依赖上游仓库 `scripts/` 里的
-`paths` / `gen_books` / `gen_pb_hanhua`。这个仓库一行译文都不存，全部现取。
+摊出来的东西（全都是**生成物**，不入库）：
 
-三样东西：
+    assets/productivebees/lang/zh_cn.json        直接来自 src/lang
+    assets/productivebees/patchouli_books/**     拿映射现套到模组自带那份 JSON 上
+    pbzh/bees.json                               三张蜂名表，给显示层用
+    META-INF/neoforge.mods.toml, pack.mcmeta     按 manifest 现填
 
-1. `assets/productivebees/lang/zh_cn.json`  —— 直接来自上游资源包
-2. `assets/productivebees/patchouli_books/**` —— 拿「原文 → 译文」映射现套到
-   模组自带那份 JSON 上（所以构建时非有那个 jar 不可）
-3. `pbzh/bees.json` —— 三张蜂名表，给 Java 那层用
-
-第 3 样是关键：`Gene.appendHoverText` 把裸 String 塞进
-`Component.translatable("...attribute.type", value)` 的参数位，那个串是运行期数据，
-不过任何 lang 查表，资源包碰不到。表**只在上游生成一次**（`gen_pb_hanhua.py`），
-这里只是把它抠出来——Java 里一个中文都不许写死，否则又变成两份译名。
+三道闸，过不了不出包：覆盖率、占位符与结构、以及构建收尾对着**打好的 jar** 跑的自测。
+「装上去只翻了一半」比没翻还糟——玩家不会来报，只会觉得这包很烂。
 """
 import json
 import re
@@ -27,51 +22,32 @@ import sys
 import zipfile
 from pathlib import Path
 
+import books
+import names
+
 ROOT = Path(__file__).resolve().parent.parent
+NS = 'productivebees'
 
 
-def name_tables(common):
-    """从上游生成的显示层脚本里抠出三张表。
-
-    为什么这么取而不是让上游多导一份：这个包不该逼上游为它改代码。
-    上游自己的 check.py 做蜂名漂移检查时用的就是同一招。
-    """
-    js = common / 'kubejs' / 'client_scripts' / 'pb_hanhua_tooltip.js'
-    if not js.is_file():
-        sys.exit('❌ 上游没生成 pb_hanhua_tooltip.js，抠不出蜂名表')
-    text = js.read_text(encoding='utf-8')
-    out = {}
-    for want, key in (('PB_ID2ZH', 'id2zh'), ('PB_EN2ZH', 'en2zh'),
-                      ('PB_TYPE2ZH', 'type2zh')):
-        m = re.search(r'const %s = (\{.*?\});\n' % want, text, re.S)
-        if not m:
-            sys.exit('❌ 上游脚本里找不到 %s' % want)
-        out[key] = json.loads(m.group(1))
-    if not out['type2zh']:
-        sys.exit('❌ 类型表是空的——那一行正是这个 mod 存在的理由')
-    return out
-
-
-def coverage(jar, ns, root, floor):
+def coverage(jar, root, floor):
     """对着 jar 的 en_us 与导览书逐个点名。"""
     z = zipfile.ZipFile(jar)
     bad, rate = {}, {}
-    en_path = 'assets/%s/lang/en_us.json' % ns
+    en_path = 'assets/%s/lang/en_us.json' % NS
     if en_path in z.namelist():
         en = json.loads(z.read(en_path))
-        f = root / 'assets' / ns / 'lang' / 'zh_cn.json'
+        f = root / 'assets' / NS / 'lang' / 'zh_cn.json'
         zh = json.loads(f.read_text(encoding='utf-8')) if f.is_file() else {}
         miss = sorted(set(en) - set(zh))
         rate['lang_keys'] = (len(en) - len(miss)) / max(1, len(en))
         if miss:
             bad['lang_keys'] = miss
-    books = [n for n in z.namelist()
-             if n.startswith('assets/%s/patchouli_books/' % ns)
-             and '/en_us/' in n and n.endswith('.json')]
-    if books:
-        miss = [n for n in books
-                if not (root / n.replace('/en_us/', '/zh_cn/')).is_file()]
-        rate['book_files'] = (len(books) - len(miss)) / len(books)
+    bk = [n for n in z.namelist()
+          if n.startswith('assets/%s/patchouli_books/' % NS)
+          and '/en_us/' in n and n.endswith('.json')]
+    if bk:
+        miss = [n for n in bk if not (root / n.replace('/en_us/', '/zh_cn/')).is_file()]
+        rate['book_files'] = (len(bk) - len(miss)) / len(bk)
         if miss:
             bad['book_files'] = miss
     fails = []
@@ -85,10 +61,17 @@ def coverage(jar, ns, root, floor):
     return rate, fails
 
 
-def sanity(jar, ns, root):
+def sanity(jar, root):
     """占位符红线 + 导览书结构，全部对着模组自己的 en_us 比。
 
-    覆盖率只回答「有没有翻」，这里回答「翻得会不会炸」。
+    覆盖率只回答「有没有翻」，这里回答「翻得会不会炸」：
+
+    - 译文的占位符集合必须 ⊆ 英文的。多出来 = 运行时参数不足 →
+      TranslatableFormatException。少是译者的合法选择（有的参数其实只是个空格）。
+    - 同序号的转换符不许从 `%s` 降级成 `%d`/`%f`，类型对不上两条渲染路径都炸。
+    - 结尾裸 `%` 会被 MC 的 FORMAT_PATTERN 匹配到字符串结尾并抛异常。
+    - 导览书中文版的 JSON 结构必须与英文版逐键一致：Patchouli 按结构读，
+      少一个 `type` 或页数对不上，那一页**静默不显示**，还不报错。
     """
     bad = []
     z = zipfile.ZipFile(jar)
@@ -108,10 +91,10 @@ def sanity(jar, ns, root):
             prof.setdefault(idx, m.group(4))
         return prof
 
-    en_path = 'assets/%s/lang/en_us.json' % ns
+    en_path = 'assets/%s/lang/en_us.json' % NS
     if en_path in z.namelist():
         en = json.loads(z.read(en_path))
-        zh = json.loads((root / 'assets' / ns / 'lang'
+        zh = json.loads((root / 'assets' / NS / 'lang'
                          / 'zh_cn.json').read_text(encoding='utf-8'))
         for k, v in zh.items():
             if not isinstance(v, str):
@@ -139,7 +122,7 @@ def sanity(jar, ns, root):
         return type(o).__name__
 
     for n in z.namelist():
-        if not (n.startswith('assets/%s/patchouli_books/' % ns)
+        if not (n.startswith('assets/%s/patchouli_books/' % NS)
                 and '/en_us/' in n and n.endswith('.json')):
             continue
         t = root / n.replace('/en_us/', '/zh_cn/')
@@ -156,14 +139,14 @@ def sanity(jar, ns, root):
     return bad
 
 
-def book_name(jar, ns, root):
+def book_name(jar, root):
     """导览书的中文名：上游 book.json 的 name 过一遍我们的 lang。不许手写。"""
     z = zipfile.ZipFile(jar)
-    p = 'data/%s/patchouli_books/guide/book.json' % ns
+    p = 'data/%s/patchouli_books/guide/book.json' % NS
     if p not in z.namelist():
         return None
     en = json.loads(z.read(p)).get('name')
-    f = root / 'assets' / ns / 'lang' / 'zh_cn.json'
+    f = root / 'assets' / NS / 'lang' / 'zh_cn.json'
     if not f.is_file():
         return en
     return json.loads(f.read_text(encoding='utf-8')).get(en, en)
@@ -187,8 +170,6 @@ description=\'\'\'
 {zh}（{en}）的简体中文汉化：物品、方块、蜜蜂、界面，内置导览书全部页面，
 以及基因样本 tooltip 里那行**运行期拼出来的蜂种名**（那一行资源包碰不到，
 只能在 ItemTooltipEvent 上拦）。
-
-摘自 All the Mods 10 汉化补丁「绿油油版」，与整合包版同一份译名真源。
 \'\'\'
 
 [[dependencies.{modid}_zh_cn]]
@@ -207,42 +188,26 @@ side="CLIENT"
 '''.format(modid=man['modid'], ver=ver, zh=man['zh_name'], en=man['en_name'])
 
 
-def build(man, jar, mods_dir, ver, common, pack_dir, gen_books, gen_pb_hanhua):
+def build(man, jar, ver):
     """摊出 mod 的资源树，返回 (资源根目录, 统计)。"""
-    print('套导览书映射 …')
-    gen_books.main(str(mods_dir))
-    print('生成蜂名表 …')
-    # 上游那个脚本是从 sys.argv 认 jar 的。**不改上游**——它是整合包自己的东西，
-    # 不该为这个包让路。这里临时把 argv 顶掉就行。
-    saved = sys.argv
-    try:
-        sys.argv = ['gen_pb_hanhua', str(jar)]
-        gen_pb_hanhua.main()
-    finally:
-        sys.argv = saved
-
     res = ROOT / 'mod' / 'src' / 'main' / 'resources'
     if res.exists():
         shutil.rmtree(res)
     res.mkdir(parents=True)
 
-    n_lang = n_book = 0
-    for ns in man['namespaces']:
-        src = pack_dir / 'assets' / ns
-        if not src.is_dir():
-            sys.exit('❌ 上游出货树里没有 assets/%s' % ns)
-        dst = res / 'assets' / ns
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(src, dst)
-        lf = dst / 'lang' / 'zh_cn.json'
-        if lf.is_file():
-            n_lang += len(json.loads(lf.read_text(encoding='utf-8')))
-        n_book += sum(1 for _ in dst.rglob('patchouli_books/**/*.json'))
+    lang_src = ROOT / 'src' / 'lang' / 'zh_cn.json'
+    lang_dst = res / 'assets' / NS / 'lang' / 'zh_cn.json'
+    lang_dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(lang_src, lang_dst)
+    n_lang = len(json.loads(lang_dst.read_text(encoding='utf-8')))
 
-    rate, fails = coverage(jar, man['namespaces'][0], res, man['coverage_floor'])
+    n_book = books.generate(jar, res / 'assets' / NS)
+    tables = names.write(jar, res / 'pbzh' / 'bees.json')
+
+    rate, fails = coverage(jar, res, man['coverage_floor'])
     for k, v in sorted(rate.items()):
         print('  %s 覆盖率 %.1f%%' % (k, v * 100))
-    fails += sanity(jar, man['namespaces'][0], res)
+    fails += sanity(jar, res)
     if fails:
         for f in fails:
             print('  ❌', f)
@@ -250,23 +215,15 @@ def build(man, jar, mods_dir, ver, common, pack_dir, gen_books, gen_pb_hanhua):
                  % len(fails))
     print('  占位符 / 导览书结构核验通过')
 
-    tables = name_tables(common)
-    (res / 'pbzh').mkdir()
-    (res / 'pbzh' / 'bees.json').write_text(
-        json.dumps(tables, ensure_ascii=False, indent=1, sort_keys=True) + '\n',
-        encoding='utf-8')
-    print('  蜂名表: ID %d / 英文名 %d / 类型行 %d'
-          % (len(tables['id2zh']), len(tables['en2zh']), len(tables['type2zh'])))
-
     (res / 'META-INF').mkdir()
     (res / 'META-INF' / 'neoforge.mods.toml').write_text(
         mods_toml(man, ver), encoding='utf-8')
     (res / 'pack.mcmeta').write_text(json.dumps({'pack': {
         'pack_format': man['pack_format'],
         'supported_formats': man['supported_formats'],
-        'description': '%s 简体中文汉化 · 绿油油版' % man['zh_name'],
+        'description': '%s 简体中文汉化' % man['zh_name'],
     }}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (res / 'LICENSE').write_bytes((ROOT / 'LICENSE').read_bytes())
 
-    return res, {'lang': n_lang, 'book': n_book, 'types': len(tables['type2zh']),
-                 'book_name': book_name(jar, man['namespaces'][0], res)}
+    return res, {'lang': n_lang, 'book': n_book,
+                 'types': len(tables['type2zh']), 'book_name': book_name(jar, res)}

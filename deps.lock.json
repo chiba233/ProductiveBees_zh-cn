@@ -1,0 +1,14 @@
+{
+ "_why": "构建的外部输入只有两样：目标那一版的资源蜜蜂 jar（在 versions/targets.json 里逐个记了 sha256 与不可变的 CurseForge fileID），和 Gradle 发行版。两样都按字节钉死，对不上就当场失败，不会「凑合出个包」。",
+ "gradle": {
+  "_why": "不用 gradle-wrapper.jar：那是二进制，这个仓库不放二进制。发行版 zip 现下现核，哈希摆在这里看得见。",
+  "version": "8.14",
+  "url": "https://services.gradle.org/distributions/gradle-8.14-bin.zip",
+  "sha256": "61ad310d3c7d3e5da131b76bbf22b5a4c0786e9d892dae8c1658d4b484de3caa"
+ },
+ "toolchain": {
+  "_why": "一个 jar 跨不了全部版本，因为字节码目标就不一样：1.16 跑 Java 8、1.17 跑 16、1.18–1.20.4 跑 17、1.20.5+ 跑 21。所以按平台各出一个 jar，但**全部 jar 共用 src/ 里同一份数据源**。",
+  "moddevgradle": "2.0.142",
+  "neoforge_latest": "21.1.241"
+ }
+}
