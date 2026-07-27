@@ -1,0 +1,247 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/mystical_agriculture.json",
+ "sha1": "59b47308a29ea6bee878a3fe6e39ae4c5b916013",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Mystical Agriculture",
+   "神秘农业"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Totally balanced bees for Mystical Agriculture and addons.",
+   "神秘农业及其附属的蜜蜂，平衡性「绝对」没问题。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "turn the page",
+   "请翻页"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#inferium)Inferium Bee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#inferium)劣质蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "ProsperiBee",
+   "活化蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "ProsperiBee",
+   "活化蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Converted from a $(l:bees/wild/ghostly)Ghostly Bee$(/l) using a soulium dagger.",
+   "用灵魂匕首将一只$(l:bees/wild/ghostly)恶魂蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Soulium Bee",
+   "灵魂锭蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Soulium Bee",
+   "灵魂锭蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#prosperity)ProsperiBee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#prosperity)繁荣蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Inferium Bee",
+   "下级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Inferium Bee",
+   "下级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#inferium)Inferium Bee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#inferium)劣质蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Prudentium Bee",
+   "初级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    9,
+    "name"
+   ],
+   "Prudentium Bee",
+   "初级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#prudentium)Prudentium Bee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#prudentium)初级蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Tertium Bee",
+   "中级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    11,
+    "name"
+   ],
+   "Tertium Bee",
+   "中级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#tertium)Tertium Bee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#tertium)中级蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Imperium Bee",
+   "高级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    13,
+    "name"
+   ],
+   "Imperium Bee",
+   "高级精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#imperium)Imperium Bee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#imperium)高级蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Supremium Bee",
+   "终极精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    15,
+    "name"
+   ],
+   "Supremium Bee",
+   "终极精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/mod/bees/mystical_agriculture#supremium)supremium Bee(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/mod/bees/mystical_agriculture#supremium)顶级蜜蜂(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Insanium Bee",
+   "究极精华蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    17,
+    "name"
+   ],
+   "Insanium Bee",
+   "究极精华蜜蜂"
+  ]
+ ]
+}

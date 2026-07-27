@@ -1,0 +1,265 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/solitary_bees.json",
+ "sha1": "a4b97e19892b58affca573f0e9146356a56b28df",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "1. Solitary Bees",
+   "一、独居蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Solitary bees can be found spawning from solitary nests in the overworld. Nests are generated during world gen or can be crafted and placed in the world manually. Each nest will spawn it's own variety of solitary bees and some of them need to be placed in specific biomes. Most solitary bees will not live in hives and do not produce any combs, but they have useful genetics for breeding.",
+   "独居蜜蜂会从主世界的独居蜂巢中生成。蜂巢在世界生成时出现，也可以合成后自己放置。每种蜂巢生成各自的独居蜜蜂，有些还必须放在特定生物群系里。多数独居蜜蜂不住蜂箱、也不产蜜脾，但它们的基因在繁殖时很有用。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "Empty nests will attract a solitary bee after a while as long as the nest is in the correct biome and loaded. Some solitary bees only spawn from the nest of other solitary bees, these are called Cuckoo bees.",
+   "只要蜂巢放在正确的生物群系里并处于加载状态，空蜂巢过一阵就会引来独居蜜蜂。有些独居蜜蜂只会从其他独居蜜蜂的蜂巢里生成，这类叫杜鹃蜂。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "[Andrena cineraria]",
+   "[灰矿蜂]"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Ashy Mining Bee",
+   "灰烬穴居蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "[Amegilla cingulata]",
+   "[环带无刺蜂]"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Blue Banded Bee",
+   "蓝色条纹蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "[Xylocopa aerata]",
+   "[绿木蜂]"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Green Carpenter Bee",
+   "绿色木匠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "[Xylocopa aruana]",
+   "[阿鲁阿纳木蜂]"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Yellow and Black Carpenter Bee",
+   "黄黑木匠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "[Andrena scotica]",
+   "[苏格兰矿蜂]"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Chocolate Mining Bee",
+   "巧克力开采蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "[Anthophora urbana]",
+   "[安托福拉·乌尔巴纳]"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Digger Bee",
+   "挖掘者蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "[Megachile brevis]",
+   "[短叶切蜂]"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Leafcutter Bee",
+   "切叶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "[Osmia lignaria]",
+   "[蓝果园蜂]"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Mason Bee",
+   "石匠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "text"
+   ],
+   "[Thyreus nitidulus]",
+   "[蒂雷乌斯·尼蒂杜卢斯]"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "title"
+   ],
+   "Neon Cuckoo Bee",
+   "霓虹杜鹃蜂"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "text"
+   ],
+   "[Nomada marshamella]",
+   "[诺玛达·马尔沙梅拉]"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "title"
+   ],
+   "Nomad Bee",
+   "游牧蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "text"
+   ],
+   "[Exoneura robusta]",
+   "[粗壮外巢蜂]"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "title"
+   ],
+   "Reed Bee",
+   "芦苇蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "text"
+   ],
+   "[Megachile mystaceana]",
+   "[梅加奇勒·密斯塔西亚娜]"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "title"
+   ],
+   "Resin Bee",
+   "树脂蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "text"
+   ],
+   "[Halictus rubicundus]",
+   "[红腹隧蜂]"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Sweat Bee",
+   "汗蜜蜂"
+  ]
+ ]
+}

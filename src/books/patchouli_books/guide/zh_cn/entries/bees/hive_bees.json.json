@@ -1,0 +1,265 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/hive_bees.json",
+ "sha1": "736f41dcf7e03100ebf0eb670c9d4811d47dc3fc",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "3. Hive Bees",
+   "三、蜂巢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Hive bees, like the vanilla bee, lives in hives and produce honey and resources. They have to live in advanced hives to produce resource combs. Most hive bees are bred from solitary bees and other hive bees but some are made by giving a specific item to a bee. All bee recipes can be found in JEI.",
+   "蜂巢蜜蜂和原版蜜蜂一样住在蜂箱里，产出蜂蜜与各种资源。要产资源蜜脾，它们必须住在高级蜂箱中。多数蜂巢蜜蜂由独居蜜蜂与其他蜂巢蜜蜂繁殖而来，也有一些是给某只蜜蜂特定物品变来的。全部繁殖配方都能在 JEI 里查到。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "Each hive bee has it's own particular flower need in order to produce resources. For instance, an Iron Bee needs something made of iron nearby it's hive. All flowering requirements can be found with JEI.",
+   "每种蜂巢蜜蜂产资源时都有各自要求的「花」。比如铁蜜蜂需要蜂箱附近有铁质的东西。全部授粉需求都能在 JEI 里查到。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and an $(l:bees/solitary_bees#ashy_mining)Ashy Mining Bee$(/l).",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/solitary_bees#ashy_mining)灰烬开采蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Iron Bee",
+   "铁蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and an $(l:bees/solitary_bees#mason)Mason Bee$(/l).",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/solitary_bees#mason)石匠蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Gold Bee",
+   "金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#glowing)Glowing Bee$(/l) and an $(l:bees/solitary_bees#chocolate_mining)Chocolate Mining Bee$(/l).",
+   "由一只$(l:bees/wild_bees#glowing)发光蜜蜂$(/l)和一只$(l:bees/solitary_bees#chocolate_mining)巧克力开采蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Redstone Bee",
+   "红石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive_bees#redstone)Redstone Bee$(/l) and a $(l:bees/solitary_bees#blue_banded)Blue Banded Bee$(/l).",
+   "由一只$(l:bees/hive_bees#redstone)红石蜜蜂$(/l)和一只$(l:bees/solitary_bees#blue_banded)蓝色条纹蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Lapis Bee",
+   "青金石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive_bees#redstone)Blazing Bee$(/l) and a $(l:bees/solitary_bees#leafcutter)Leafcutter Bee$(/l).",
+   "由一只$(l:bees/hive_bees#redstone)烈焰蜜蜂$(/l)和一只$(l:bees/solitary_bees#leafcutter)切叶蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Coal Bee",
+   "煤炭蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#magmatic)Magmatic Bee$(/l) and a $(l:bees/solitary_bees#sweaty)Sweat Bee$(/l).",
+   "由一只$(l:bees/wild_bees#magmatic)熔岩蜜蜂$(/l)和一只$(l:bees/solitary_bees#sweaty)汗蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Obsidian Bee",
+   "黑曜石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "Bred from an $(l:bees/wild_bees#ender)Ender Bee$(/l) and a $(l:bees/hive_bees#lapis)Lapis Bee$(/l).",
+   "由一只$(l:bees/wild_bees#ender)末影蜜蜂$(/l)和一只$(l:bees/hive_bees#lapis)青金石蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Diamond Bee",
+   "钻石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "Bred from an $(l:bees/wild_bees#slimy)Slimy Bee$(/l) and a $(l:bees/hive_bees#diamond)Diamond Bee$(/l).",
+   "由一只$(l:bees/wild_bees#slimy)史莱姆蜜蜂$(/l)和一只$(l:bees/hive_bees#diamond)钻石蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Emerald Bee",
+   "绿宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "text"
+   ],
+   "Will move in to an advanced hive if the hive is left empty in the dark.",
+   "如果将高级蜂箱空着放在黑暗中，它就会搬进去。"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "title"
+   ],
+   "Skeletal Bee",
+   "骷髅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "text"
+   ],
+   "Will move in to an advanced hive if the hive is left empty in the dark.",
+   "如果将高级蜂箱空着放在黑暗中，它就会搬进去。"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "title"
+   ],
+   "Zombie Bee",
+   "僵尸蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "text"
+   ],
+   "Obtained by feeding a block of TNT to a vanilla bee.",
+   "给一只原版蜜蜂喂食一整块 TNT 后获得。"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "title"
+   ],
+   "Creeper Bee",
+   "苦力怕蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#magmatic)Magmatic Bee$(/l) and a $(l:bees/solitary_bees#nomad)Nomad Bee$(/l).",
+   "由一只$(l:bees/wild_bees#magmatic)熔岩蜜蜂$(/l)和一只$(l:bees/solitary_bees#nomad)游牧蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "title"
+   ],
+   "Blazing Bee",
+   "烈焰蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "text"
+   ],
+   "Obtained by feeding a wither rose to a $(l:bees/hive_bees#skeletal)Skeletal Bee$(/l).",
+   "给一只$(l:bees/hive_bees#skeletal)骷髅蜜蜂$(/l)喂食凋灵玫瑰后获得。"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Withered Bee",
+   "凋零蜜蜂"
+  ]
+ ]
+}

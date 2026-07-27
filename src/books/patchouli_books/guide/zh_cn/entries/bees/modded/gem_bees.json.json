@@ -1,0 +1,1399 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/gem_bees.json",
+ "sha1": "b59a67254d2809e260cefcab2881d033830ba393",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Gem Bees",
+   "宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "If you have mods that adds gemstones, you will most likely find a bee for them.",
+   "只要装了添加宝石的模组，基本都能找到对应的蜜蜂。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an agate gem.",
+   "用玛瑙宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Agate Bee",
+   "玛瑙蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Agate Bee",
+   "玛瑙蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an alexandrite gem.",
+   "用变石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Alexandrite Bee",
+   "变石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Alexandrite Bee",
+   "变石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an amber gem.",
+   "用琥珀宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Amber Bee",
+   "琥珀蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Amber Bee",
+   "琥珀蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an amethyst gem.",
+   "用紫水晶宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Amethyst Bee",
+   "紫水晶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    9,
+    "name"
+   ],
+   "Amethyst Bee",
+   "紫水晶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an ametrine gem.",
+   "用紫黄晶宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Ametrine Bee",
+   "紫黄晶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    11,
+    "name"
+   ],
+   "Ametrine Bee",
+   "紫黄晶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an ammolite gem.",
+   "用斑彩石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Ammolite Bee",
+   "斑彩石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    13,
+    "name"
+   ],
+   "Ammolite Bee",
+   "斑彩石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an apatite gem.",
+   "用磷灰石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Apatite Bee",
+   "磷灰石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    15,
+    "name"
+   ],
+   "Apatite Bee",
+   "磷灰石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an aquamarine gem.",
+   "用海蓝宝石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Aquamarine Bee",
+   "海蓝宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    17,
+    "name"
+   ],
+   "Aquamarine Bee",
+   "海蓝宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a benitoite gem.",
+   "用蓝锥矿宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "title"
+   ],
+   "Benitoite Bee",
+   "蓝锥矿蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    19,
+    "name"
+   ],
+   "Benitoite Bee",
+   "蓝锥矿蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a black diamond gem.",
+   "用黑钻石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "title"
+   ],
+   "Black Diamond Bee",
+   "黑钻石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    21,
+    "name"
+   ],
+   "Black Diamond Bee",
+   "黑钻石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a black opal gem.",
+   "用黑欧泊宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "title"
+   ],
+   "Black Opal Bee",
+   "黑蛋白石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    23,
+    "name"
+   ],
+   "Black Opal Bee",
+   "黑蛋白石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a carnelian gem.",
+   "用红玉髓宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "title"
+   ],
+   "Carnelian Bee",
+   "红玉髓蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    25,
+    "name"
+   ],
+   "Carnelian Bee",
+   "红玉髓蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a cats eye gem.",
+   "用猫眼石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Cats Eye Bee",
+   "猫眼石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    27,
+    "name"
+   ],
+   "Cats Eye Bee",
+   "猫眼石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    28,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a chrysoprase gem.",
+   "用绿玉髓宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    28,
+    "title"
+   ],
+   "Chrysoprase Bee",
+   "绿玉髓蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    29,
+    "name"
+   ],
+   "Chrysoprase Bee",
+   "绿玉髓蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    30,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a cinnabar gem.",
+   "用朱砂宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    30,
+    "title"
+   ],
+   "Cinnabar Bee",
+   "朱砂蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    31,
+    "name"
+   ],
+   "Cinnabar Bee",
+   "朱砂蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    32,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a citrine gem.",
+   "用黄水晶宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    32,
+    "title"
+   ],
+   "Citrine Bee",
+   "黄水晶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    33,
+    "name"
+   ],
+   "Citrine Bee",
+   "黄水晶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    34,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a coral gem.",
+   "用珊瑚宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    34,
+    "title"
+   ],
+   "Coral Bee",
+   "珊瑚蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    35,
+    "name"
+   ],
+   "Coral Bee",
+   "珊瑚蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    36,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an euclase gem.",
+   "用蓝柱石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    36,
+    "title"
+   ],
+   "Euclase Bee",
+   "蓝柱石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    37,
+    "name"
+   ],
+   "Euclase Bee",
+   "蓝柱石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    38,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a fluorite gem.",
+   "用萤石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    38,
+    "title"
+   ],
+   "Fluorite Bee",
+   "氟石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    39,
+    "name"
+   ],
+   "Fluorite Bee",
+   "氟石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    40,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a garnet gem.",
+   "用石榴石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    40,
+    "title"
+   ],
+   "Garnet Bee",
+   "石榴石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    41,
+    "name"
+   ],
+   "Garnet Bee",
+   "石榴石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    42,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a green sapphire gem.",
+   "用绿蓝宝石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    42,
+    "title"
+   ],
+   "Green Sapphire Bee",
+   "绿色蓝宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    43,
+    "name"
+   ],
+   "Green Sapphire Bee",
+   "绿色蓝宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    44,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a heliodor gem.",
+   "用金绿柱石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    44,
+    "title"
+   ],
+   "Heliodor Bee",
+   "金绿柱石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    45,
+    "name"
+   ],
+   "Heliodor Bee",
+   "金绿柱石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    46,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an iolite gem.",
+   "用堇青石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    46,
+    "title"
+   ],
+   "Iolite Bee",
+   "堇青石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    47,
+    "name"
+   ],
+   "Iolite Bee",
+   "堇青石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    48,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a jade gem.",
+   "用翡翠宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    48,
+    "title"
+   ],
+   "Jade Bee",
+   "翡翠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    49,
+    "name"
+   ],
+   "Jade Bee",
+   "翡翠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    50,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a jasper gem.",
+   "用碧玉宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    50,
+    "title"
+   ],
+   "Jasper Bee",
+   "碧玉蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    51,
+    "name"
+   ],
+   "Jasper Bee",
+   "碧玉蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    52,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a kunzite gem.",
+   "用紫锂辉石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    52,
+    "title"
+   ],
+   "Kunzite Bee",
+   "紫锂辉石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    53,
+    "name"
+   ],
+   "Kunzite Bee",
+   "紫锂辉石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    54,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a kyanite gem.",
+   "用蓝晶石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    54,
+    "title"
+   ],
+   "Kyanite Bee",
+   "蓝晶石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    55,
+    "name"
+   ],
+   "Kyanite Bee",
+   "蓝晶石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    56,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a lepidolite gem.",
+   "用锂云母宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    56,
+    "title"
+   ],
+   "Lepidolite Bee",
+   "锂云母蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    57,
+    "name"
+   ],
+   "Lepidolite Bee",
+   "锂云母蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    58,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a malachite gem.",
+   "用孔雀石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    58,
+    "title"
+   ],
+   "Malachite Bee",
+   "孔雀石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    59,
+    "name"
+   ],
+   "Malachite Bee",
+   "孔雀石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    60,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a moldavite gem.",
+   "用捷克陨石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    60,
+    "title"
+   ],
+   "Moldavite Bee",
+   "绿玻陨石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    61,
+    "name"
+   ],
+   "Moldavite Bee",
+   "绿玻陨石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    62,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a moonstone gem.",
+   "用月光石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    62,
+    "title"
+   ],
+   "Moonstone Bee",
+   "月光石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    63,
+    "name"
+   ],
+   "Moonstone Bee",
+   "月光石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    64,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a morganite gem.",
+   "用摩根石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    64,
+    "title"
+   ],
+   "Morganite Bee",
+   "摩根石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    65,
+    "name"
+   ],
+   "Morganite Bee",
+   "摩根石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    66,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an onyx gem.",
+   "用缟玛瑙宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    66,
+    "title"
+   ],
+   "Onyx Bee",
+   "缟玛瑙蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    67,
+    "name"
+   ],
+   "Onyx Bee",
+   "缟玛瑙蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    68,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using an opal gem.",
+   "用欧泊宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    68,
+    "title"
+   ],
+   "Opal Bee",
+   "蛋白石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    69,
+    "name"
+   ],
+   "Opal Bee",
+   "蛋白石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    70,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a pearl gem.",
+   "用珍珠宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    70,
+    "title"
+   ],
+   "Pearl Bee",
+   "珍珠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    71,
+    "name"
+   ],
+   "Pearl Bee",
+   "珍珠蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    72,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a peridot gem.",
+   "用橄榄石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    72,
+    "title"
+   ],
+   "Peridot Bee",
+   "橄榄石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    73,
+    "name"
+   ],
+   "Peridot Bee",
+   "橄榄石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    74,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a phosphophyllite gem.",
+   "用磷叶石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    74,
+    "title"
+   ],
+   "Phosphophyllite Bee",
+   "磷叶石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    75,
+    "name"
+   ],
+   "Phosphophyllite Bee",
+   "磷叶石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    76,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a pyrope gem.",
+   "用镁铝榴石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    76,
+    "title"
+   ],
+   "Pyrope Bee",
+   "榴石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    77,
+    "name"
+   ],
+   "Pyrope Bee",
+   "榴石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    78,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a rose quartz gem.",
+   "用蔷薇石英宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    78,
+    "title"
+   ],
+   "Rose Quartz Bee",
+   "玫瑰石英蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    79,
+    "name"
+   ],
+   "Rose Quartz Bee",
+   "玫瑰石英蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    80,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a ruby gem.",
+   "用红宝石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    80,
+    "title"
+   ],
+   "Ruby Bee",
+   "红宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    81,
+    "name"
+   ],
+   "Ruby Bee",
+   "红宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    82,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a sapphire gem.",
+   "用蓝宝石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    82,
+    "title"
+   ],
+   "Sapphire Bee",
+   "蓝宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    83,
+    "name"
+   ],
+   "Sapphire Bee",
+   "蓝宝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    84,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a sodalite gem.",
+   "用方钠石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    84,
+    "title"
+   ],
+   "Sodalite Bee",
+   "方钠石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    85,
+    "name"
+   ],
+   "Sodalite Bee",
+   "方钠石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    86,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a spinel gem.",
+   "用尖晶石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    86,
+    "title"
+   ],
+   "Spinel Bee",
+   "尖晶石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    87,
+    "name"
+   ],
+   "Spinel Bee",
+   "尖晶石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    88,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a sunstone gem.",
+   "用日光石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    88,
+    "title"
+   ],
+   "Sunstone Bee",
+   "日光石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    89,
+    "name"
+   ],
+   "Sunstone Bee",
+   "日光石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    90,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a tanzanite gem.",
+   "用坦桑石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    90,
+    "title"
+   ],
+   "Tanzanite Bee",
+   "坦桑石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    91,
+    "name"
+   ],
+   "Tanzanite Bee",
+   "坦桑石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    92,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a tektite gem.",
+   "用玻璃陨石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    92,
+    "title"
+   ],
+   "Tektite Bee",
+   "玻陨石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    93,
+    "name"
+   ],
+   "Tektite Bee",
+   "玻陨石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    94,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a topaz gem.",
+   "用黄玉宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    94,
+    "title"
+   ],
+   "Topaz Bee",
+   "黄玉蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    95,
+    "name"
+   ],
+   "Topaz Bee",
+   "黄玉蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    96,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a tourmaline gem.",
+   "用碧玺宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    96,
+    "title"
+   ],
+   "Tourmaline Bee",
+   "碧玺蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    97,
+    "name"
+   ],
+   "Tourmaline Bee",
+   "碧玺蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    98,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a turquoise gem.",
+   "用绿松石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    98,
+    "title"
+   ],
+   "Turquoise Bee",
+   "绿松石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    99,
+    "name"
+   ],
+   "Turquoise Bee",
+   "绿松石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    100,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a yellow diamond gem.",
+   "用黄钻石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    100,
+    "title"
+   ],
+   "Yellow Diamond Bee",
+   "黄钻石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    101,
+    "name"
+   ],
+   "Yellow Diamond Bee",
+   "黄钻石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    102,
+    "text"
+   ],
+   "Converted from a $(l:bees/hive/diamond)Diamond Bee$(/l) using a zircon gem.",
+   "用锆石宝石将一只$(l:bees/hive/diamond)钻石蜜蜂$(/l)转化而来。"
+  ],
+  [
+   [
+    "pages",
+    102,
+    "title"
+   ],
+   "Zircon Bee",
+   "锆石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    103,
+    "name"
+   ],
+   "Zircon Bee",
+   "锆石蜜蜂"
+  ]
+ ]
+}

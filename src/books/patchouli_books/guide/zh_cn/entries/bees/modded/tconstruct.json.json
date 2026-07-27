@@ -1,0 +1,382 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/tconstruct.json",
+ "sha1": "8ea770e1652dd8c39187ed17a4f1730bb9f3adf5",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Tinkers Construct",
+   "匠魂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Bees for Tinkers Construct materials. The bees are obtained by pouring a material over a spawn egg in the casting table.",
+   "匠魂各种材料的蜜蜂。在铸造台上把材料浇在刷怪蛋上即可获得。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "turn the page",
+   "请翻页"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/wild/slimy)Slimy Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/wild/slimy)史莱姆蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Ender Slimy Bee",
+   "末影黏液蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Ender Slimy Bee",
+   "末影黏液蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/wild/slimy)Slimy Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/wild/slimy)史莱姆蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Ichor Slimy Bee",
+   "灵浆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Ichor Slimy Bee",
+   "灵浆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/wild/slimy)Slimy Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/wild/slimy)史莱姆蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Sky Slimy Bee",
+   "碧空黏液蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Sky Slimy Bee",
+   "碧空黏液蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from an $(l:bees/hive/iron)Iron Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/iron)铁蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Cobalt Bee",
+   "钴蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    9,
+    "name"
+   ],
+   "Cobalt Bee",
+   "钴蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from an $(l:bees/hive/obsidian)Obsidian Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/obsidian)黑曜石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Hepatizon Bee",
+   "黑色科林斯青铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    11,
+    "name"
+   ],
+   "Hepatizon Bee",
+   "黑色科林斯青铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from an $(l:bees/hive/iron)Iron Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/iron)铁蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Knightslime Bee",
+   "骑士史莱姆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    13,
+    "name"
+   ],
+   "Knightslime Bee",
+   "骑士史莱姆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/netherite)Ancient Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/netherite)远古蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Manyullyn Bee",
+   "玛玉灵蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    15,
+    "name"
+   ],
+   "Manyullyn Bee",
+   "玛玉灵蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from an $(l:bees/hive/iron)Iron Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/iron)铁蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Pig Iron Bee",
+   "生铁蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    17,
+    "name"
+   ],
+   "Pig Iron Bee",
+   "生铁蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/gold)Gold Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/gold)金蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "title"
+   ],
+   "Queens Slime Bee",
+   "皇后史莱姆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    19,
+    "name"
+   ],
+   "Queens Slime Bee",
+   "皇后史莱姆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/gold)Gold Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/gold)金蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "title"
+   ],
+   "Rose Gold Bee",
+   "玫瑰金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    21,
+    "name"
+   ],
+   "Rose Gold Bee",
+   "玫瑰金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from an $(l:bees/hive/iron)Iron Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/hive/iron)铁蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "title"
+   ],
+   "Slimesteel Bee",
+   "黏钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    23,
+    "name"
+   ],
+   "Slimesteel Bee",
+   "黏钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/modded/tconstruct#cobalt)Cobalt Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/modded/tconstruct#cobalt)钴蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "title"
+   ],
+   "Soulsteel Bee",
+   "魂钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    25,
+    "name"
+   ],
+   "Soulsteel Bee",
+   "魂钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/modded/ingot_bees#copper)Copper Bee$(/l) spawn egg using a casting table.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用铸造台以一枚$(l:bees/modded/ingot_bees#copper)铜蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Amethyst Bronze Bee",
+   "紫水晶青铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    27,
+    "name"
+   ],
+   "Amethyst Bronze Bee",
+   "紫水晶青铜蜜蜂"
+  ]
+ ]
+}

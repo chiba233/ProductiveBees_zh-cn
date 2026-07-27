@@ -136,8 +136,29 @@ def apply_one(doc, entries, rel, strict, miss):
     return ok
 
 
-def generate(jar_path, out_dir):
-    """把全部映射套到 jar 上，写进 out_dir。返回落位统计。"""
+def resolve(names, src):
+    """映射里记的路径在这一版 jar 里叫什么。
+
+    Patchouli 的书搬过家：**1.20.1 起在 `assets/` 下，1.19.4 及更早在 `data/` 下**。
+    映射是对着新版提的，所以路径记的是 `assets/…`；套到老版本上必须换成 `data/…`，
+    否则一个都对不上——而且是静默对不上，出来一本全英文的书。
+    """
+    if src in names:
+        return src
+    for a, b in (('assets/', 'data/'), ('data/', 'assets/')):
+        if src.startswith(a):
+            alt = b + src[len(a):]
+            if alt in names:
+                return alt
+    return None
+
+
+def generate(jar_path, res_root):
+    """把全部映射套到 jar 上，写进资源根目录。返回落位的文件数。
+
+    输出位置**跟着 jar 走**：jar 里在 `data/` 下，我们也写 `data/`。
+    写错地方 Patchouli 根本不去读，同样是静默失效。
+    """
     if not BOOKS.is_dir():
         sys.exit('❌ 没有 %s' % BOOKS)
     z = zipfile.ZipFile(jar_path)
@@ -147,14 +168,15 @@ def generate(jar_path, out_dir):
     for mp in sorted(BOOKS.rglob('*.json')):
         rel = mp.relative_to(BOOKS).as_posix()[:-len('.json')]
         doc = json.loads(mp.read_text(encoding='utf-8'))
-        if doc['src'] not in names:
+        src = resolve(names, doc['src'])
+        if src is None:
             continue                        # 这个模组版本没这个文件
-        up = z.read(doc['src'])
+        up = z.read(src)
         obj = json.loads(up.decode('utf-8-sig'))
         strict = sha1(up) == doc['sha1']
         total += len(doc['t'])
         ok += apply_one(obj, doc['t'], rel, strict, miss)
-        t = Path(out_dir) / rel
+        t = Path(res_root) / src.replace('/en_us/', '/zh_cn/')
         t.parent.mkdir(parents=True, exist_ok=True)
         t.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + '\n',
                      encoding='utf-8')

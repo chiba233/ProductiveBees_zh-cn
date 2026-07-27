@@ -1,0 +1,859 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/mod_bees.json",
+ "sha1": "68177759fb818800dfd4f1961502eaa84dc537a3",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "5. Mod Bees",
+   "五、模组蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Mod bees are only available if their requirements are met. A requirement could be if a a certain mod is installed or the existance of a certain resource added by a mod.",
+   "模组蜜蜂只有在满足条件时才会出现。条件可能是装了某个模组，也可能是存在某个模组添加的资源。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and an $(l:bees/solitary_bees#ashy_mining)Ashy Mining Bee$(/l).",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/solitary_bees#ashy_mining)灰烬开采蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Aluminum Bee",
+   "铝蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Aluminum Bee",
+   "铝蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and an $(l:bees/solitary_bees#ashy_mining)Ashy Mining Bee$(/l).",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/solitary_bees#ashy_mining)灰烬开采蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Copper Bee",
+   "铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Copper Bee",
+   "铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and an $(l:bees/solitary_bees#ashy_mining)Ashy Mining Bee$(/l).",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/solitary_bees#ashy_mining)灰烬开采蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Tin Bee",
+   "锡蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Tin Bee",
+   "锡蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "Bred from a $(l:bees/mod_bees#tin)Tin Bee$(/l) and a $(l:bees/mod_bees#copper)Copper Bee$(/l).",
+   "由一只$(l:bees/mod_bees#tin)锡蜜蜂$(/l)和一只$(l:bees/mod_bees#copper)铜蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Bronze Bee",
+   "青铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    9,
+    "name"
+   ],
+   "Bronze Bee",
+   "青铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/solitary_bees#sweaty)Sweat Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/solitary_bees#sweaty)汗蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Zinc Bee",
+   "锌蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    11,
+    "name"
+   ],
+   "Zinc Bee",
+   "锌蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "Bred from a $(l:bees/mod_bees#zinc)Zinc Bee$(/l) and a $(l:bees/mod_bees#copper)Copper Bee$(/l).",
+   "由一只$(l:bees/mod_bees#zinc)锌蜜蜂$(/l)和一只$(l:bees/mod_bees#copper)铜蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Brass Bee",
+   "黄铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    13,
+    "name"
+   ],
+   "Brass Bee",
+   "黄铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/solitary_bees#blue_banded)Blue Banded Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/solitary_bees#blue_banded)蓝色条纹蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Lead Bee",
+   "铅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    15,
+    "name"
+   ],
+   "Lead Bee",
+   "铅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/solitary_bees#mason)Mason Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/solitary_bees#mason)石匠蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Silver Bee",
+   "银蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    17,
+    "name"
+   ],
+   "Silver Bee",
+   "银蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/mod_bees#silver)Silver Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/mod_bees#silver)银蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "title"
+   ],
+   "Electrum Bee",
+   "琥珀金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    19,
+    "name"
+   ],
+   "Electrum Bee",
+   "琥珀金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/solitary_bees#sweaty)Sweat Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/solitary_bees#sweaty)汗蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "title"
+   ],
+   "Nickel Bee",
+   "镍蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    21,
+    "name"
+   ],
+   "Nickel Bee",
+   "镍蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "text"
+   ],
+   "Bred from a $(l:bees/mod_bees#copper)Copper Bee$(/l) and a $(l:bees/mod_bees#nickel)Nickel Bee$(/l).",
+   "由一只$(l:bees/mod_bees#copper)铜蜜蜂$(/l)和一只$(l:bees/mod_bees#nickel)镍蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "title"
+   ],
+   "Constantan Bee",
+   "康铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    23,
+    "name"
+   ],
+   "Constantan Bee",
+   "康铜蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/mod_bees#nickel)Nickel Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/mod_bees#nickel)镍蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "title"
+   ],
+   "Invar Bee",
+   "殷钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    25,
+    "name"
+   ],
+   "Invar Bee",
+   "殷钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/hive_bees#coal)Coal Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/hive_bees#coal)煤炭蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Steel Bee",
+   "钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    27,
+    "name"
+   ],
+   "Steel Bee",
+   "钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    28,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive_bees#gold)Gold Bee$(/l) and a $(l:bees/wild_bees#ender)Ender Bee$(/l).",
+   "由一只$(l:bees/hive_bees#gold)金蜜蜂$(/l)和一只$(l:bees/wild_bees#ender)末影蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    28,
+    "title"
+   ],
+   "Platinum Bee",
+   "铂蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    29,
+    "name"
+   ],
+   "Platinum Bee",
+   "铂蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    30,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/bees/hive_bees#diamond)Diamond Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/bees/hive_bees#diamond)钻石蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    30,
+    "title"
+   ],
+   "Titanium Bee",
+   "钛蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    31,
+    "name"
+   ],
+   "Titanium Bee",
+   "钛蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    32,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive_bees#coal)Coal Bee$(/l) and a $(l:bees/wild_bees#ender)Ender Bee$(/l).",
+   "由一只$(l:bees/hive_bees#coal)煤炭蜜蜂$(/l)和一只$(l:bees/wild_bees#ender)末影蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    32,
+    "title"
+   ],
+   "Tungsten Bee",
+   "钨蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    33,
+    "name"
+   ],
+   "Tungsten Bee",
+   "钨蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    34,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/bees/hive_bees#creeper)Creeper Bee$(/l).",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/bees/hive_bees#creeper)苦力怕蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    34,
+    "title"
+   ],
+   "Radioactive Bee",
+   "辐射蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    35,
+    "name"
+   ],
+   "Radioactive Bee",
+   "辐射蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    36,
+    "text"
+   ],
+   "Bred from a $(l:bees/solitary_bees#nomad)Nomad Bee$(/l) and a $(l:bees/solitary_bees#reed)Reed Bee$(/l).",
+   "由一只$(l:bees/solitary_bees#nomad)游牧蜜蜂$(/l)和一只$(l:bees/solitary_bees#reed)芦苇蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    36,
+    "title"
+   ],
+   "Silicon Bee",
+   "硅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    37,
+    "name"
+   ],
+   "Silicon Bee",
+   "硅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    38,
+    "text"
+   ],
+   "Bred from a $(l:bees/solitary_bees#resin)Resin Bee$(/l) and a $(l:bees/worker_bees#lumber)Lumber Bee$(/l).",
+   "由一只$(l:bees/solitary_bees#resin)树脂蜜蜂$(/l)和一只$(l:bees/worker_bees#lumber)木场蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    38,
+    "title"
+   ],
+   "Plastic Bee",
+   "塑料蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    39,
+    "name"
+   ],
+   "Plastic Bee",
+   "塑料蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    40,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and a $(l:bees/solitary_bees#resin)Resin Bee$(/l).",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/solitary_bees#resin)树脂蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    40,
+    "title"
+   ],
+   "Amber Bee",
+   "琥珀蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    41,
+    "name"
+   ],
+   "Amber Bee",
+   "琥珀蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    42,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and a $(l:bees/wild_bees#draconic)Draconic Bee$(/l).$(br)Required mod: Quark",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/wild_bees#draconic)末影龙蜜蜂$(/l)繁殖而来。$(br)需要模组：Quark"
+  ],
+  [
+   [
+    "pages",
+    42,
+    "title"
+   ],
+   "Ender Biotite Bee",
+   "末影黑云母蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    43,
+    "name"
+   ],
+   "Ender Biotite Bee",
+   "末影黑云母蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    44,
+    "text"
+   ],
+   "Obtained by feeding a black lotus to an $(l:bees/hive_bees#iron)Iron Bee$(/l).$(br)Required mod: Botania",
+   "给一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)喂食黑莲花后获得。$(br)需要模组：植物魔法"
+  ],
+  [
+   [
+    "pages",
+    44,
+    "title"
+   ],
+   "Manasteel Bee",
+   "魔力钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    45,
+    "name"
+   ],
+   "Manasteel Bee",
+   "魔力钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    46,
+    "text"
+   ],
+   "Obtained by feeding a Terrasteel ingot to a $(l:bees/mod_bees#manasteel)Manasteel Bee$(/l).$(br)Required mod: Botania",
+   "给一只$(l:bees/mod_bees#manasteel)魔力钢蜜蜂$(/l)喂食一块泰拉钢锭后获得。$(br)需要模组：植物魔法"
+  ],
+  [
+   [
+    "pages",
+    46,
+    "title"
+   ],
+   "Terrasteel Bee",
+   "泰拉钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    47,
+    "name"
+   ],
+   "Terrasteel Bee",
+   "泰拉钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    48,
+    "text"
+   ],
+   "Obtained by feeding an Elementium ingot to a $(l:bees/mod_bees#terrasteel)Terrasteel Bee$(/l).$(br)Required mod: Botania",
+   "给一只$(l:bees/mod_bees#terrasteel)泰拉钢蜜蜂$(/l)喂食一块元素锭后获得。$(br)需要模组：植物魔法"
+  ],
+  [
+   [
+    "pages",
+    48,
+    "title"
+   ],
+   "Elementium Bee",
+   "源质钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    49,
+    "name"
+   ],
+   "Elementium Bee",
+   "源质钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    50,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive_bees#iron)Iron Bee$(/l) and a $(l:bees/solitary_bees#neon_cuckoo)Neon Cuckoo Bee$(/l).$(br)Required mod: Mekanism",
+   "由一只$(l:bees/hive_bees#iron)铁蜜蜂$(/l)和一只$(l:bees/solitary_bees#neon_cuckoo)霓虹杜鹃蜂$(/l)繁殖而来。$(br)需要模组：通用机械"
+  ],
+  [
+   [
+    "pages",
+    50,
+    "title"
+   ],
+   "Osmium Bee",
+   "锇蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    51,
+    "name"
+   ],
+   "Osmium Bee",
+   "锇蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    52,
+    "text"
+   ],
+   "Bred from an $(l:bees/mod_bees#osmium)Osmium Bee$(/l) and a $(l:bees/wild_bees#glowing)Glowing Bee$(/l).$(br)Required mod: Mekanism",
+   "由一只$(l:bees/mod_bees#osmium)锇蜜蜂$(/l)和一只$(l:bees/wild_bees#glowing)发光蜜蜂$(/l)繁殖而来。$(br)需要模组：通用机械"
+  ],
+  [
+   [
+    "pages",
+    52,
+    "title"
+   ],
+   "Refined Glowstone Bee",
+   "强化荧石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    53,
+    "name"
+   ],
+   "Refined Glowstone Bee",
+   "强化荧石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    54,
+    "text"
+   ],
+   "Bred from an $(l:bees/mod_bees#osmium)Osmium Bee$(/l) and an $(l:bees/hive_bees#obsidian)Obsidian Bee$(/l).$(br)Required mod: Mekanism",
+   "由一只$(l:bees/mod_bees#osmium)锇蜜蜂$(/l)和一只$(l:bees/hive_bees#obsidian)黑曜石蜜蜂$(/l)繁殖而来。$(br)需要模组：通用机械"
+  ],
+  [
+   [
+    "pages",
+    54,
+    "title"
+   ],
+   "Refined Obsidian Bee",
+   "强化黑曜石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    55,
+    "name"
+   ],
+   "Refined Obsidian Bee",
+   "强化黑曜石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    56,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild_bees#crystalline)Crystalline Bee$(/l) and an $(l:bees/wild_bees#ender)Ender Bee$(/l).$(br)Required mod: AE2",
+   "由一只$(l:bees/wild_bees#crystalline)石英蜜蜂$(/l)和一只$(l:bees/wild_bees#ender)末影蜜蜂$(/l)繁殖而来。$(br)需要模组：应用能源 2"
+  ],
+  [
+   [
+    "pages",
+    56,
+    "title"
+   ],
+   "Spacial Bee",
+   "空间蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    57,
+    "name"
+   ],
+   "Spacial Bee",
+   "空间蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    58,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive_bees#diamond)Diamond Bee$(/l) and a $(l:bees/hive_bees#withered)Withered Bee$(/l).$(br)Required mod: Allthemodium",
+   "由一只$(l:bees/hive_bees#diamond)钻石蜜蜂$(/l)和一只$(l:bees/hive_bees#withered)凋灵蜜蜂$(/l)繁殖而来。$(br)需要模组：ATM 矿物"
+  ],
+  [
+   [
+    "pages",
+    58,
+    "title"
+   ],
+   "Allthemodium Bee",
+   "ATM蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    59,
+    "name"
+   ],
+   "Allthemodium Bee",
+   "ATM蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    60,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive_bees#diamond)Diamond Bee$(/l) and a $(l:bees/wild_bees#draconic)Draconic Bee$(/l).$(br)Required mod: Allthemodium",
+   "由一只$(l:bees/hive_bees#diamond)钻石蜜蜂$(/l)和一只$(l:bees/wild_bees#draconic)末影龙蜜蜂$(/l)繁殖而来。$(br)需要模组：ATM 矿物"
+  ],
+  [
+   [
+    "pages",
+    60,
+    "title"
+   ],
+   "Vibranium Bee",
+   "振金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    61,
+    "name"
+   ],
+   "Vibranium Bee",
+   "振金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    62,
+    "text"
+   ],
+   "Bred from an $(l:bees/mod_bees#allthemodium)Allthemodium Bee$(/l) and a $(l:bees/mod_bees#vibranium)Vibranium Bee$(/l).$(br)Required mod: Allthemodium",
+   "由一只$(l:bees/mod_bees#allthemodium)ATM蜜蜂$(/l)和一只$(l:bees/mod_bees#vibranium)振金蜜蜂$(/l)繁殖而来。$(br)需要模组：ATM 矿物"
+  ],
+  [
+   [
+    "pages",
+    62,
+    "title"
+   ],
+   "Unobtainium Bee",
+   "难得素蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    63,
+    "name"
+   ],
+   "Unobtainium Bee",
+   "难得素蜜蜂"
+  ]
+ ]
+}

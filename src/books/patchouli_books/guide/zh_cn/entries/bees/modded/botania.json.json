@@ -1,0 +1,139 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/botania.json",
+ "sha1": "d2f2593eaf64d2981aa55b850595a3a6fd1af104",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Botania",
+   "植物魔法"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Bees for Botania and addons.",
+   "植物魔法及其附属的蜜蜂。"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "turn the page",
+   "请翻页"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/#iron)Iron Bee$(/l) spawn egg in a mana pool.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要在魔力池中以一枚$(l:bees/hive/#iron)铁蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Manasteel Bee",
+   "魔力钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Manasteel Bee",
+   "魔力钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/modded/botania#manasteel)Manasteel Bee$(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/modded/botania#manasteel)魔力钢蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Terrasteel Bee",
+   "泰拉钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Terrasteel Bee",
+   "泰拉钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/modded/botania#manasteel)Manasteel Bee$(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/modded/botania#manasteel)魔力钢蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Elementium Bee",
+   "源质钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Elementium Bee",
+   "源质钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/modded/botania#elementium)Elementium Bee$(/l) spawn egg using an infusion altar.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用注魂祭坛以一枚$(l:bees/modded/botania#elementium)源质钢蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Alfsteel Bee",
+   "精灵钢蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    9,
+    "name"
+   ],
+   "Alfsteel Bee",
+   "精灵钢蜜蜂"
+  ]
+ ]
+}

@@ -1,0 +1,418 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/misc.json",
+ "sha1": "f7cdb94a25e8a82e22cde9c6766e2901830f7048",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Misc",
+   "杂项"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Bred from a $(l:bees/solitary/nomad)Nomad Bee$(/l) and a $(l:bees/solitary/reed)Reed Bee$(/l).",
+   "由一只$(l:bees/solitary/nomad)游牧蜜蜂$(/l)和一只$(l:bees/solitary/reed)芦苇蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "title"
+   ],
+   "Silicon Bee",
+   "硅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "name"
+   ],
+   "Silicon Bee",
+   "硅蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Bred from a $(l:bees/solitary/resin)Resin Bee$(/l) and a $(l:bees/worker/lumber)Lumber Bee$(/l).",
+   "由一只$(l:bees/solitary/resin)树脂蜜蜂$(/l)和一只$(l:bees/worker/lumber)木场蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Plastic Bee",
+   "塑料蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Plastic Bee",
+   "塑料蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Bred from a $(l:bees/wild/crystalline)Crystalline Bee$(/l) and an $(l:bees/wild/ender)Ender Bee$(/l).$(br2)The combs of this bee can be centrifuged to get certus quartz seeds which require further processing.",
+   "由一只$(l:bees/wild/crystalline)石英蜜蜂$(/l)和一只$(l:bees/wild/ender)末影蜜蜂$(/l)繁殖而来。$(br2)它的蜜脾可以离心得到赛特斯石英种子，还需要进一步加工。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Spatial Bee",
+   "空间蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Spatial Bee",
+   "空间蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive/coal)Coal Bee$(/l) and an $(l:bees/wild/magmatic)Magmatic Bee$(/l).",
+   "由一只$(l:bees/hive/coal)煤炭蜜蜂$(/l)和一只$(l:bees/wild/magmatic)熔岩蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Niter Bee",
+   "硝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Niter Bee",
+   "硝石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive/coal)Coal Bee$(/l) and an $(l:bees/hive/creeper)CreeBee(/l).",
+   "由一只$(l:bees/hive/coal)煤炭蜜蜂$(/l)和一只$(l:bees/hive/creeper)苦力怕蜜蜂(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Sulfur Bee",
+   "硫蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    9,
+    "name"
+   ],
+   "Sulfur Bee",
+   "硫蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/diamond)Diamond Bee$(/l) spawn egg using a Enchanting Apparatus.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用附魔装置以一枚$(l:bees/hive/diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Arcane Bee",
+   "魔源蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    11,
+    "name"
+   ],
+   "Arcane Bee",
+   "魔源蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from an $(l:bees/hive/iron)Iron Bee$(/l) spawn egg using an Infuser.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用灌注器以一枚$(l:bees/hive/iron)铁蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Starmetal Bee",
+   "星辉蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    13,
+    "name"
+   ],
+   "Starmetal Bee",
+   "星辉蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/solitary/nomad)Nomad Bee$(/l) spawn egg.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋由一枚$(l:bees/solitary/nomad)游牧蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Bloody Bee",
+   "血腥蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    15,
+    "name"
+   ],
+   "Bloody Bee",
+   "血腥蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "This bee can be converted from a $(l:bees/wild/slimy)Slimy Bee$(/l) by feeding it some pink slime.",
+   "给一只$(l:bees/wild/slimy)史莱姆蜜蜂$(/l)喂食一些粉红史莱姆即可转化成它。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Pink Slimy Bee",
+   "粉红黏液蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    17,
+    "name"
+   ],
+   "Pink Slimy Bee",
+   "粉红黏液蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "text"
+   ],
+   "Bred from a $(l:bees/solitary/neon_cuckoo)Diamond Bee$(/l) and a $(l:bees/wild/crystalline)Crystalline Bee$(/l).",
+   "由一只$(l:bees/solitary/neon_cuckoo)钻石蜜蜂$(/l)和一只$(l:bees/wild/crystalline)石英蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    18,
+    "title"
+   ],
+   "Menril Bee",
+   "门瑞欧蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    19,
+    "name"
+   ],
+   "Menril Bee",
+   "门瑞欧蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "text"
+   ],
+   "Bred from an $(l:bees/hive/iron)Iron Bee$(/l) and a $(l:bees/bees/hive/creeper)Creeper Bee$(/l).",
+   "由一只$(l:bees/hive/iron)铁蜜蜂$(/l)和一只$(l:bees/bees/hive/creeper)苦力怕蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    20,
+    "title"
+   ],
+   "Uraninite Bee",
+   "晶质铀矿蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    21,
+    "name"
+   ],
+   "Uraninite Bee",
+   "晶质铀矿蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "text"
+   ],
+   "Obtained by giving salt to a vanilla bee",
+   "给原版蜜蜂盐后获得"
+  ],
+  [
+   [
+    "pages",
+    22,
+    "title"
+   ],
+   "Salty Bee",
+   "盐蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    23,
+    "name"
+   ],
+   "Salty Bee",
+   "盐蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive/netherite)Netherite Bee$(/l) and a $(l:bees/hive/withered)Withered Bee$(/l).",
+   "由一只$(l:bees/hive/netherite)远古蜜蜂$(/l)和一只$(l:bees/hive/withered)凋灵蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    24,
+    "title"
+   ],
+   "Allthemodium Bee",
+   "ATM蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    25,
+    "name"
+   ],
+   "Allthemodium Bee",
+   "ATM蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "text"
+   ],
+   "Bred from a $(l:bees/hive/netherite)Netherite Bee$(/l) and a $(l:bees/wild/draconic)Draconic Bee$(/l).",
+   "由一只$(l:bees/hive/netherite)远古蜜蜂$(/l)和一只$(l:bees/wild/draconic)末影龙蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    26,
+    "title"
+   ],
+   "Vibranium Bee",
+   "振金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    27,
+    "name"
+   ],
+   "Vibranium Bee",
+   "振金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    28,
+    "text"
+   ],
+   "Bred from an $(l:bees/mod_bees#allthemodium)Allthemodium Bee$(/l) and a $(l:bees/mod_bees#vibranium)Vibranium Bee$(/l).",
+   "由一只$(l:bees/mod_bees#allthemodium)ATM蜜蜂$(/l)和一只$(l:bees/mod_bees#vibranium)振金蜜蜂$(/l)繁殖而来。"
+  ],
+  [
+   [
+    "pages",
+    28,
+    "title"
+   ],
+   "Unobtainium Bee",
+   "难得素蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    29,
+    "name"
+   ],
+   "Unobtainium Bee",
+   "难得素蜜蜂"
+  ]
+ ]
+}

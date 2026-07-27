@@ -43,7 +43,7 @@ def coverage(jar, root, floor):
         if miss:
             bad['lang_keys'] = miss
     bk = [n for n in z.namelist()
-          if n.startswith('assets/%s/patchouli_books/' % NS)
+          if n.startswith(('assets/%s/patchouli_books/' % NS, 'data/%s/patchouli_books/' % NS))
           and '/en_us/' in n and n.endswith('.json')]
     if bk:
         miss = [n for n in bk if not (root / n.replace('/en_us/', '/zh_cn/')).is_file()]
@@ -122,7 +122,8 @@ def sanity(jar, root):
         return type(o).__name__
 
     for n in z.namelist():
-        if not (n.startswith('assets/%s/patchouli_books/' % NS)
+        if not (n.startswith(('assets/%s/patchouli_books/' % NS,
+                              'data/%s/patchouli_books/' % NS))
                 and '/en_us/' in n and n.endswith('.json')):
             continue
         t = root / n.replace('/en_us/', '/zh_cn/')
@@ -219,7 +220,7 @@ def build(man, jar, ver, t):
     shutil.copy2(lang_src, lang_dst)
     n_lang = len(json.loads(lang_dst.read_text(encoding='utf-8')))
 
-    n_book = books.generate(jar, res / 'assets' / NS)
+    n_book = books.generate(jar, res)
     tables = names.write(jar, res / 'pbzh' / 'bees.json')
 
     rate, fails = coverage(jar, res, man['coverage_floor'])

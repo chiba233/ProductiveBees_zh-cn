@@ -1,0 +1,148 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/worker_bees.json",
+ "sha1": "eb5c12205c5799797eb88f1437f2b27f7fa12dd1",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "4. Professional Bees",
+   "四、职业蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Besides the bees producing resources there are a few bees with special tasks.",
+   "除了会产出资源的蜜蜂外，还有少数蜜蜂承担着特殊任务。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Will harvest nearby crops and leave the produce on the ground.",
+   "会收割附近的作物，并把收成留在地上。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Farmer Bee",
+   "农夫蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Will milk nearby cows and create milky combs in it's hive.",
+   "会给附近的牛挤奶，并在蜂箱里产出牛奶蜜脾。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Rancher Bee",
+   "牧场蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Collects items on the ground and puts them in it's hive.$(br)Combine with the farmer bee for an automated farm.",
+   "会捡起地上的物品放进蜂箱。$(br)与农夫蜜蜂搭配即可做出自动农场。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Hoarder Bee",
+   "囤积者蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "Nibble on nearby wood and collects wood chips in it's hive. Wood chips can be crafted into logs.",
+   "会啃食附近的木头，把木屑收进蜂箱。木屑可以合成原木。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Lumber Bee",
+   "木场蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "Nibble on nearby stone, sand or gravel and collects stone chips in it's hive. Stone chips can be crafted into it's counterpart block.",
+   "会啃食附近的石头、沙子或砂砾，把石屑收进蜂箱。石屑可以合成回对应的方块。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Quarry Bee",
+   "采石场蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "Produces dye based on the flower it has pollinated.",
+   "根据它授粉过的花朵产出对应的染料。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Dye Bee",
+   "染料蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "The pheromones secreted from this bee gets animals in the mood.",
+   "这种蜜蜂分泌的信息素会让动物进入繁殖状态。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "CuBee",
+   "丘比特蜜蜂"
+  ]
+ ]
+}

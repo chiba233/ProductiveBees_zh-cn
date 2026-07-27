@@ -1,0 +1,112 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/beyond_earth.json",
+ "sha1": "941d752d06c69409be490a30b8564c3e43de23f1",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Beyond Earth",
+   "地球之外"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Bees Beyond Earth",
+   "地球之外的蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "turn the page",
+   "请翻页"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Give a block of Desh to a $(l:bees/modded/ingot_bees#steel)Steel Bee$(/l)",
+   "给一只$(l:bees/modded/ingot_bees#steel)钢蜜蜂$(/l)一块德西块"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Desh Bee",
+   "戴斯蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Desh Bee",
+   "戴斯蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Give a block of Ostrum to a $(l:bees/modded/beyond_earth#desh)Desh Bee$(/l)",
+   "给一只$(l:bees/modded/beyond_earth#desh)戴斯蜜蜂$(/l)一块奥斯特姆块"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Ostrum Bee",
+   "紫金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Ostrum Bee",
+   "紫金蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Give a block of Calorite to a $(l:bees/modded/beyond_earth#ostrum)Ostrum Bee$(/l)",
+   "给一只$(l:bees/modded/beyond_earth#ostrum)紫金蜜蜂$(/l)一块卡洛里特块"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Calorite Bee",
+   "耐热金属蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Calorite Bee",
+   "耐热金属蜜蜂"
+  ]
+ ]
+}

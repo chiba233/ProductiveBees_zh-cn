@@ -1,0 +1,103 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/fluid.json",
+ "sha1": "30a44382a736441bc92a9506562d0dced1bc0d65",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Fluid Bees",
+   "流体蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Bees producing fluid stuff",
+   "产出流体的蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Obtained by fishing in ocean biomes",
+   "在海洋生物群系钓鱼获得"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Oily Bee",
+   "石油蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Oily Bee",
+   "石油蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Obtained by feeding cocoa beans to a $(l:bees/wild/sugarbag)Sugarbag Bee$(/l).",
+   "给一只$(l:bees/wild/sugarbag)蜜袋蜜蜂$(/l)喂食可可豆后获得。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Chocolate Bee",
+   "巧克力蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Chocolate Bee",
+   "巧克力蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Obtained by feeding a bucket of water to a $(l:bees/solitary/leafcutter)Leafcutter Bee$(/l).",
+   "给一只$(l:bees/solitary/leafcutter)切叶蜜蜂$(/l)喂食一桶水后获得。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Tea Bee",
+   "茶蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Tea Bee",
+   "茶蜜蜂"
+  ]
+ ]
+}

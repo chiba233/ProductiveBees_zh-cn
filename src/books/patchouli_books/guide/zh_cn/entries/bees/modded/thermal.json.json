@@ -1,0 +1,112 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/modded/thermal.json",
+ "sha1": "e422120665110b026fbd017847be477f675b44c1",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "Thermal",
+   "热力系列"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Bees for Thermal. Only special material bees are shown here, for common materials like copper and tin go to the $(l:bees/modded/ingot_bees)list of ingot bees$(/l)",
+   "热力系列的蜜蜂。这里只列特殊材料，铜、锡之类的常见材料请看$(l:bees/modded/ingot_bees)锭蜜蜂列表$(/l)"
+  ],
+  [
+   [
+    "pages",
+    1,
+    "text"
+   ],
+   "turn the page",
+   "请翻页"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/diamond)Diamond Bee$(/l) spawn egg using a Smelter.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用冶炼炉以一枚$(l:bees/hive/diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Basalz Bee",
+   "岩石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "name"
+   ],
+   "Basalz Bee",
+   "岩石蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/diamond)Diamond Bee$(/l) spawn egg using a Smelter.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用冶炼炉以一枚$(l:bees/hive/diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Blitz Bee",
+   "狂风蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    5,
+    "name"
+   ],
+   "Blitz Bee",
+   "狂风蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "This bee cannot be bred. Spawn egg is crafted from a $(l:bees/hive/diamond)Diamond Bee$(/l) spawn egg using a Chiller.",
+   "这种蜜蜂无法繁殖。它的刷怪蛋需要用冷凝器以一枚$(l:bees/hive/diamond)钻石蜜蜂$(/l)刷怪蛋制作。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Blizz Bee",
+   "暴雪蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    7,
+    "name"
+   ],
+   "Blizz Bee",
+   "暴雪蜜蜂"
+  ]
+ ]
+}

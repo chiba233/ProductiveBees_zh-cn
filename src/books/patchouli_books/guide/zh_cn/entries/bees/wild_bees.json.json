@@ -1,0 +1,166 @@
+{
+ "src": "data/productivebees/patchouli_books/guide/en_us/entries/bees/wild_bees.json",
+ "sha1": "8f3670ca91964480dc6118a457cba004a7a0b70c",
+ "t": [
+  [
+   [
+    "name"
+   ],
+   "2. Wild Bees",
+   "二、野生蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    0,
+    "text"
+   ],
+   "Wild bees, like solitary bees, live in nests found around the world but unlike solitary bees they will gladly move into a hive as well. Wild bees live primarily in the nether and the end.",
+   "野生蜜蜂和独居蜜蜂一样，生活在世界各处生成的巢穴中，但与独居蜜蜂不同的是，它们也很乐意搬进蜂巢里。野生蜜蜂主要生活在下界和末地。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "text"
+   ],
+   "Found living in slimy nests in swampy biomes. Slimy Bees prefer pollinating flowers found in swampy areas, but will also make do with flowers from other biomes..",
+   "栖息在沼泽群系的黏液蜂巢中。史莱姆蜜蜂更喜欢为沼泽地区的花朵授粉，不过其他群系的花也能凑合。"
+  ],
+  [
+   [
+    "pages",
+    2,
+    "title"
+   ],
+   "Slimy Bee",
+   "史莱姆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "text"
+   ],
+   "Found living in nether quartz nests in the nether. Glowing Bees prefer pollinating something containing nether quartz..",
+   "栖息在下界的下界石英蜂巢中。发光蜜蜂偏好授粉含下界石英的东西。"
+  ],
+  [
+   [
+    "pages",
+    4,
+    "title"
+   ],
+   "Crystalline Bee",
+   "石英蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Found living in glowing nests in the nether. Glowing Bees prefer pollinating glowing blocks like glowstone or lamps.",
+   "栖息在下界的发光蜂巢中。发光蜜蜂更喜欢为荧石或灯这类发光方块授粉。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "title"
+   ],
+   "Glowing Bee",
+   "发光蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "text"
+   ],
+   "Found living in nether brick nests in nether fortresses. Magmatic Bees prefer pollinating magma blocks or nether wart.",
+   "栖息在下界要塞的下界砖蜂巢中。岩浆蜜蜂偏好授粉岩浆块或下界疣。"
+  ],
+  [
+   [
+    "pages",
+    8,
+    "title"
+   ],
+   "Magmatic Bee",
+   "岩浆蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "text"
+   ],
+   "Found living in soul sand nests in the nether. Ghostly Bees prefer pollinating nearby soul sand.",
+   "栖息在下界的灵魂沙蜂巢中。恶魂蜜蜂更喜欢为附近的灵魂沙授粉。"
+  ],
+  [
+   [
+    "pages",
+    10,
+    "title"
+   ],
+   "Ghostly Bee",
+   "恶魂蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "text"
+   ],
+   "Found living in end stone nests on end islands. Ender Bees prefer pollinating the locally flora of chorus plants.",
+   "栖息在末地岛屿上的末地石蜂巢中。末影蜜蜂更喜欢为当地的紫颂植物授粉。"
+  ],
+  [
+   [
+    "pages",
+    12,
+    "title"
+   ],
+   "Ender Bee",
+   "末影蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "text"
+   ],
+   "Rarely found living in obsidian pillars on the main island in the end. Draconic Bees pollinate by flying around in the end collecting nectar from the air. The will also nibble on dragon eggs if they get the chance.",
+   "极少会在末地主岛的黑曜石柱中发现。末影龙蜜蜂通过在末地中飞行、从空气中收集花蜜来授粉。如果有机会，它们还会啃食龙蛋。"
+  ],
+  [
+   [
+    "pages",
+    14,
+    "title"
+   ],
+   "Draconic Bee",
+   "末影龙蜜蜂"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "text"
+   ],
+   "This little stingless bee can bee found in warm areas. It produces a special type of super delicious comb.",
+   "这种无刺小蜜蜂出没于温暖地带，能产出一种特别美味的蜜脾。"
+  ],
+  [
+   [
+    "pages",
+    16,
+    "title"
+   ],
+   "Sugarbag Bee",
+   "袋装糖蜜蜂"
+  ]
+ ]
+}
