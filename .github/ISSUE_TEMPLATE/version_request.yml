@@ -1,0 +1,43 @@
+name: 🧩 适配别的版本 / Request another Minecraft version
+description: 想要 1.20.1、1.19.2、Forge 之类的版本 / Ask for another Minecraft version or loader
+labels: ["version"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        先说清楚两件事，省得空等：
+
+        **Fabric 没戏。** 资源蜜蜂本体从来就没有 Fabric 版（Forge 1.15.2–1.20.1，
+        NeoForge 1.20+/1.21.x），做了也是死代码。
+
+        **能不能出包，取决于译文覆盖率，不取决于写不写代码。** 目前实测：
+
+        | 目标 | lang | 导览书 |
+        |---|---|---|
+        | 1.21.x NeoForge | 100% | 100% |
+        | 1.20.1 Forge + NeoForge | 99.8% | 100% |
+        | 1.19.2 / 1.18.2 Forge | ~92.6% | 88% |
+        | 1.16.5 Forge | 65.8% | 88.4% |
+
+        差的部分要先在 [上游仓库](https://github.com/chiba233/atm10-zh-cn) 把译文补齐，
+        这边才出得了包——**不到 100% 不出包**，「只翻了一半」比没翻还糟。
+  - type: input
+    id: target
+    attributes:
+      label: 想要哪个版本 / Which version
+      placeholder: 例如 1.20.1 NeoForge
+    validations:
+      required: true
+  - type: input
+    id: pbver
+    attributes:
+      label: 你用的资源蜜蜂版本 / Productive Bees version
+      description: 覆盖率是对着**具体那一份 jar** 算的，写清楚版本号。
+      placeholder: 例如 productivebees-1.20.1-12.6.0
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 用在哪个整合包 / Which modpack
+      description: 有具体去处的会优先。

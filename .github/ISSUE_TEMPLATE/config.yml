@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🈶 译名不对 / 漏翻 / 错别字 —— 请去上游仓库
+    url: https://github.com/chiba233/atm10-zh-cn/issues/new/choose
+    about: 译文不在这个仓库，在 atm10-zh-cn。改一次，整合包版和独立 mod 一起好。Translations live upstream.
+  - name: 🐝 资源蜜蜂本体的问题 / Productive Bees issues
+    url: https://github.com/jdkdigital/productive-bees/issues
+    about: 与汉化无关的模组 bug（崩溃、配方、蜂不产东西等）请报给模组作者。Non-localization mod bugs go upstream.

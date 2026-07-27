@@ -1,0 +1,54 @@
+name: 🐞 崩溃或功能异常 / Crash or malfunction
+description: 装了这个 mod 之后崩溃、tooltip 没生效、进不了服 / Crash, tooltip not translated, or cannot join a server
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！Thanks for reporting!
+
+        **先确认一下不是这两种情况**（省你我时间）：
+        - 译名不对 / 漏翻 → 请去 [上游仓库](https://github.com/chiba233/atm10-zh-cn/issues)，译文在那边
+        - 蜂不产东西、配方不对等模组本身的问题 → 请去 [Productive Bees](https://github.com/jdkdigital/productive-bees/issues)
+
+        这个 mod 只做一件事：改 tooltip 上的字。它不注册任何东西、不改配方、不联网。
+  - type: input
+    id: version
+    attributes:
+      label: 汉化 mod 版本 / Localization mod version
+      placeholder: 例如 productivebees-zh_cn-r12.jar
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Minecraft / 加载器 / 资源蜜蜂版本
+      description: 三个都写上。Minecraft version, loader (NeoForge/Forge) and version, Productive Bees version.
+      placeholder: 例如 1.21.1 / NeoForge 21.1.241 / productivebees-1.21.1-13.13.5
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么？ / What happened?
+      description: 崩溃的话请贴 crash report 或 latest.log。/ Attach the crash report or latest.log if it crashed.
+      placeholder: 例如：基因样本的 tooltip 里「类型」那一行还是英文，其余都是中文。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤 / Steps to reproduce
+      placeholder: |
+        1. 新建单人世界
+        2. 用离心机做一个基因样本
+        3. 鼠标悬停看 tooltip
+    validations:
+      required: true
+  - type: checkboxes
+    id: isolated
+    attributes:
+      label: 排除过没有？ / Did you isolate it?
+      options:
+        - label: 把这个 mod 单独拿掉之后问题就没了 / The problem goes away when I remove only this mod
+        - label: 我用的整合包里还装了别的汉化 mod / 汉化资源包（如果是，请说明是哪个）
