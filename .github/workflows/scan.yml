@@ -29,6 +29,11 @@ on:
         description: 'Modrinth 只扫下载量前 N 个（all = 全部）'
         type: string
         default: 'all'
+      platforms:
+        description: '扫哪个平台'
+        type: choice
+        options: [both, curseforge, modrinth]
+        default: both
   schedule:
     # 每月 1 号扫一遍：整合包会更新，新蜂会冒出来
     - cron: '0 6 1 * *'
@@ -74,6 +79,7 @@ jobs:
   curseforge:
     name: CurseForge ${{ matrix.shard }}
     needs: plan
+    if: ${{ (inputs.platforms || 'both') != 'modrinth' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -84,6 +90,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # 扫过的不再重扫：结果按片缓存，下次只补新增的项目。
+      # 扫描器本身就会跳过 results 里已有的 id，所以恢复出来就等于断点续扫。
+      - uses: actions/cache@v4
+        with:
+          path: build/dependents
+          key: scan-cf-${{ matrix.shard }}-${{ github.run_id }}
+          restore-keys: |
+            scan-cf-${{ matrix.shard }}-
       - uses: actions/download-artifact@v4
         with:
           name: pack-lists
@@ -101,6 +115,7 @@ jobs:
   modrinth:
     name: Modrinth ${{ matrix.shard }}
     needs: plan
+    if: ${{ (inputs.platforms || 'both') != 'curseforge' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -111,6 +126,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: build/modrinth
+          key: scan-mr-${{ matrix.shard }}-${{ github.run_id }}
+          restore-keys: |
+            scan-mr-${{ matrix.shard }}-
       - uses: actions/download-artifact@v4
         with:
           name: pack-lists
@@ -135,12 +156,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # 某个平台没跑（platforms 选了单边）时，这一步取不到 artifact 是正常的
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           pattern: scan-cf-*
           path: build/dependents
           merge-multiple: true
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           pattern: scan-mr-*
           path: build/modrinth
@@ -157,4 +181,5 @@ jobs:
             versions/addon_keys.json
             versions/addon_scan.json
             build/dependents/results.json
+            build/modrinth/results*.json
           if-no-files-found: error
