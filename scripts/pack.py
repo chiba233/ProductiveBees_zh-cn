@@ -192,15 +192,77 @@ def pack_format(mc):
     return 5
 
 
-def mods_toml(man, ver, t):
-    """加载器元数据。1.20.2 起 NeoForge 换了文件名与依赖 modId，别搞混。"""
-    v = tuple(int(x) for x in t['minecraft'].split('.'))
-    neo = t['loader'] == 'NeoForge' and v >= (1, 20, 2)
-    # `displayTest` 是后来才有的字段：1.16 及更早的 Forge 不认这个 key，
-    # 那个年代要靠代码注册 ExtensionPoint.DISPLAYTEST（见 LegacyEntry）。
+def loader_meta(jar):
+    """元数据该怎么写，**照参考 jar 抄**，不按版本号推。
+
+    有两样东西随加载器改过写法：
+
+        文件名       `mods.toml` → `neoforge.mods.toml`（NeoForge 1.20.2 起）
+        必需标记     `mandatory=true` → `type="required"`（同一时期）
+
+    写错任何一样，加载器在**扫描阶段**就抛 InvalidModFileException。那不是
+    「这一个 mod 不加载」——扫描当场中断，玩家看到的是整个 mods 目录一个都没
+    进游戏，老版本上直接闪退（1.15.2/1.16.1 实测如此）。
+
+    所以不猜：目标那一版的资源蜜蜂 jar 就装在同一个 mods 目录里、由同一个加载器
+    读，它加载得了，它用的就是这一版认的写法。照它抄，顺带把 `neo` 也定下来——
+    文件名叫 neoforge.mods.toml 的那一代，依赖里的加载器 modId 才是 neoforge。
+    """
+    z = zipfile.ZipFile(jar)
+    for name in ('META-INF/neoforge.mods.toml', 'META-INF/mods.toml'):
+        if name not in z.namelist():
+            continue
+        text = z.read(name).decode('utf-8-sig', 'replace')
+        dep = ''.join(text.split('[[dependencies.')[1:])
+        if re.search(r'^\s*mandatory\s*=', dep, re.M):
+            marker = 'mandatory=true'
+        elif re.search(r'^\s*type\s*=', dep, re.M):
+            marker = 'type="required"'
+        else:
+            # 参考 jar 一个依赖都不声明，抄不到样本，退回按文件名判断
+            marker = 'type="required"' if 'neoforge' in name else 'mandatory=true'
+        return {'file': name.rsplit('/', 1)[-1], 'marker': marker,
+                'neo': 'neoforge' in name}
+    sys.exit('❌ 参考 jar %s 里没有 mods.toml，抄不到这一版的写法' % Path(jar).name)
+
+
+def check_toml(text, lm):
+    """出包前核一遍：每个依赖块都得有必需标记，且不许混进另一套写法。
+
+    这道闸挡的就是上面那种「扫描阶段整个中断」的故障——它不像少翻一句，
+    没法靠玩家反馈慢慢发现，装上去就是一个模组都进不去。
+    """
+    try:
+        import tomllib
+        tomllib.loads(text)                  # 语法先过一遍；加载器读不了就全完
+    except ImportError:
+        print('  ℹ️ 这个 Python 没有 tomllib，跳过语法解析，只核写法')
+    except Exception as e:                                     # noqa: BLE001
+        return ['元数据不是合法 TOML：%r' % e]
+    bad = []
+    blocks = text.split('[[dependencies.')[1:]
+    if not blocks:
+        return ['元数据里一个依赖块都没有']
+    other = 'type=' if lm['marker'].startswith('mandatory') else 'mandatory='
+    for i, b in enumerate(blocks, 1):
+        if lm['marker'] not in b:
+            bad.append('第 %d 个依赖块少了 %s（这一版加载器认这个键）'
+                       % (i, lm['marker']))
+        if other in b:
+            bad.append('第 %d 个依赖块混进了 %s（这一版加载器不认）' % (i, other))
+    return bad
+
+
+def mods_toml(man, ver, t, lm):
+    """加载器元数据。写法由 loader_meta 从参考 jar 读出来，这里只负责填。"""
+    neo = lm['neo']
+    # `displayTest` 只有 neoforge.mods.toml 那一代的加载器会读。1.17–1.20 的
+    # Forge 把这个键当无关文本略过——不报错，但也什么都不做（在 fmlloader /
+    # fmlcore 的 ModInfo、ModContainer 里根本没有这个字符串）。那几版要靠代码
+    # 注册扩展点，见 ServerCompat；1.16 及更早也走同一条路。
     dt = ('# 纯客户端显示层，服务端不会有这个 mod。不写这条，进服时可能被判定\n'
           '# 「mod 不一致」而连不上——汉化把人挡在服务器外面是最不能接受的一类故障。\n'
-          'displayTest="IGNORE_ALL_VERSION"\n') if v >= (1, 17) else ''
+          'displayTest="IGNORE_ALL_VERSION"\n') if neo else ''
     return '''modLoader="javafml"
 loaderVersion="[1,)"
 license="Custom: 译文 (C) 星野夢華; Productive Bees (C) JDKDigital, All Rights Reserved"
@@ -219,19 +281,19 @@ authors="星野夢華 (Hoshino Yumeka)"
 
 [[dependencies.{modid}_zh_cn]]
 modId="{loader}"
-type="required"
+{marker}
 versionRange="[0,)"
 ordering="NONE"
 side="CLIENT"
 
 [[dependencies.{modid}_zh_cn]]
 modId="{modid}"
-type="required"
+{marker}
 versionRange="[0,)"
 ordering="AFTER"
 side="CLIENT"
 '''.format(modid=man['modid'], ver=ver, zh=man['zh_name'], en=man['en_name'],
-           loader='neoforge' if neo else 'forge', dt=dt), neo
+           loader='neoforge' if neo else 'forge', dt=dt, marker=lm['marker'])
 
 
 def build(man, jar, ver, t):
@@ -265,10 +327,16 @@ def build(man, jar, ver, t):
                  % len(fails))
     print('  占位符 / 导览书结构核验通过')
 
-    toml, neo = mods_toml(man, ver, t)
+    lm = loader_meta(jar)
+    toml = mods_toml(man, ver, t, lm)
+    wrong = check_toml(toml, lm)
+    if wrong:
+        for w in wrong:
+            print('  ❌', w)
+        sys.exit('❌ 加载器元数据写法不对，不出包——这种错会让整个 mods 目录扫描中断')
+    print('  元数据照 %s 的 %s 写：%s' % (Path(jar).name, lm['file'], lm['marker']))
     (res / 'META-INF').mkdir()
-    (res / 'META-INF' / ('neoforge.mods.toml' if neo else 'mods.toml')).write_text(
-        toml, encoding='utf-8')
+    (res / 'META-INF' / lm['file']).write_text(toml, encoding='utf-8')
     fmt = pack_format(t['minecraft'])
     (res / 'pack.mcmeta').write_text(json.dumps({'pack': {
         'pack_format': fmt,

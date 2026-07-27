@@ -17,8 +17,9 @@ import java.util.List;
  * <p>与 NeoForge 那一份的区别只有包名：事件类在 {@code net.minecraftforge.*} 下。
  * 真逻辑都在 {@link BeeNames}，那个类不引用任何 Minecraft 类型，两边共用。
  *
- * <p>没有走 {@code @Mod(dist = ...)}：那是 NeoForge 才有的写法。这边靠
- * {@code mods.toml} 的 {@code displayTest} 声明「服务端没有也没关系」。
+ * <p>没有走 {@code @Mod(dist = ...)}：那是 NeoForge 才有的写法。「服务端没有也
+ * 没关系」这一声明也不能指望 {@code mods.toml} 的 {@code displayTest}——这几版的
+ * 加载器根本不读那个键，得在代码里注册扩展点，见 {@link ServerCompat}。
  */
 @Mod(ForgeEntry.MODID)
 public final class ForgeEntry {
@@ -26,6 +27,7 @@ public final class ForgeEntry {
 
     public ForgeEntry() {
         MinecraftForge.EVENT_BUS.addListener(ForgeEntry::onItemTooltip);
+        ServerCompat.ignoreOnServers();
     }
 
     static void onItemTooltip(ItemTooltipEvent event) {

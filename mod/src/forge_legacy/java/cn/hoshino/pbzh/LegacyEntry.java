@@ -18,8 +18,6 @@ import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.Supplier;
 
 /**
  * Forge 1.15.2 – 1.16.5 的入口。
@@ -56,36 +54,8 @@ public final class LegacyEntry {
 
     public LegacyEntry() {
         MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
-        ignoreOnServers();
-    }
-
-    /**
-     * 告诉 Forge：这是纯客户端的显示层，别拿它和服务端比对。
-     *
-     * <p>1.16 及更早的 `mods.toml` 还没有 `displayTest` 字段（Forge 那会儿不认，
-     * 写了也白写），这个年代的写法是注册 {@code ExtensionPoint.DISPLAYTEST}。
-     * 全程反射：这几个 Forge 类名稳定，但泛型签名各版本有出入，反射就不用管。
-     */
-    private static void ignoreOnServers() {
-        try {
-            Object pair = Class.forName("org.apache.commons.lang3.tuple.Pair")
-                    .getMethod("of", Object.class, Object.class)
-                    .invoke(null, (Supplier<String>) () -> "",
-                            (BiPredicate<String, Boolean>) (remote, isServer) -> true);
-            Object point = Class.forName("net.minecraftforge.fml.ExtensionPoint")
-                    .getField("DISPLAYTEST").get(null);
-            Object ctx = Class.forName("net.minecraftforge.fml.ModLoadingContext")
-                    .getMethod("get").invoke(null);
-            for (Method m : ctx.getClass().getMethods()) {
-                if (m.getName().equals("registerExtensionPoint")
-                        && m.getParameterCount() == 2) {
-                    m.invoke(ctx, point, (Supplier<Object>) () -> pair);
-                    return;
-                }
-            }
-        } catch (Throwable ignored) {
-            // 注册不上顶多是服务器列表那个兼容标记不准，不值得为它崩
-        }
+        // 「服务端没有这个 mod 也没关系」——这一声明各版本写法不同，统一收在 ServerCompat
+        ServerCompat.ignoreOnServers();
     }
 
     /** 按名字取方法，取不到就返回 null——这一条不成立顶多不翻，不能炸。 */

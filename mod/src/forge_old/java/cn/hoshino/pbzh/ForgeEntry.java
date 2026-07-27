@@ -21,6 +21,9 @@ import java.util.List;
  * <p>与 {@code src/forge} 那份只差一处：{@code Component.literal()} 是 1.19 才有的，
  * 1.18 及更早要用 {@code new TextComponent()}。为这一个方法单开一套源目录，
  * 比在代码里反射兜圈子清楚。
+ *
+ * <p>「服务端没有也没关系」这一声明不能指望 {@code mods.toml} 的
+ * {@code displayTest}——这几版的加载器根本不读那个键，见 {@link ServerCompat}。
  */
 @Mod(ForgeEntry.MODID)
 public final class ForgeEntry {
@@ -28,6 +31,7 @@ public final class ForgeEntry {
 
     public ForgeEntry() {
         MinecraftForge.EVENT_BUS.addListener(ForgeEntry::onItemTooltip);
+        ServerCompat.ignoreOnServers();
     }
 
     static void onItemTooltip(ItemTooltipEvent event) {
