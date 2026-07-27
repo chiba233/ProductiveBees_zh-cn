@@ -1,0 +1,60 @@
+# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化
+# Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: CI
+
+# 每个 PR / main push 都跑的**快闸**。刻意不出全部 20 个平台的 jar
+# （那是 Build / Release 的活），只覆盖两类立刻能红的东西：
+#   1. 数据闸：版本矩阵与 key 并集自洽，译文覆盖率没倒退
+#   2. 编译闸：最新那个平台真能编出来，且对着打好的 jar 跑得过自测
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    name: 数据闸 + 编译闸
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 1.21.x 跑在 Java 21 上；老平台的 jar 由 Build 出，那边再装对应 JDK
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # 数据自洽：targets.json 与 keys.json 是同一次扫描的产物，
+      # 只改一个不改另一个，覆盖率报告就会骗人。
+      - name: 版本矩阵自洽
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, sys
+          t = json.loads(pathlib.Path('versions/targets.json').read_text(encoding='utf-8'))
+          k = json.loads(pathlib.Path('versions/keys.json').read_text(encoding='utf-8'))
+          tags = set(t)
+          used = {x for v in k['lang'].values() for x in v}
+          if used - tags:
+              sys.exit('❌ keys.json 里引用了 targets.json 没有的目标: %s' % sorted(used - tags))
+          if tags - used:
+              sys.exit('❌ targets.json 里有目标一个 key 都没贡献，扫描不完整: %s'
+                       % sorted(tags - used))
+          print('✅ %d 个目标、%d 个 key 自洽' % (len(tags), len(k['lang'])))
+          PY
+
+      # 覆盖率只许涨不许跌。降了就是有人删了译文或者加了目标没补翻译。
+      - name: 译文覆盖率
+        run: python3 scripts/versions.py gap
+
+      # 编一个最新平台出来，并对着**打好的那个 jar** 跑译名自测
+      - name: 编译 + 自测（1.21.1 NeoForge）
+        run: python3 scripts/build.py 0.0.0-rc.1 1.21.1-neoforge
+
+      - name: Python 语法
+        run: python3 -m compileall -q scripts

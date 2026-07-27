@@ -1,0 +1,149 @@
+# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化
+# Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Release
+
+# 出全部平台的 jar 并发 GitHub Release。
+#
+# 触发方式：
+#   1. push tag v1.0.0 / v1.0.0-beta.1 —— 按 tag 解析版本号，自动发布
+#   2. workflow_dispatch —— 手动，可选发不发
+on:
+  workflow_dispatch:
+    inputs:
+      publish_release:
+        description: Publish a GitHub release after building
+        type: boolean
+        required: true
+        default: false
+      version:
+        description: '版本号，如 1.0.0 或 1.0.0-beta.1'
+        type: string
+        required: false
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: 全平台构建并发布
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 两条路径共用**同一个版本形态**，别两边各写一套然后对不上。
+      # mod 的版本要进 mods.toml，加载器按 Maven 语义比较，所以只认标准 semver。
+      - name: Resolve release options
+        id: release
+        env:
+          PUBLISH_RELEASE: ${{ inputs.publish_release || false }}
+          RELEASE_INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          semver='^[0-9]+\.[0-9]+\.[0-9]+(-(beta|rc)\.[0-9]+)?$'
+
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            version="${GITHUB_REF_NAME#v}"
+            if [[ ! "$version" =~ $semver ]]; then
+              echo "❌ Tag '$GITHUB_REF_NAME' 不合法。写 v1.0.0 / v1.0.0-beta.1 / v1.0.0-rc.1。" >&2
+              exit 1
+            fi
+            prerelease=false
+            [[ "$version" =~ -(beta|rc)\.[0-9]+$ ]] && prerelease=true
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            echo "version=$version" >> "$GITHUB_OUTPUT"
+            echo "prerelease=$prerelease" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          version="$RELEASE_INPUT_VERSION"
+          if [[ "$PUBLISH_RELEASE" != "true" ]]; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "version=${version:-0.0.0-rc.${GITHUB_RUN_NUMBER}}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ -z "$version" ]]; then
+            echo "❌ 要发布就必须给版本号。" >&2
+            exit 1
+          fi
+          if [[ ! "$version" =~ $semver ]]; then
+            echo "❌ 版本号 '$version' 不合法。写 1.0.0 / 1.0.0-beta.1 / 1.0.0-rc.1。" >&2
+            exit 1
+          fi
+          prerelease=false
+          [[ "$version" =~ -(beta|rc)\.[0-9]+$ ]] && prerelease=true
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$prerelease" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            8
+            17
+            21
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            build/pbjars
+            build/gradle
+            ~/.gradle/caches
+          key: deps-${{ hashFiles('versions/targets.json', 'deps.lock.json') }}
+
+      - name: 出全部平台的 jar
+        run: python3 scripts/build.py '${{ steps.release.outputs.version }}'
+
+      # Release 说明取 CHANGELOG.md 里 `## <版本>` 那一段。**整串精确比对**，
+      # 别用正则前缀匹配——`## 1.0` 会把 `## 1.0.1` 也匹上。取不到就回落到全文提示。
+      - name: 取 Release 说明
+        id: notes
+        run: |
+          set -euo pipefail
+          v='${{ steps.release.outputs.version }}'
+          python3 - "$v" <<'PY' > release-notes.md
+          import pathlib, sys
+          want = sys.argv[1]
+          lines = pathlib.Path('CHANGELOG.md').read_text(encoding='utf-8').split('\n')
+          out, on = [], False
+          for ln in lines:
+              if ln.startswith('## '):
+                  if on:
+                      break
+                  on = ln[3:].strip() == want
+                  continue
+              if on:
+                  out.append(ln)
+          body = '\n'.join(out).strip()
+          print(body if body else '本次发布的说明见 CHANGELOG.md。')
+          PY
+          cat release-notes.md
+
+      - name: 产物清单
+        run: ls -lh dist/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: productivebees-zh_cn-${{ steps.release.outputs.version }}
+          path: dist/*.jar
+          if-no-files-found: error
+
+      - name: 发布 Release
+        if: steps.release.outputs.publish == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.release.outputs.version }}
+          name: v${{ steps.release.outputs.version }}
+          body_path: release-notes.md
+          prerelease: ${{ steps.release.outputs.prerelease }}
+          files: dist/*.jar
+          fail_on_unmatched_files: true

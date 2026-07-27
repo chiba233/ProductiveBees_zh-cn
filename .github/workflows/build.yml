@@ -1,26 +1,33 @@
-# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化（独立发布）
+# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化
 # Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
 # SPDX-License-Identifier: GPL-3.0-or-later
 name: Build
 
-# 这个仓库不存译文，只按 SOURCE.lock 钉死的上游 commit 现打。
-# 所以 CI 的意义有两层：
-#   1. SOURCE.lock 一动就立刻验证「那个 commit 真的能打出包」
-#   2. 覆盖率门控（en_us 每个键、导览书每个页面）在这里跑，不达标不出包
+# 出**全部平台**的 jar。一次 build 全出，各平台只差字节码目标与加载器元数据，
+# 数据源只有 src/ 那一份——不会为哪个整合包单独编一个。
+#
+# 比 CI 慢：要按 targets.json 逐个下资源蜜蜂的 jar（导览书是拿映射现套到它自带
+# 那份 JSON 上生成的，非有不可），再逐个平台编译。
 on:
-  push:
-    branches: [main]
-    tags: ['v*']
-  pull_request:
   workflow_dispatch:
     inputs:
       version:
-        description: '版本号（如 r12）'
-        required: true
-        default: 'dev'
+        description: '版本号（x.y.z / x.y.z-beta.N / x.y.z-rc.N）'
+        type: string
+        required: false
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'mod/**'
+      - 'scripts/**'
+      - 'versions/**'
+      - 'deps.lock.json'
+      - 'manifest.json'
 
 jobs:
   build:
+    name: 全平台构建
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,45 +36,43 @@ jobs:
         with:
           python-version: '3.12'
 
-      # NeoForge 1.21.1 的工具链要 Java 21
+      # 矩阵里的平台横跨 Java 8 / 17 / 21，三个都得在
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: |
+            8
+            17
+            21
 
       - name: 定版本号
         id: v
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            v='${{ inputs.version }}'
-          elif [ "${{ github.ref_type }}" = "tag" ]; then
-            v="${GITHUB_REF_NAME#v}"
-          else
-            v="dev-$(echo "$GITHUB_SHA" | cut -c1-7)"
-          fi
+          set -euo pipefail
+          v='${{ inputs.version }}'
+          # 非发布构建用 0.0.0-rc.N：既满足 mods.toml 的版本形态，
+          # 又一眼看得出不是正式版（N 取运行号，保证递增不重复）
+          [ -n "$v" ] || v="0.0.0-rc.${GITHUB_RUN_NUMBER}"
           echo "version=$v" >> "$GITHUB_OUTPUT"
 
-      # 模组 jar 按 sha256 核过才用，缓存命中也一样要核（build.py 自己会核）
+      # 资源蜜蜂的 jar 与 Gradle 都按 sha256 核过才用；缓存命中也照样核
+      # （build.py 自己核，缓存里的东西同样可能是坏的）。
       - uses: actions/cache@v4
         with:
           path: |
-            build/mods
+            build/pbjars
             build/gradle
             ~/.gradle/caches
-          key: pbdeps-${{ hashFiles('SOURCE.lock') }}
+          key: deps-${{ hashFiles('versions/targets.json', 'deps.lock.json') }}
 
-      - name: 打包
+      - name: 出全部平台的 jar
         run: python3 scripts/build.py '${{ steps.v.outputs.version }}'
+
+      - name: 产物清单
+        run: ls -lh dist/
 
       - uses: actions/upload-artifact@v4
         with:
           name: productivebees-zh_cn-${{ steps.v.outputs.version }}
-          path: dist/*
-
-      # 发布由仓库主人推 tag 触发，CI 只负责把产物挂上去
-      - name: 挂到 Release
-        if: github.ref_type == 'tag'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/*
-          generate_release_notes: true
+          path: dist/*.jar
+          if-no-files-found: error

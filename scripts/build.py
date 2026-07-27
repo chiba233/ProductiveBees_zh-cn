@@ -19,12 +19,18 @@
 **只发 jar**：一个 jar 装完就是全部汉化，不额外要资源包、不额外要脚本。
 做不到就别做——让玩家装两三样东西才凑齐一份汉化，那是半成品。
 
+版本号必须是标准形态 `x.y.z` / `x.y.z-beta.N` / `x.y.z-rc.N`：它要写进
+`neoforge.mods.toml` 的 `version`，加载器会按 Maven 语义比较版本，
+`r12` 那种是整合包补丁自己的编号，放到 mod 上不合法。
+
 用法:
-    python3 scripts/build.py <版本号> [目标]      # 例：python3 scripts/build.py r1
+    python3 scripts/build.py 1.0.0            # 出全部平台
+    python3 scripts/build.py 1.0.0-beta.1 1.21.1-neoforge   # 只出一个平台
 """
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -42,6 +48,17 @@ BUILD = ROOT / 'build'
 UA = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
       '(KHTML, like Gecko) Chrome/126.0 Safari/537.36')
 CF = 'https://www.curseforge.com/api/v1/mods/%d/files/%d/download'
+
+
+# mod 的版本号要进 mods.toml，加载器按 Maven 语义比较，必须是标准形态
+VERSION_RE = re.compile(r'^\d+\.\d+\.\d+(-(beta|rc)\.\d+)?$')
+
+
+def check_version(v):
+    if not VERSION_RE.match(v):
+        sys.exit('❌ 版本号 %r 不合法。mod 的版本要写进 mods.toml，加载器按 Maven 语义\n'
+                 '   比较，必须是 x.y.z / x.y.z-beta.N / x.y.z-rc.N。' % v)
+    return v
 
 
 def run(*cmd, **kw):
@@ -169,6 +186,7 @@ def build_one(ver, tag, t, gradle):
 
 def main(ver, only=None):
     """**一次 build 出全部平台**，全部共用 src/ 里同一份数据源。"""
+    check_version(ver)
     todo = {k: v for k, v in TARGETS.items()
             if v.get('buildable') and (only is None or k == only)}
     skipped = sorted(k for k, v in TARGETS.items() if not v.get('buildable'))
