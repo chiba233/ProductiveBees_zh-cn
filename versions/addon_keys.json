@@ -4797,21 +4797,27 @@
  },
  "block_type.productivebees.advanced_beehive": {
   "en": "Advanced %s Beehive",
-  "n": 4,
+  "n": 7,
   "from": [
+   "Adventures In Create",
    "BecksCraft",
    "Enchanted Genesis ",
    "Every Compat (Wood Good)",
+   "Technical Farming 2.0",
+   "Vanilla Supreme",
    "WildLouna"
   ]
  },
  "block_type.productivebees.expansion_box": {
   "en": "%s Expansion Box",
-  "n": 4,
+  "n": 7,
   "from": [
+   "Adventures In Create",
    "BecksCraft",
    "Enchanted Genesis ",
    "Every Compat (Wood Good)",
+   "Technical Farming 2.0",
+   "Vanilla Supreme",
    "WildLouna"
   ]
  },
@@ -11545,6 +11551,13 @@
    "Dungeons, Dragons and Space Shuttles 2"
   ]
  },
+ "entity.productivebees.uru_metal_bee": {
+  "en": "Uru Metal Bee",
+  "n": 1,
+  "from": [
+   "MOTCraft server"
+  ]
+ },
  "entity.productivebees.utheric_bee": {
   "en": "نحلة أوثيريك",
   "n": 9,
@@ -15068,9 +15081,11 @@
  },
  "productivebees.information.upgrade.upgrade_stability": {
   "en": "禁用熔铸炉流体合金功能.",
-  "n": 2,
+  "n": 4,
   "from": [
+   "ATM : All Tech Mods",
    "Dungeons and Shuttles Evolution",
+   "MOTCraft server",
    "Mekanism-Cosmogenic-Core-Builder"
   ]
  },
@@ -15221,6 +15236,15 @@
    "SyFy Traveler by neo"
   ]
  },
+ "productivebees.ingredient.description.allthemodium_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
+  ]
+ },
  "productivebees.ingredient.description.amber_bee": {
   "en": "ستبحث عن الكائنات وتغلفها بالكهرمان محكومة عليها بحياة في حالة تعليق الحركة.",
   "n": 6,
@@ -15279,6 +15303,24 @@
    "MartinClan2026",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.brass_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
+  ]
+ },
+ "productivebees.ingredient.description.bronze_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.bumble_bee": {
@@ -15345,6 +15387,15 @@
    "MartinClan2026",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.constantan_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.creeper_bee": {
@@ -15446,6 +15497,15 @@
    "Winter Leveling LITE"
   ]
  },
+ "productivebees.ingredient.description.electrum_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
+  ]
+ },
  "productivebees.ingredient.description.end_stone_nest": {
   "en": "هذا العش يجذب النحل الأصلي في النهاية. يجب وضع العش في النهاية لجذب النحل.",
   "n": 7,
@@ -15457,6 +15517,15 @@
    "MartinClan2026",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.enderium_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.farmer_bee": {
@@ -15561,6 +15630,15 @@
    "Winter Leveling LITE"
   ]
  },
+ "productivebees.ingredient.description.invar_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
+  ]
+ },
  "productivebees.ingredient.description.jungle_wood_nest": {
   "en": "هذا العش سيجذب النحل في أي بيئة في العالم السفلي.",
   "n": 7,
@@ -15598,6 +15676,15 @@
    "MartinClan2026",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.lumium_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.mason_bee": {
@@ -15892,6 +15979,15 @@
    "Winter Leveling LITE"
   ]
  },
+ "productivebees.ingredient.description.signalum_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
+  ]
+ },
  "productivebees.ingredient.description.skeletal": {
   "en": "Be sure to keep your hives well lit to prevent this guy from moving in.",
   "n": 1,
@@ -15937,6 +16033,15 @@
    "Sky Bees Reborn",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.soul_lava_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.soul_sand_nest": {
@@ -16000,6 +16105,15 @@
    "MartinClan2026",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.steel_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.stone_chip": {
@@ -16073,6 +16187,22 @@
    "Dungeons, Dragons and Space Shuttles 2"
   ]
  },
+ "productivebees.ingredient.description.unobtainium_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
+  ]
+ },
+ "productivebees.ingredient.description.uru_metal_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 1,
+  "from": [
+   "MOTCraft server"
+  ]
+ },
  "productivebees.ingredient.description.utheric_bee": {
   "en": "احذر! أسراب من هذه النحل تختبئ في اليقطينات الكئيبة، الموجودة في الحديقة السفلية.",
   "n": 5,
@@ -16082,6 +16212,15 @@
    "MartinClan2026",
    "Winter Leveling",
    "Winter Leveling LITE"
+  ]
+ },
+ "productivebees.ingredient.description.vibranium_bee": {
+  "en": "To acquire this bee, look up the crafting recipe for its spawn egg.",
+  "n": 3,
+  "from": [
+   "ATM : All Tech Mods",
+   "Aoura MC",
+   "MOTCraft server"
   ]
  },
  "productivebees.ingredient.description.wanna_bee": {

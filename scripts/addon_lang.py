@@ -20,6 +20,8 @@
 1. 我们自己的译文里已经有同一个材料（别的 key 用过它）——最可信，直接复用；
 2. `src/lang/addon_terms.json` 里手写的那张表——那些是别的模组的专有名词
    （匠魂的钢叶、暮色的铁木、Botania 的盖亚），只能人来定。
+   表里还有两栏兜底：`keys` 按整条 key 覆盖（玩梗名拼不出「X蜜蜂」），
+   `texts` 按**原文**覆盖（同一句描述常在十几个 key 上重复）。
 
 推不出来的**一条都不硬填**：宁可显示英文，也不能出「泰伯利亚Bee」这种半截货。
 
@@ -73,7 +75,8 @@ def hand_terms():
     `keys` 是整条覆盖，给那些拼不出「X蜜蜂」的（Cobbee、InfiniBee 这种玩梗名）。"""
     d = load(TERMS, {})
     return ({k: v for k, v in d.get('materials', {}).items() if not k.startswith('_')},
-            {k: v for k, v in d.get('keys', {}).items() if not k.startswith('_')})
+            {k: v for k, v in d.get('keys', {}).items() if not k.startswith('_')},
+            {k: v for k, v in d.get('texts', {}).items() if not k.startswith('_')})
 
 
 def missing_keys():
@@ -87,12 +90,15 @@ def missing_keys():
 def main(write=False):
     miss, zh, all_keys = missing_keys()
     mats = known_materials(zh)
-    hand_mat, hand_key = hand_terms()
+    hand_mat, hand_key, hand_text = hand_terms()
 
     made, left = {}, {}
     for key, info in sorted(miss.items()):
         en = info['en'] if isinstance(info, dict) else info
-        done = hand_key.get(key)
+        # 先按整条 key，再按**原文**：同一句话在十几个 key 上重复是常事
+        # （「想要这种蜜蜂，去查它刷怪蛋的合成配方」在 ATM 系整合包里出现 14 次），
+        # 按原文记一条就全覆盖，以后再冒出来也自动命中。
+        done = hand_key.get(key) or hand_text.get(en)
         for pat, fmt in ([] if done else SHAPES):
             m = pat.match(key)
             if not m:

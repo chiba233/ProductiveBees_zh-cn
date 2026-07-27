@@ -46,36 +46,36 @@ mod。**丢进 `mods/` 就行**，不用装资源包、不用改配置。
 
 <!-- 覆盖范围开始 · 由 scripts/readme.py 生成，勿手改 -->
 
-已逐个翻过 **2243** 个整合包与模组（CurseForge 2441 个；198 个取不到文件）。其中 **56** 个自带蜂名——它们用数据包加了自己的蜂，名字不在模组本体里。这些名字**也在本汉化里**：
+已逐个翻过 **17549** 个整合包与模组（CurseForge 2440 个、Modrinth 15316 个；207 个取不到文件）。其中 **62** 个自带蜂名——它们用数据包加了自己的蜂，名字不在模组本体里。这些名字**也在本汉化里**：
 
 | 整合包 | 自定义条目 | 下载量 |
 |---|---:|---:|
-| MineColonies - Cobblemon Conquest | 32 | 27,011 |
-| MineColonies - Create & Conquer | 16 | 139,990 |
-| TechEv \|\| Discovery | 16 | 7,737 |
-| Nightwing Diamond | 15 | 165 |
-| MartinClan2026 | 15 | 116 |
-| Dungeons, Dragons and Space Shuttles 2 | 14 | 56,750 |
-| Mordant Minds | 12 | 137 |
-| Psi: Tweaks and Additions | 11 | 1,934 |
-| Phoenix Forge Technologies | 11 | 1,465 |
-| WithTheCat (Second Edition) | 10 | 504 |
-| Bee Proud | 9 | 7,457 |
-| DivineRPG: Compatability | 6 | 140,751 |
-| Journey Through The Abyss | 6 | 5,872 |
-| Bee Master | 6 | 887 |
-| Sky Bees Reborn | 5 | 16,447 |
-| Dungeons and Shuttles Evolution | 5 | 3,193 |
-| Fated Curse | 5 | 700 |
-| Impostor Syndrome - Reimagined | 4 | 293 |
-| FTB Skies Expert | 3 | 22,859 |
-| Every Compat (Wood Good) | 2 | 46,267,428 |
-| Productive Trees | 2 | 21,464,851 |
-| Medival, Magic & Tech NeoForge | 2 | 24,342 |
-| FTB Inferno | 2 | 24,040 |
-| Enchanted Genesis  | 2 | 19,358 |
-| Adventure of Tech V | 2 | 5,696 |
-| …另有 31 个 | | |
+| MineColonies - Cobblemon Conquest | 32 | 27,014 |
+| MineColonies - Create & Conquer | 16 | 140,015 |
+| TechEv \|\| Discovery | 16 | 7,739 |
+| MOTCraft server | 16 | 1,149 |
+| Nightwing Diamond | 15 | 166 |
+| MartinClan2026 | 15 | 117 |
+| Dungeons, Dragons and Space Shuttles 2 | 14 | 56,753 |
+| ATM : All Tech Mods | 14 | 13,542 |
+| Aoura MC | 13 | 216 |
+| Mordant Minds | 12 | 138 |
+| Psi: Tweaks and Additions | 11 | 1,938 |
+| Phoenix Forge Technologies | 11 | 1,466 |
+| WithTheCat (Second Edition) | 10 | 505 |
+| Bee Proud | 9 | 7,458 |
+| DivineRPG: Compatability | 6 | 140,765 |
+| Journey Through The Abyss | 6 | 5,873 |
+| Bee Master | 6 | 888 |
+| Sky Bees Reborn | 5 | 16,456 |
+| Dungeons and Shuttles Evolution | 5 | 3,194 |
+| Fated Curse | 5 | 701 |
+| Impostor Syndrome - Reimagined | 4 | 298 |
+| FTB Skies Expert | 3 | 22,862 |
+| Every Compat (Wood Good) | 2 | 46,269,727 |
+| Productive Trees | 2 | 21,466,412 |
+| Medival, Magic & Tech NeoForge | 2 | 24,343 |
+| …另有 37 个 | | |
 
 没列出来的整合包也照样能用：本汉化覆盖模组本体的全部词条，自定义蜂名只是额外多兜的一层。
 

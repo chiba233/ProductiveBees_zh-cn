@@ -178,5 +178,9 @@
   "productivebees.ingredient.description.spatial_bee": "这种蜜蜂的蜜脾离心后会产出赛特斯石英种子，而后需要进一步加工。",
   "item.productivebees.spawn_egg_configurable_bee": "资源蜜蜂刷怪蛋",
   "block.productivebees.bamboo_nest": "竹蜂巢"
+ },
+ "texts": {
+  "_why": "同一句原文在很多 key 上重复时，按原文记一条就够，不必一个 key 抄一遍。",
+  "To acquire this bee, look up the crafting recipe for its spawn egg.": "想要这种蜜蜂，去查它刷怪蛋的合成配方。"
  }
 }
