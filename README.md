@@ -99,6 +99,19 @@ mod。**丢进 `mods/` 就行**，不用装资源包、不用改配置。
 
 ## 授权
 
-GPL-3.0-or-later · Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+三类东西各归各的，详见 [LICENSE](LICENSE)：
 
-模组本体由 jdkdigital 等作者开发，本仓库只提供中文内容。
+| | |
+|---|---|
+| 代码（`scripts/`、`mod/`、CI） | GPL-3.0-or-later · (C) 2026 星野夢華 |
+| 译文（`src/lang`、`src/books`） | (C) 2026 星野夢華，保留一切权利 |
+| Productive Bees 本体 | (C) [JDKDigital](https://www.curseforge.com/minecraft/mc-mods/productivebees)，**All Rights Reserved** |
+
+本仓库**不含任何上游文件**——不放 jar、不放上游语言文件、不放上游导览书，
+只记「英文原文 → 中文译文」的对应表。
+
+但**打出来的 jar 含有上游作品的衍生内容**（导览书是上游 JSON 结构套上我们的中文）。
+因此分发成品 jar 需要 Productive Bees 作者的许可；在拿到许可并写明出处之前，
+不会上传到 CurseForge——那边的审核政策对这一条是永久封号。
+
+本汉化与 JDKDigital 无隶属关系，也未获其背书。

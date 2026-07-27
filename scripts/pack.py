@@ -203,7 +203,7 @@ def mods_toml(man, ver, t):
           'displayTest="IGNORE_ALL_VERSION"\n') if v >= (1, 17) else ''
     return '''modLoader="javafml"
 loaderVersion="[1,)"
-license="GPL-3.0-or-later"
+license="Custom: 译文 (C) 星野夢華; Productive Bees (C) JDKDigital, All Rights Reserved"
 issueTrackerURL="https://github.com/chiba233/ProductiveBees_zh-cn/issues"
 
 [[mods]]
@@ -274,7 +274,9 @@ def build(man, jar, ver, t):
         'pack_format': fmt,
         'description': '%s 简体中文汉化' % man['zh_name'],
     }}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    # 两份都进 jar：LICENSE 讲清楚三类东西各归各的，GPL 正文给代码那部分
     (res / 'LICENSE').write_bytes((ROOT / 'LICENSE').read_bytes())
+    (res / 'LICENSE-GPL-3.0').write_bytes((ROOT / 'LICENSE-GPL-3.0').read_bytes())
 
     return res, {'lang': n_lang, 'book': n_book,
                  'types': len(tables['type2zh']), 'book_name': book_name(jar, res)}
