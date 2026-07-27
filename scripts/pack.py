@@ -152,7 +152,24 @@ def book_name(jar, root):
     return json.loads(f.read_text(encoding='utf-8')).get(en, en)
 
 
-def mods_toml(man, ver):
+# 资源包格式号按 MC 版本走。一个 jar 跨不了多版本，所以每个目标各填各的。
+PACK_FORMAT = [((1, 21), 34), ((1, 20, 5), 32), ((1, 20, 3), 22), ((1, 20, 2), 18),
+               ((1, 20), 15), ((1, 19, 4), 13), ((1, 19, 3), 12), ((1, 19), 9),
+               ((1, 18), 8), ((1, 17), 7), ((1, 16, 2), 6), ((1, 15), 5)]
+
+
+def pack_format(mc):
+    v = tuple(int(x) for x in mc.split('.'))
+    for need, fmt in PACK_FORMAT:
+        if v >= need:
+            return fmt
+    return 5
+
+
+def mods_toml(man, ver, t):
+    """加载器元数据。1.20.2 起 NeoForge 换了文件名与依赖 modId，别搞混。"""
+    v = tuple(int(x) for x in t['minecraft'].split('.'))
+    neo = t['loader'] == 'NeoForge' and v >= (1, 20, 2)
     return '''modLoader="javafml"
 loaderVersion="[1,)"
 license="GPL-3.0-or-later"
@@ -173,9 +190,9 @@ description=\'\'\'
 \'\'\'
 
 [[dependencies.{modid}_zh_cn]]
-modId="neoforge"
+modId="{loader}"
 type="required"
-versionRange="[21,)"
+versionRange="[0,)"
 ordering="NONE"
 side="CLIENT"
 
@@ -185,10 +202,11 @@ type="required"
 versionRange="[0,)"
 ordering="AFTER"
 side="CLIENT"
-'''.format(modid=man['modid'], ver=ver, zh=man['zh_name'], en=man['en_name'])
+'''.format(modid=man['modid'], ver=ver, zh=man['zh_name'], en=man['en_name'],
+           loader='neoforge' if neo else 'forge'), neo
 
 
-def build(man, jar, ver):
+def build(man, jar, ver, t):
     """摊出 mod 的资源树，返回 (资源根目录, 统计)。"""
     res = ROOT / 'mod' / 'src' / 'main' / 'resources'
     if res.exists():
@@ -215,12 +233,13 @@ def build(man, jar, ver):
                  % len(fails))
     print('  占位符 / 导览书结构核验通过')
 
+    toml, neo = mods_toml(man, ver, t)
     (res / 'META-INF').mkdir()
-    (res / 'META-INF' / 'neoforge.mods.toml').write_text(
-        mods_toml(man, ver), encoding='utf-8')
+    (res / 'META-INF' / ('neoforge.mods.toml' if neo else 'mods.toml')).write_text(
+        toml, encoding='utf-8')
+    fmt = pack_format(t['minecraft'])
     (res / 'pack.mcmeta').write_text(json.dumps({'pack': {
-        'pack_format': man['pack_format'],
-        'supported_formats': man['supported_formats'],
+        'pack_format': fmt,
         'description': '%s 简体中文汉化' % man['zh_name'],
     }}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (res / 'LICENSE').write_bytes((ROOT / 'LICENSE').read_bytes())

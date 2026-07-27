@@ -52,6 +52,10 @@ jobs:
       - name: 译文覆盖率
         run: python3 scripts/versions.py gap
 
+      # README 的支持矩阵是从 versions/ 生成的，改了数据没重跑就会对不上
+      - name: README 支持矩阵是最新的
+        run: python3 scripts/readme.py --check
+
       # 编一个最新平台出来，并对着**打好的那个 jar** 跑译名自测
       - name: 编译 + 自测（1.21.1 NeoForge）
         run: python3 scripts/build.py 0.0.0-rc.1 1.21.1-neoforge

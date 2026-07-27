@@ -1,88 +1,65 @@
 # 资源蜜蜂 简体中文汉化
 
-[Productive Bees](https://www.curseforge.com/minecraft/mc-mods/productive-bees) 的
-**全量**简体中文汉化。**一个 jar，装完就是全部**——不用再装资源包，也不用往
-`kubejs/` 里放脚本。
+[Productive Bees](https://www.curseforge.com/minecraft/mc-mods/productive-bees) 的中文
+mod。**丢进 `mods/` 就行**，不用装资源包、不用改配置。
 
-丢进 `mods/`，完事。
+纯客户端。服务端没有它照样进服，不改配方、不动存档。
+
+## 下载
+
+去 [Releases](../../releases)，按你的 Minecraft 版本和加载器选文件：
+
+    productivebees-zh_cn-<版本>-mc<Minecraft版本>-<加载器>.jar
+
+## 支持哪些版本
+
+<!-- 支持矩阵开始 · 由 scripts/readme.py 生成，勿手改 -->
+
+| Minecraft | 加载器 | 已汉化条目 | 导览书页数 | 状态 |
+|---|---|---|---|---|
+| 1.21.1 | NeoForge | 1118 / 1118（100.0%） | 81 | ✅ 可用 |
+| 1.21 | NeoForge | 1080 / 1081（99.9%） | 81 | ⏳ 差 1 条 |
+| 1.20.1 | NeoForge | 1034 / 1036（99.8%） | 81 | ⏳ 差 2 条 |
+| 1.20.1 | Forge | 1034 / 1036（99.8%） | 81 | ⏳ 差 2 条 |
+| 1.20 | NeoForge | 902 / 907（99.4%） | 92 | ⏳ 差 5 条 |
+| 1.20 | Forge | 902 / 907（99.4%） | 92 | ⏳ 差 5 条 |
+| 1.19.4 | Forge | 580 / 626（92.7%） | 92 | ⏳ 差 46 条 |
+| 1.19.3 | Forge | 568 / 614（92.5%） | 92 | ⏳ 差 46 条 |
+| 1.19.2 | Forge | 581 / 627（92.7%） | 92 | ⏳ 差 46 条 |
+| 1.19.1 | Forge | 538 / 583（92.3%） | 89 | ⏳ 差 45 条 |
+| 1.19 | Forge | 530 / 575（92.2%） | 89 | ⏳ 差 45 条 |
+| 1.18.2 | Forge | 564 / 610（92.5%） | 92 | ⏳ 差 46 条 |
+| 1.18.1 | Forge | 514 / 561（91.6%） | 89 | ⏳ 差 47 条 |
+| 1.18 | Forge | 495 / 747（66.3%） | 86 | ⏳ 差 252 条 |
+| 1.17.1 | Forge | 485 / 740（65.5%） | 86 | ⏳ 差 255 条 |
+| 1.16.5 | Forge | 490 / 745（65.8%） | 86 | 暂无（构建工具链够不着 1.16 及更早） |
+| 1.16.4 | Forge | 309 / 553（55.9%） | 84 | 暂无（构建工具链够不着 1.16 及更早） |
+| 1.16.3 | Forge | 309 / 553（55.9%） | 84 | 暂无（构建工具链够不着 1.16 及更早） |
+| 1.16.1 | Forge | 309 / 557（55.5%） | 26 | 暂无（构建工具链够不着 1.16 及更早） |
+| 1.15.2 | Forge | 297 / 537（55.3%） | 31 | 暂无（构建工具链够不着 1.16 及更早） |
+
+<!-- 支持矩阵结束 -->
+
+「已汉化条目」是这一版模组的语言条目里我们翻了多少。差几条就是游戏里会露几处英文。
 
 ## 翻了什么
 
+- 物品、方块、蜜蜂名、界面、进度
+- 内置导览书《蜜蜂大书》全部页面
+- **基因样本 / 蜜蜂小食 tooltip 里的蜂种名**（467 个蜂种）——
+  这一行是运行期拼出来的，资源包翻不到，只有 mod 能翻
+
+## 提问题
+
 | | |
 |---|---|
-| 物品 / 方块 / 蜜蜂 / 界面 / 进度 | **1118 / 1118** 条（100%） |
-| 内置导览书《蜜蜂大书》 | **81 / 81** 个页面文件（100%） |
-| 基因样本 tooltip 里的**蜂种名** | **467** 个蜂种 |
-
-最后那一行是这个东西非得做成 mod 的唯一理由。模组是这么拼它的：
-
-```java
-Component.translatable("productivebees.information.attribute.type", value)
-//                                                                  ↑ 裸 String，运行期数据
-```
-
-`value` 从物品的 data component 里读出来，**不过任何 lang 查表**。资源包碰不到它；
-改字节码常量池的工具（VaultPatcher 之流）也碰不到，因为那个串根本不在常量池里。
-只能在 `ItemTooltipEvent` 上拦下来改——那就得有代码，那就得是 mod。
-
-基因的各项**属性**（产量 / 耐力 / 脾气 / 习性 / 耐候 / 生命）和蜂笼上的
-「类型：蜂巢型 / 独居型」走的是正经 lang 键，jar 里的资源已经覆盖。
-
-## 支持范围
-
-对着 `productivebees-1.21.1-13.13.5.jar` 逐条核过：**Minecraft 1.21.1 / NeoForge**。
-
-| 目标 | 状态 |
-|---|---|
-| NeoForge 1.21.x | ✅ 已发布，lang 与导览书 100% |
-| Forge / NeoForge 1.20.1 | 译文覆盖 99.8%，尚未出包 |
-| Forge 1.19.2 / 1.18.2 | 译文覆盖 ~92.6%，缺的主要是各种木头蜂箱 |
-| Forge 1.16.5 | 译文覆盖 65.8%，缺 255 条 |
-| Fabric | **不存在**——资源蜜蜂本体从来没有 Fabric 版 |
-
-一个 jar 跨不了这么多版本：1.16 跑 Java 8、1.17+ 跑 Java 17、1.20.5+ 跑 Java 21，
-字节码版本就不兼容；Forge 与 NeoForge 的事件类也不是同一个包。所以每个目标各出一个
-jar，各自对着那一版的模组 jar 验过覆盖率才发——**不到 100% 不出包**。
-「装上去只翻了一半」比没翻还糟：玩家不会来报，只会觉得这包很烂。
-
-## 它不做什么
-
-只改 tooltip 上的字。不注册方块物品、不动配方、不发网络包、不碰存档。
-`displayTest="IGNORE_ALL_VERSION"`，服务端没有它也照样进服。
-
-## 译文放在哪 / 怎么提改进
-
-译文**不在这个仓库**，在
-[chiba233/atm10-zh-cn](https://github.com/chiba233/atm10-zh-cn)：
-
-    src/pack/assets/productivebees/lang/zh_cn.json      语言文件
-    src/books/assets/productivebees/**.json             导览书的「原文 → 译文」映射
-
-这个仓库只负责**把它单独打成 mod**，本身不存任何一份译文副本，也不存 Gradle
-wrapper 之类的二进制——上游按 commit 钉、模组 jar 按 sha256 钉、Gradle 发行版按
-sha256 钉，全写在 `SOURCE.lock` 里。
-
-为什么这么分：这份汉化本来就是
-[All the Mods 10 汉化补丁「绿油油版」](https://github.com/chiba233/atm10-zh-cn)
-的一部分。两边各存一份必然漂移，最后同一只蜂在整合包里叫一个名、在这里叫另一个名。
-
-顺带一提，ATM10 整合包**不用**这个 mod——那边走 KubeJS 显示层，本来就装了 KubeJS，
-更合适。这个 mod 是给其他整合包用的。两者互补。
-
-**译名有问题、漏翻、错别字**：去上游仓库开 issue 或提 PR，改一次两边一起好。
-**打包 / 安装 / 版本适配**：在这个仓库开 issue。
-
-## 自己构建
-
-```bash
-python3 scripts/build.py r12
-```
-
-拉上游、核 jar、摊资源、编译、**对着打好的 jar 跑一遍译名自测**，产物在 `dist/`。
+| 译名不对、漏翻、错别字 | [开 issue](../../issues/new/choose) |
+| 装了之后崩溃 / 没生效 / 进不了服 | [开 issue](../../issues/new/choose) |
+| 想要还没支持的版本 | [开 issue](../../issues/new/choose) |
+| 蜜蜂本身的 bug（不产东西、配方不对） | [Productive Bees](https://github.com/jdkdigital/productive-bees/issues) |
 
 ## 授权
 
-GPL-3.0-or-later。Copyright (C) 2026 星野夢華 (Hoshino Yumeka)。
+GPL-3.0-or-later · Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
 
-Productive Bees 本体由 jdkdigital 等作者开发，与本汉化无关；这里只提供中文资源与
-一层显示层代码。
+模组本体由 jdkdigital 等作者开发，本仓库只提供中文内容。
