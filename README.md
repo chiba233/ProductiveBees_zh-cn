@@ -1,6 +1,6 @@
 # 资源蜜蜂 简体中文汉化
 
-[Productive Bees](https://www.curseforge.com/minecraft/mc-mods/productive-bees) 的中文
+[Productive Bees](https://www.curseforge.com/minecraft/mc-mods/productivebees) 的中文
 mod。**丢进 `mods/` 就行**，不用装资源包、不用改配置。
 
 纯客户端。服务端没有它照样进服，不改配方、不动存档。
