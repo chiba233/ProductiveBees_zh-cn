@@ -28,7 +28,9 @@ CurseForge 有反向依赖接口 `/mods/<id>/dependents`，把「用了资源蜜
 
 用法:
     python3 scripts/addons.py list            # 拉项目清单
-    python3 scripts/addons.py scan [N|all]    # 按下载量从高到低扫，默认 200
+    python3 scripts/addons.py scan [N|all] [--shard=i/N]   # 按下载量从高到低扫
+    python3 scripts/addons.py merge          # 合并两个平台各分片的结果并统计
+    python3 scripts/addons.py selftest        # 只跑合成用例（不联网，CI 用）
     python3 scripts/addons.py verify [N]      # 验扫描器：合成用例 + 整包暴力对照
     python3 scripts/addons.py gap             # 报还缺多少译文
 """
@@ -290,9 +292,15 @@ def save_results(res):
     RESULTS.write_text(json.dumps(res, ensure_ascii=False) + '\n', encoding='utf-8')
 
 
-def scan(limit, workers=5):
+def scan(limit, workers=5, shard=None):
     all_rows = rows()
     todo = all_rows if limit is None else all_rows[:limit]
+    global RESULTS
+    if shard:
+        # CI 上分片跑：每片一个结果文件，最后由 merge 合起来
+        i, n = shard
+        todo = todo[i::n]
+        RESULTS = CACHE / ('results-%d.json' % i)
     res = load_results()
     pending = [r for r in todo if str(r['id']) not in res]
     print('清单 %d 个，本轮 %d 个，其中 %d 个还没扫过'
@@ -322,6 +330,22 @@ def scan(limit, workers=5):
     return report(res)
 
 
+def merge():
+    """把两个平台、各分片的结果合到一起再统计。
+
+    CurseForge 有反向依赖接口，Modrinth 没有——那边只能把一万七千个整合包
+    全列一遍逐个翻。两边拆包与认 key 用的是同一份代码，所以结果可以直接合。
+    """
+    res = {}
+    for d, pref in ((CACHE, 'cf'), (ROOT / 'build' / 'modrinth', 'mr')):
+        for p in sorted(d.glob('results*.json')):
+            for k, v in json.loads(p.read_text(encoding='utf-8')).items():
+                res['%s:%s' % (pref, k)] = v
+    save_results(res)
+    print('合并 %d 个项目的扫描结果' % len(res))
+    return report(res)
+
+
 def report(res=None):
     res = res if res is not None else load_results()
     keys, ok, bad, withkeys = {}, 0, 0, 0
@@ -345,9 +369,13 @@ def report(res=None):
          for r in res.values() if r.get('keys')),
         key=lambda x: (-x['keys'], -x['downloads']))
     packs = [x for x in packs if x['keys']]
+    plat = {}
+    for r in res.values():
+        p = r.get('platform', 'curseforge')
+        plat[p] = plat.get(p, 0) + 1
     (VERSIONS / 'addon_scan.json').write_text(json.dumps(
         {'scanned': ok, 'failed': bad, 'total': len(rows()),
-         'keys': len(keys), 'packs': packs},
+         'platforms': plat, 'keys': len(keys), 'packs': packs},
         ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     (VERSIONS / 'addon_keys.json').write_text(json.dumps(
         {k: {'en': v['en'], 'n': len(set(v['from'])),
@@ -487,17 +515,27 @@ def verify(n=3):
 
 if __name__ == '__main__':
     a = sys.argv[1:]
-    if not a or a[0] not in ('list', 'scan', 'gap', 'verify', 'report'):
+    if not a or a[0] not in ('list', 'scan', 'gap', 'verify', 'report',
+                             'selftest', 'merge'):
         sys.exit(__doc__)
-    if a[0] == 'list':
+    if a[0] == 'selftest':
+        verify_synthetic()          # 只跑合成用例，不联网：CI 每次都跑得起
+    elif a[0] == 'list':
         fetch_list()
     elif a[0] == 'gap':
         gap()
     elif a[0] == 'report':
         report()
+    elif a[0] == 'merge':
+        merge()
     elif a[0] == 'verify':
         sys.exit(1 if verify(int(a[1]) if len(a) > 1 else 3) else 0)
     else:
-        lim = (None if len(a) > 1 and a[1] == 'all'
-               else int(a[1]) if len(a) > 1 else 200)
-        scan(lim, workers=int(os.environ.get('PB_WORKERS', '5')))
+        pos = [x for x in a[1:] if not x.startswith('--')]
+        lim = (None if pos and pos[0] == 'all' else int(pos[0]) if pos else 200)
+        sh = None
+        for x in a:
+            if x.startswith('--shard='):
+                i, n = x.split('=', 1)[1].split('/')
+                sh = (int(i), int(n))
+        scan(lim, workers=int(os.environ.get('PB_WORKERS', '5')), shard=sh)

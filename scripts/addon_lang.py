@@ -125,4 +125,9 @@ def main(write=False):
 
 
 if __name__ == '__main__':
-    main('--write' in sys.argv)
+    rest = main('--write' in sys.argv)
+    # CI 用：扫出来的整合包 key 一条都不许没译。没这道闸，下次扫到新包就是
+    # 悄悄多一批英文——扫描器越勤快，漏得越多。
+    if '--check' in sys.argv and rest:
+        sys.exit('❌ 还有 %d 条整合包 key 没译；'
+                 '在 src/lang/addon_terms.json 里补，再跑 --write' % len(rest))

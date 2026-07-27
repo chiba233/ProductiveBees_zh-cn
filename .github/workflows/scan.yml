@@ -1,0 +1,160 @@
+# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化
+# Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Scan
+
+# 把「谁给资源蜜蜂加了自己的蜂」这件事扫一遍。
+#
+# 两个平台都要扫：
+#   - CurseForge 有反向依赖接口，两千多个项目
+#   - Modrinth 没有反向依赖接口，只能把一万七千多个整合包全列一遍逐个翻
+#
+# 所以按分片并行。整包不下载：走 HTTP Range 只取压缩包的中央目录，再单独取
+# 要的那几条语言文件（整合包的语言文件多半还在内嵌的资源包/数据包 zip 里）。
+#
+# 产物是 artifact，不自动提交——扫出来的新 key 要先有人译，
+# 译完再连同 versions/*.json 一起进仓库。
+on:
+  workflow_dispatch:
+    inputs:
+      curseforge_shards:
+        description: 'CurseForge 分几片'
+        type: string
+        default: '6'
+      modrinth_shards:
+        description: 'Modrinth 分几片'
+        type: string
+        default: '10'
+      modrinth_limit:
+        description: 'Modrinth 只扫下载量前 N 个（all = 全部）'
+        type: string
+        default: 'all'
+  schedule:
+    # 每月 1 号扫一遍：整合包会更新，新蜂会冒出来
+    - cron: '0 6 1 * *'
+
+permissions:
+  contents: read
+
+jobs:
+  # 清单**只列一次**，分片全用同一份。各片各列一次的话，两次列出来的顺序
+  # 但凡有出入，按下标分片就会有的项目被扫两遍、有的一遍都没扫到。
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      cf: ${{ steps.p.outputs.cf }}
+      mr: ${{ steps.p.outputs.mr }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 列两个平台的项目
+        run: |
+          python3 scripts/addons.py list
+          python3 scripts/modrinth.py list
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pack-lists
+          path: |
+            versions/dependents.json
+            versions/modrinth_packs.json
+          if-no-files-found: error
+      - id: p
+        run: |
+          set -euo pipefail
+          cf='${{ inputs.curseforge_shards }}'; cf="${cf:-6}"
+          mr='${{ inputs.modrinth_shards }}';  mr="${mr:-10}"
+          python3 - "$cf" "$mr" <<'PY' >> "$GITHUB_OUTPUT"
+          import json, sys
+          print('cf=' + json.dumps(list(range(int(sys.argv[1])))))
+          print('mr=' + json.dumps(list(range(int(sys.argv[2])))))
+          PY
+
+  curseforge:
+    name: CurseForge ${{ matrix.shard }}
+    needs: plan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.cf) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: pack-lists
+          path: versions
+      - name: 扫这一片
+        run: |
+          python3 scripts/addons.py scan all \
+            --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scan-cf-${{ matrix.shard }}
+          path: build/dependents/results*.json
+          if-no-files-found: error
+
+  modrinth:
+    name: Modrinth ${{ matrix.shard }}
+    needs: plan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.mr) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: pack-lists
+          path: versions
+      - name: 扫这一片
+        run: |
+          python3 scripts/modrinth.py scan '${{ inputs.modrinth_limit || 'all' }}' \
+            --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scan-mr-${{ matrix.shard }}
+          path: build/modrinth/results*.json
+          if-no-files-found: error
+
+  merge:
+    name: 合并并报缺口
+    needs: [curseforge, modrinth]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: scan-cf-*
+          path: build/dependents
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: scan-mr-*
+          path: build/modrinth
+          merge-multiple: true
+      - name: 合并
+        run: python3 scripts/addons.py merge
+      # 还缺多少译文——扫到新蜂就在这里现形
+      - name: 还缺哪些译文
+        run: python3 scripts/addon_lang.py || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scan-result
+          path: |
+            versions/addon_keys.json
+            versions/addon_scan.json
+            build/dependents/results.json
+          if-no-files-found: error

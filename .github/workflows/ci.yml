@@ -52,6 +52,15 @@ jobs:
       - name: 译文覆盖率
         run: python3 scripts/versions.py gap
 
+      # 扫描器自己也要验：该收的收到、该躲的躲开、内嵌包钻得进去。
+      # 只跑合成用例，不联网——真扫要下几百个整合包，那是本地干的活。
+      - name: 整合包扫描器自验
+        run: python3 scripts/addons.py selftest
+
+      # 扫出来的整合包自定义 key 必须条条有译文
+      - name: 整合包 key 全译过
+        run: python3 scripts/addon_lang.py --check
+
       # README 的支持矩阵是从 versions/ 生成的，改了数据没重跑就会对不上
       - name: README 支持矩阵是最新的
         run: python3 scripts/readme.py --check
