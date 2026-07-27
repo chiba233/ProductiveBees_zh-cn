@@ -48,18 +48,21 @@ def api(path):
     return json.loads(addons.get(API + path)[0])
 
 
-def fetch_list():
-    """把 Modrinth 上的整合包全部列出来。"""
-    facets = urllib.parse.quote('[["project_type:modpack"]]')
-    out, offset, total = [], 0, None
-    while True:
-        d = api('/search?facets=%s&limit=%d&offset=%d&index=downloads'
-                % (facets, PAGE, offset))
+def _page(facets, index, seen, out):
+    """按一组分面翻页。搜索接口**翻不过 10000 条**，所以一趟只能拿这么多。"""
+    offset = 0
+    total = None
+    while offset < 10000:
+        d = api('/search?facets=%s&limit=%d&offset=%d&index=%s'
+                % (urllib.parse.quote(json.dumps(facets)), PAGE, offset, index))
         total = d['total_hits']
         hits = d.get('hits') or []
         if not hits:
             break
         for h in hits:
+            if h['project_id'] in seen:
+                continue
+            seen.add(h['project_id'])
             # 搜索结果里就带最新版本 id。别再去 /project/<id>/version 拉版本列表：
             # 热门整合包有几百个版本，那个 JSON 好几 MB，一万七千个包拉下来，
             # 光这一步就能把扫描拖成看着像卡死。
@@ -67,36 +70,39 @@ def fetch_list():
                         'name': h['title'], 'downloads': h.get('downloads') or 0,
                         'version': h.get('latest_version')})
         offset += PAGE
-        if offset >= min(total, 10000):
-            # 搜索接口翻不过 10000 条，剩下的按下载量倒序再来一趟
+        if offset >= total:
             break
-        time.sleep(0.1)
-    if total and total > 10000:
-        offset = 0
-        while offset < min(total - 10000, 10000):
-            d = api('/search?facets=%s&limit=%d&offset=%d&index=newest'
-                    % (facets, PAGE, offset))
-            hits = d.get('hits') or []
-            if not hits:
-                break
-            for h in hits:
-                out.append({'id': h['project_id'], 'slug': h['slug'],
-                            'name': h['title'],
-                            'downloads': h.get('downloads') or 0,
-                            'version': h.get('latest_version')})
-            offset += PAGE
-            time.sleep(0.1)
-    seen, rows = set(), []
-    for r in out:
-        if r['id'] not in seen:
-            seen.add(r['id'])
-            rows.append(r)
-    rows.sort(key=lambda r: -r['downloads'])
+        time.sleep(0.05)
+    return total or 0
+
+
+def fetch_list():
+    """把 Modrinth 上的整合包全部列出来。
+
+    一趟最多 10000 条，而整合包有一万七千多个——所以**按分面切**：先按不同排序
+    各来一趟（各自能覆盖前 10000），再按 Minecraft 版本逐个来一趟。每个版本的
+    子集都远小于上限，合起来才是全集。少了这一步，后面两千多个包一个都扫不到。
+    """
+    seen, out = set(), []
+    base = [['project_type:modpack']]
+    total = 0
+    for index in ('downloads', 'newest', 'updated', 'follows'):
+        total = max(total, _page(base, index, seen, out))
+        print('  按 %-9s 排序后累计 %d 个' % (index, len(out)), flush=True)
+    versions = [v['version'] for v in api('/tag/game_version')
+                if v.get('version_type') == 'release']
+    for v in versions:
+        before = len(out)
+        _page(base + [['versions:%s' % v]], 'downloads', seen, out)
+        if len(out) > before:
+            print('  %-9s 又找到 %d 个（累计 %d）'
+                  % (v, len(out) - before, len(out)), flush=True)
+    out.sort(key=lambda r: -r['downloads'])
     VERSIONS.mkdir(exist_ok=True)
     (VERSIONS / 'modrinth_packs.json').write_text(
-        json.dumps(rows, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print('Modrinth 整合包：接口说 %d 个，列到 %d 个' % (total, len(rows)))
-    return rows
+        json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    print('Modrinth 整合包：接口说 %d 个，列到 %d 个' % (total, len(out)))
+    return out
 
 
 def rows():
