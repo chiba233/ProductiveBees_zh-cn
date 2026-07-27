@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package cn.hoshino.pbzh;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
  * <p>这个类里**没有一个 Minecraft 类型**——事件胶水在 {@link TooltipHook}。
  * 分开是为了能脱离游戏直接跑测试：真逻辑全在这儿，测试拿打好的 jar 就能验。
  *
- * <p>译名表 {@code /pbzh/bees.json} 是构建时由 Python 从**同一份真源**
- * （atm10-zh-cn 的资源包 zh_cn.json）生成的，这个类里一个中文都不写死。
+ * <p>译名表 {@code /pbzh/bees.json} 是构建时由 Python 从 {@code src/lang/zh_cn.json}
+ * ——和词条同一份数据源——生成的，这个类里一个中文都不写死。
  *
  * <p>几条从整合包版继承下来的安全规矩，都是踩过才有的：
  * <ul>
@@ -79,8 +79,14 @@ public final class BeeNames {
             if (in == null) {
                 return;                      // 表没打进来就什么都不做，绝不抛异常影响游戏
             }
-            JsonObject root = JsonParser.parseReader(
-                    new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
+            // 用 Gson 实例，不用 JsonParser 的静态方法：`JsonParser.parseReader` 是
+            // Gson 2.8.6 才加的，1.17.1 那批 Minecraft 自带的 Gson 比它老，编不过；
+            // `Gson#fromJson(Reader, Class)` 从 Gson 1.x 一路都在。
+            JsonObject root = new Gson().fromJson(
+                    new InputStreamReader(in, StandardCharsets.UTF_8), JsonObject.class);
+            if (root == null) {
+                return;
+            }
             fill(root, "id2zh", ID2ZH);
             fill(root, "en2zh", EN2ZH);
             fill(root, "type2zh", TYPE2ZH);
