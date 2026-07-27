@@ -69,7 +69,7 @@ KEYNS = re.compile(r'(^|\.)productivebees(\.|$)')
 # 内嵌压缩包：资源包/数据包/不可分发的模组 jar 都得再拆一层
 NESTED = re.compile(r'\.(zip|jar)$', re.I)
 
-BLOCK = 1 << 18                # Range 一次取 256 KiB：够读中央目录又不至于浪费
+BLOCK = 1 << 20                # Range 一次取 1 MiB：取太碎就是几百个来回，比整包下还慢
 MAX_NESTED = 48 << 20          # 单个内嵌包超过这个就不取
 MAX_PROJECT = 192 << 20        # 一个项目总共最多取这么多
 DEPTH = 3
@@ -220,7 +220,7 @@ def rows():
 
 # ── 拆包 ────────────────────────────────────────────────────────────────────
 
-def harvest(zf, depth=0, budget=None, stats=None):
+def harvest(zf, depth=0, budget=None, stats=None, max_nested=None):
     """从一个已打开的 zip 里收 productivebees 的 en_us，必要时往内嵌包再钻。"""
     found = {}
     stats = stats if stats is not None else {}
@@ -241,7 +241,8 @@ def harvest(zf, depth=0, budget=None, stats=None):
     if depth >= DEPTH:
         return found, stats
     for info in zf.infolist():
-        if not NESTED.search(info.filename) or info.file_size > MAX_NESTED:
+        if (not NESTED.search(info.filename)
+                or info.file_size > (max_nested or MAX_NESTED)):
             continue
         if budget is not None:
             if budget[0] <= 0:
@@ -250,7 +251,7 @@ def harvest(zf, depth=0, budget=None, stats=None):
             budget[0] -= info.file_size
         try:
             with zipfile.ZipFile(io.BytesIO(zf.read(info.filename))) as inner:
-                sub, _ = harvest(inner, depth + 1, budget, stats)
+                sub, _ = harvest(inner, depth + 1, budget, stats, max_nested)
         except Exception:                             # noqa: BLE001
             stats['bad_zip'] = stats.get('bad_zip', 0) + 1
             continue

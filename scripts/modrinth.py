@@ -60,8 +60,12 @@ def fetch_list():
         if not hits:
             break
         for h in hits:
+            # 搜索结果里就带最新版本 id。别再去 /project/<id>/version 拉版本列表：
+            # 热门整合包有几百个版本，那个 JSON 好几 MB，一万七千个包拉下来，
+            # 光这一步就能把扫描拖成看着像卡死。
             out.append({'id': h['project_id'], 'slug': h['slug'],
-                        'name': h['title'], 'downloads': h.get('downloads') or 0})
+                        'name': h['title'], 'downloads': h.get('downloads') or 0,
+                        'version': h.get('latest_version')})
         offset += PAGE
         if offset >= min(total, 10000):
             # 搜索接口翻不过 10000 条，剩下的按下载量倒序再来一趟
@@ -78,7 +82,8 @@ def fetch_list():
             for h in hits:
                 out.append({'id': h['project_id'], 'slug': h['slug'],
                             'name': h['title'],
-                            'downloads': h.get('downloads') or 0})
+                            'downloads': h.get('downloads') or 0,
+                            'version': h.get('latest_version')})
             offset += PAGE
             time.sleep(0.1)
     seen, rows = set(), []
@@ -99,13 +104,16 @@ def rows():
     return json.loads(p.read_text(encoding='utf-8')) if p.is_file() else fetch_list()
 
 
-def newest_file(pid):
-    vs = api('/project/%s/version' % pid)
+def newest_file(row):
+    """取这个整合包最新版的 .mrpack。优先用清单里带的版本 id——一次小请求。"""
+    vs = ([api('/version/%s' % row['version'])] if row.get('version')
+          else api('/project/%s/version' % row['id']))
     for v in vs:
-        for f in v.get('files', []):
+        files = v.get('files') or []
+        for f in files:
             if f.get('primary') and f['filename'].endswith('.mrpack'):
                 return v, f
-        for f in v.get('files', []):
+        for f in files:
             if f['filename'].endswith('.mrpack'):
                 return v, f
     return None, None
@@ -124,15 +132,22 @@ def uses_pb(z):
     return False
 
 
+# Range 是一次一个来回，取太碎就慢。上限也压小：整合包里那些几十 MB 的
+# 资源包不可能装着资源蜜蜂的语言文件，为它们来回几百次不值当。
+MAX_NESTED = 8 << 20
+MAX_PACK = 24 << 20
+
+
 def scan_one(r):
-    ver, f = newest_file(r['id'])
+    ver, f = newest_file(r)
     if not f:
         raise RuntimeError('没有 .mrpack')
     src, how = addons.remote_or_local(f['url'])
     try:
         with zipfile.ZipFile(src) as z:
             pb = uses_pb(z)
-            keys, stats = addons.harvest(z, budget=[addons.MAX_PROJECT])
+            keys, stats = addons.harvest(z, budget=[MAX_PACK],
+                                         max_nested=MAX_NESTED)
     finally:
         try:
             src.close()
@@ -170,11 +185,11 @@ def scan(limit, shard=None, workers=5):
             done[0] += 1
             n = len(got.get('keys') or {})
             if n:
-                print('  %-42s key %d' % (r['name'][:42], n))
-            if done[0] % 100 == 0:
+                print('  %-42s key %d' % (r['name'][:42], n), flush=True)
+            if done[0] % 25 == 0:
                 out_path.write_text(json.dumps(res, ensure_ascii=False) + '\n',
                                     encoding='utf-8')
-                print('  … %d/%d' % (done[0], len(pending)))
+                print('  … %d/%d' % (done[0], len(pending)), flush=True)
 
     if pending:
         with ThreadPoolExecutor(workers) as ex:
