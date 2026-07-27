@@ -1,0 +1,8 @@
+# 这个仓库只放源与配置，产物一律不入库。
+build/
+dist/
+upstream/
+*.zip
+*.jar
+__pycache__/
+.DS_Store

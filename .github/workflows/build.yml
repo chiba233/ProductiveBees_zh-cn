@@ -1,0 +1,64 @@
+# ProductiveBees_zh-cn — 资源蜜蜂简体中文汉化（独立发布）
+# Copyright (C) 2026 星野夢華 (Hoshino Yumeka)
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Build
+
+# 这个仓库不存译文，只按 SOURCE.lock 钉死的上游 commit 现打。
+# 所以 CI 的意义有两层：
+#   1. SOURCE.lock 一动就立刻验证「那个 commit 真的能打出包」
+#   2. 覆盖率门控（en_us 每个键、导览书每个页面）在这里跑，不达标不出包
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号（如 r12）'
+        required: true
+        default: 'dev'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 定版本号
+        id: v
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            v='${{ inputs.version }}'
+          elif [ "${{ github.ref_type }}" = "tag" ]; then
+            v="${GITHUB_REF_NAME#v}"
+          else
+            v="dev-$(echo "$GITHUB_SHA" | cut -c1-7)"
+          fi
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      # 模组 jar 按 sha256 核过才用，缓存命中也一样要核（build.py 自己会核）
+      - uses: actions/cache@v4
+        with:
+          path: build/mods
+          key: pbjar-${{ hashFiles('SOURCE.lock') }}
+
+      - name: 打包
+        run: python3 scripts/build.py '${{ steps.v.outputs.version }}'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: productivebees-zh_cn-${{ steps.v.outputs.version }}
+          path: dist/*
+
+      # 发布由仓库主人推 tag 触发，CI 只负责把产物挂上去
+      - name: 挂到 Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true

@@ -1,0 +1,18 @@
+{
+ "_why": "这个仓库不存任何一份译文副本。译文和生成器都在 atm10-zh-cn，这里按 commit 钉死一个版本去构建——钉 commit 而不是分支，因为分支会动，commit 不会。想升级就改这里的 commit，改动本身就是一次可审阅的提交。",
+ "source": {
+  "repo": "https://github.com/chiba233/atm10-zh-cn",
+  "commit": "0ce4b06356aea7f04c460b7360381062e6eb4932",
+  "manifest": "src/standalone/productivebees.json"
+ },
+ "mod": {
+  "_why": "导览书的中文版是拿「原文 → 译文」映射现套到模组自带那份 JSON 上生成的（仓库里不存上游副本），所以构建时必须有这个 jar。按 sha256 核，下错版本当场失败。",
+  "name": "productivebees-1.21.1-13.13.5.jar",
+  "curseforge_project_id": 377897,
+  "curseforge_file_id": 8022994,
+  "sha256": "9d48d198bc6eacf3b7729f4d60b91e661cfa15d105264ba225dee87b1d547ba1",
+  "size": 5216551,
+  "minecraft": "1.21.1",
+  "loader": "neoforge"
+ }
+}
