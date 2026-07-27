@@ -78,11 +78,17 @@ def coverage():
         return CBEGIN + '\n' + CEND
     d = json.loads(p.read_text(encoding='utf-8'))
     packs = d['packs']
+    plat = d.get('platforms') or {}
+    # 两个平台的量级差很多，分开说：CurseForge 有反向依赖接口，能直接问「谁用了
+    # 资源蜜蜂」；Modrinth 没有，只能把整合包全列一遍逐个翻。
+    where = '、'.join(
+        '%s %d 个' % ({'curseforge': 'CurseForge', 'modrinth': 'Modrinth'}.get(k, k), v)
+        for k, v in sorted(plat.items())) or 'CurseForge %d 个' % d['scanned']
     out = [CBEGIN, '',
-           '在 CurseForge 上，用了资源蜜蜂的项目共 **%d** 个，已逐个翻过 **%d** 个'
-           '（%d 个取不到文件）。其中 **%d** 个自带蜂名——它们用数据包加了自己的蜂，'
-           '名字不在模组本体里。这些名字**也在本汉化里**：'
-           % (d['total'], d['scanned'], d['failed'], len(packs)),
+           '已逐个翻过 **%d** 个整合包与模组（%s；%d 个取不到文件）。'
+           '其中 **%d** 个自带蜂名——它们用数据包加了自己的蜂，名字不在模组本体里。'
+           '这些名字**也在本汉化里**：'
+           % (d['scanned'], where, d['failed'], len(packs)),
            '',
            '| 整合包 | 自定义条目 | 下载量 |',
            '|---|---:|---:|']

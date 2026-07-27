@@ -155,7 +155,13 @@
   "infinibee": "无尽",
   "allergy": "防过敏",
   "desonium": "德索尼姆",
-  "nazore": "纳佐尔"
+  "nazore": "纳佐尔",
+  "naveiron": "纳维铁",
+  "navesteel": "纳维钢",
+  "navetitan": "纳维钛",
+  "spatial": "空间",
+  "starcore": "星核",
+  "thermal": "热力"
  },
  "keys": {
   "_why": "拼不出「X蜜蜂」的那些：原文本身在玩梗，或者根本不是蜂名。",
@@ -168,6 +174,9 @@
   "block_type.productivebees.expansion_box": "%s扩容盒",
   "entity.productivebees.cobbee_bee": "圆石蜂",
   "productivebees.ingredient.description.allergy_bee": "会格外卖力地把花粉收走，好让你伐木时不至于犯鼻炎。",
-  "productivebees.ingredient.description.mos_bee": "祝你好运。"
+  "productivebees.ingredient.description.mos_bee": "祝你好运。",
+  "productivebees.ingredient.description.spatial_bee": "这种蜜蜂的蜜脾离心后会产出赛特斯石英种子，而后需要进一步加工。",
+  "item.productivebees.spawn_egg_configurable_bee": "资源蜜蜂刷怪蛋",
+  "block.productivebees.bamboo_nest": "竹蜂巢"
  }
 }

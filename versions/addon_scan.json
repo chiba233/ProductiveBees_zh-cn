@@ -1,8 +1,11 @@
 {
- "scanned": 1280,
- "failed": 20,
+ "scanned": 2243,
+ "failed": 198,
  "total": 2440,
- "keys": 1472,
+ "platforms": {
+  "curseforge": 2441
+ },
+ "keys": 1535,
  "packs": [
   {
    "name": "MineColonies - Cobblemon Conquest",
@@ -20,9 +23,24 @@
    "keys": 16
   },
   {
+   "name": "Nightwing Diamond",
+   "downloads": 165,
+   "keys": 15
+  },
+  {
+   "name": "MartinClan2026",
+   "downloads": 116,
+   "keys": 15
+  },
+  {
    "name": "Dungeons, Dragons and Space Shuttles 2",
    "downloads": 56750,
    "keys": 14
+  },
+  {
+   "name": "Mordant Minds",
+   "downloads": 137,
+   "keys": 12
   },
   {
    "name": "Psi: Tweaks and Additions",
@@ -197,6 +215,41 @@
   {
    "name": "Dxstopia SMP",
    "downloads": 213,
+   "keys": 2
+  },
+  {
+   "name": "Future Tech Frontier",
+   "downloads": 139,
+   "keys": 2
+  },
+  {
+   "name": "Rata-craft",
+   "downloads": 123,
+   "keys": 2
+  },
+  {
+   "name": "Diablocraft: Hardcore",
+   "downloads": 105,
+   "keys": 2
+  },
+  {
+   "name": "Gnome Depot",
+   "downloads": 91,
+   "keys": 2
+  },
+  {
+   "name": "Notorious Quests 2",
+   "downloads": 70,
+   "keys": 2
+  },
+  {
+   "name": "Easy Livin - Open Horizons",
+   "downloads": 48,
+   "keys": 2
+  },
+  {
+   "name": "SyFy Traveler by neo",
+   "downloads": 48,
    "keys": 2
   },
   {
