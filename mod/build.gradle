@@ -35,8 +35,11 @@ java {
 
 // 加载器胶水各有一套（事件类的包名不同：net.minecraftforge.* vs net.neoforged.*），
 // 但真逻辑 BeeNames 不引用任何 Minecraft 类型，两边共用。
+// 1.18 及更早再分一套：Component.literal() 是 1.19 才有的
+def mc = (project.findProperty('mcVersion') ?: '1.21.1') as String
+def oldForge = legacy && (mc.split('\\.')[1] as Integer) <= 18
 sourceSets.main.java.srcDirs = ['src/main/java',
-                                legacy ? 'src/forge/java' : 'src/neoforge/java']
+    legacy ? (oldForge ? 'src/forge_old/java' : 'src/forge/java') : 'src/neoforge/java']
 
 if (legacy) {
     legacyForge { version = project.findProperty('loaderVersion') ?: '1.20.1-47.4.9' }

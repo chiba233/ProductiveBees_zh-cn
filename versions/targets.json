@@ -1,7 +1,7 @@
 {
  "1.15.2-forge": {
   "book_files": 31,
-  "buildable": true,
+  "buildable": false,
   "curseforge_file_id": 3231069,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.15.2-0.6.9.3.jar",
@@ -15,7 +15,7 @@
  },
  "1.16.1-forge": {
   "book_files": 26,
-  "buildable": true,
+  "buildable": false,
   "curseforge_file_id": 3162509,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.1-0.5.2.9.jar",
@@ -29,7 +29,7 @@
  },
  "1.16.3-forge": {
   "book_files": 84,
-  "buildable": true,
+  "buildable": false,
   "curseforge_file_id": 3381843,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.5-0.6.9.16.jar",
@@ -43,7 +43,7 @@
  },
  "1.16.4-forge": {
   "book_files": 84,
-  "buildable": true,
+  "buildable": false,
   "curseforge_file_id": 3406686,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.5-0.6.9.18.jar",
@@ -57,7 +57,7 @@
  },
  "1.16.5-forge": {
   "book_files": 86,
-  "buildable": true,
+  "buildable": false,
   "curseforge_file_id": 3845577,
   "curseforge_project_id": 377897,
   "jar": "productivebees-1.16.5-0.6.9.28.jar",
