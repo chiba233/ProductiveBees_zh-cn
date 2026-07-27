@@ -144,7 +144,9 @@ def selftest(modjar, jdk):
         return
     out = BUILD / 'test'
     out.mkdir(parents=True, exist_ok=True)
-    run(javac, '-d', str(out), str(ROOT / 'mod' / 'test' / 'TestTranslate.java'))
+    # 测试自己也用 gson 读 jar 里那张表，编译期就得有它
+    run(javac, '-cp', str(gson[0]), '-d', str(out),
+        str(ROOT / 'mod' / 'test' / 'TestTranslate.java'))
     print('自测（真 jar + 真表）:')
     run(java, '-cp', os.pathsep.join([str(out), str(modjar), str(gson[0])]),
         'TestTranslate')
@@ -165,6 +167,7 @@ def build_one(ver, tag, t, gradle):
     print('编译 …')
     run(str(gradle), '--no-daemon', '-q', 'clean', 'build',
         '-PmodVersion=%s' % ver, '-PjavaVersion=%s' % t['java'],
+        '-PloaderVersion=%s' % t['loader_version'],
         '-Ploader=%s' % t['loader'].lower(), '-PmcVersion=%s' % t['minecraft'],
         cwd=ROOT / 'mod', env=env)
 

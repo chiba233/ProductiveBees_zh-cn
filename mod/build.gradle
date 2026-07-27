@@ -21,15 +21,14 @@ group = 'cn.hoshino'
 base { archivesName = 'productivebees-zh_cn' }
 
 java {
-    // NeoForge 1.21.1 跑在 Java 21 上。构建机的 JDK 可以更新，
-    // 但字节码必须按 21 出，否则玩家那边 UnsupportedClassVersionError。
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    // **必须按目标那一版 Minecraft 的 Java 出字节码**：1.20.4 及更早跑 Java 17，
+    // 拿 21 的字节码给它就是 UnsupportedClassVersionError，游戏直接起不来。
+    toolchain.languageVersion = JavaLanguageVersion.of(
+        (project.findProperty('javaVersion') ?: '21') as Integer)
 }
 
 neoForge {
-    // 与 ATM10 7.2 同一版；编译期用哪版不影响兼容范围，
-    // 兼容范围由 mods.toml 里的 versionRange 决定。
-    version = project.findProperty('neoVersion') ?: '21.1.241'
+    version = project.findProperty('loaderVersion') ?: '21.1.241'
 }
 
 // 产物字节要可复现：不写时间戳，条目按名字排序。
