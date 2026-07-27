@@ -335,6 +335,20 @@ def report(res=None):
         for k, v in (r.get('keys') or {}).items():
             e = keys.setdefault(k, {'en': v, 'from': []})
             e['from'].append(r.get('name') or pid)
+    # 覆盖范围要能写进 README，而 build/ 是不入库的临时目录——把摘要落到 versions/。
+    # 只数**模组本体没有的** key：有些整合包自带一份别的语言的翻译资源包，
+    # 里面是模组本体那一千多条 key，算进「自定义」就把表带偏了。
+    base = json.loads((VERSIONS / 'keys.json').read_text(encoding='utf-8'))['lang']
+    packs = sorted(
+        ({'name': r.get('name'), 'downloads': r.get('downloads') or 0,
+          'keys': len([k for k in (r.get('keys') or {}) if k not in base])}
+         for r in res.values() if r.get('keys')),
+        key=lambda x: (-x['keys'], -x['downloads']))
+    packs = [x for x in packs if x['keys']]
+    (VERSIONS / 'addon_scan.json').write_text(json.dumps(
+        {'scanned': ok, 'failed': bad, 'total': len(rows()),
+         'keys': len(keys), 'packs': packs},
+        ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     (VERSIONS / 'addon_keys.json').write_text(json.dumps(
         {k: {'en': v['en'], 'n': len(set(v['from'])),
              'from': sorted(set(v['from']))[:40]}

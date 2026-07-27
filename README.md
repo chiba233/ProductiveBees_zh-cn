@@ -42,6 +42,45 @@ mod。**丢进 `mods/` 就行**，不用装资源包、不用改配置。
 
 「已汉化条目」是这一版模组的语言条目里我们翻了多少。差几条就是游戏里会露几处英文。
 
+## 覆盖哪些整合包
+
+<!-- 覆盖范围开始 · 由 scripts/readme.py 生成，勿手改 -->
+
+在 CurseForge 上，用了资源蜜蜂的项目共 **2440** 个，已逐个翻过 **1280** 个（20 个取不到文件）。其中 **46** 个自带蜂名——它们用数据包加了自己的蜂，名字不在模组本体里。这些名字**也在本汉化里**：
+
+| 整合包 | 自定义条目 | 下载量 |
+|---|---:|---:|
+| MineColonies - Cobblemon Conquest | 32 | 27,011 |
+| MineColonies - Create & Conquer | 16 | 139,990 |
+| TechEv \|\| Discovery | 16 | 7,737 |
+| Dungeons, Dragons and Space Shuttles 2 | 14 | 56,750 |
+| Psi: Tweaks and Additions | 11 | 1,934 |
+| Phoenix Forge Technologies | 11 | 1,465 |
+| WithTheCat (Second Edition) | 10 | 504 |
+| Bee Proud | 9 | 7,457 |
+| DivineRPG: Compatability | 6 | 140,751 |
+| Journey Through The Abyss | 6 | 5,872 |
+| Bee Master | 6 | 887 |
+| Sky Bees Reborn | 5 | 16,447 |
+| Dungeons and Shuttles Evolution | 5 | 3,193 |
+| Fated Curse | 5 | 700 |
+| Impostor Syndrome - Reimagined | 4 | 293 |
+| FTB Skies Expert | 3 | 22,859 |
+| Every Compat (Wood Good) | 2 | 46,267,428 |
+| Productive Trees | 2 | 21,464,851 |
+| Medival, Magic & Tech NeoForge | 2 | 24,342 |
+| FTB Inferno | 2 | 24,040 |
+| Enchanted Genesis  | 2 | 19,358 |
+| Adventure of Tech V | 2 | 5,696 |
+| Artifice & Industry | 2 | 4,652 |
+| Friends United 2.1 | 2 | 4,583 |
+| WildLouna | 2 | 3,117 |
+| …另有 21 个 | | |
+
+没列出来的整合包也照样能用：本汉化覆盖模组本体的全部词条，自定义蜂名只是额外多兜的一层。
+
+<!-- 覆盖范围结束 -->
+
 ## 翻了什么
 
 - 物品、方块、蜜蜂名、界面、进度
