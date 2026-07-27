@@ -1,6 +1,6 @@
 {
  "src": "data/productivebees/patchouli_books/guide/en_us/entries/hives/advanced_hives.json",
- "sha1": "a77ec6325dc185d51e27a481ce66587c15420a15",
+ "sha1": "7110b7766176747a633e04941a9f1e85c05b008b",
  "t": [
   [
    [
@@ -66,11 +66,29 @@
   [
    [
     "pages",
+    2,
+    "text"
+   ],
+   "Advanced Hives feature a GUI from where you can see which bees are currently inside the hive as well as take out any produced resources. Advanced Hives can be further upgraded using an $(l:hives/expansion_boxes)expansion box$(/l). Attaching an $(l:hives/expansion_boxes)expansion box$(/l) will increase the bee capacity from 3 to 5 and allow $(l:items/upgrades)upgrades$(/l) to be installed.",
+   "高级蜂箱带有界面，你可以从中看到蜂箱内当前住着哪些蜜蜂，也能取走产出的资源。高级蜂箱还能用$(l:hives/expansion_boxes)扩容盒$(/l)进一步升级：装上$(l:hives/expansion_boxes)扩容盒$(/l)后，蜜蜂容量会从 3 提升到 5，并且可以安装$(l:items/upgrades)升级$(/l)。"
+  ],
+  [
+   [
+    "pages",
     3,
     "text"
    ],
    "If you're tired of waiting for the bees to finish their job and get out of the hive, you can whack the hive or nest with a stick to force it out, losing all production progress. This only works if it's safe for the bees to exit.",
    "如果你不想再等蜜蜂干完活从蜂箱里出来，可以用木棍敲打蜂箱或蜂巢，强制把它们赶出来，但会损失所有当前的生产进度。只有在蜜蜂能够安全离开时，这种方法才有效。"
+  ],
+  [
+   [
+    "pages",
+    3,
+    "text"
+   ],
+   "If you're tired of waiting for the bees to finish their job and get out of the hive, you can whack the hive or nest with a stick to force it out, loosing all production progress. This only works if it's safe for the bees to exit.",
+   "要是等不及蜜蜂干完活自己出来，可以拿棍子敲蜂箱或蜂巢把它赶出来，代价是这一轮的产出进度全部作废。只有在蜜蜂出来不会有危险时才敲得动。"
   ]
  ]
 }

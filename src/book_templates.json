@@ -177,7 +177,13 @@
   "When installed in a hive, a small sample of pollinating bees will be extracted with each visit. It shouldn't bee hurting them at all.": "安装在蜂箱中时，每有蜜蜂来访，都会取走一小份样本。放心，它们一点也不「蜂」疼。",
   "When installed in a hive, the BaBee upgrade will give a small chance for the bees living inside the hive to breed and produce new offspring without your involvement. $(br)When installed in a {0}, only BaBees will be caught and put in cages.": "安装在蜂箱中时，升级：繁殖会让居住在蜂箱内的蜜蜂有小概率自行繁殖并产生新的后代，无需你的参与。$(br)安装在{0}中时，则只会捕捉 BaBee 并将其装入蜂笼。",
   "When installed in a hive, the bees will produce comb blocks instead of honeycombs.": "安装在蜂箱中时，蜜蜂会直接产出蜜脾块，而不是蜜脾。",
-  "Will milk nearby cows, sheep or llamas to create milky combs in its hive.$(br2)Many cows were harmed in the making of this bee.": "会去挤附近的牛、羊或羊驼的奶，在蜂巢里酿出奶蜜脾。$(br2)本蜂研制过程中，伤害了大量奶牛。"
+  "Will milk nearby cows, sheep or llamas to create milky combs in its hive.$(br2)Many cows were harmed in the making of this bee.": "会去挤附近的牛、羊或羊驼的奶，在蜂巢里酿出奶蜜脾。$(br2)本蜂研制过程中，伤害了大量奶牛。",
+  "If you're tired of waiting for the bees to finish their job and get out of the hive, you can whack the hive or nest with a stick to force it out, loosing all production progress. This only works if it's safe for the bees to exit.": "要是等不及蜜蜂干完活自己出来，可以拿棍子敲蜂箱或蜂巢把它赶出来，代价是这一轮的产出进度全部作废。只有在蜜蜂出来不会有危险时才敲得动。",
+  "Usable in: {0}, {1}, {2}, $(l:blocks/honey_generator)Honey Generator(/l).": "可用于：{0}、{1}、{2}、$(l:blocks/honey_generator)蜂蜜发电机(/l)。",
+  "Usable in: {0}, $(l:blocks/honey_generator)Honey Generator(/l).": "可用于：{0}、$(l:blocks/honey_generator)蜂蜜发电机(/l)。",
+  "Used for bottling honey and milk among other things. Honey can be pumped into the side or it can be placed next to a centrifuge to be filled automatically.$(br2)The bottler together with a piston can be used to bottle up bees as well, see {0}.": "用来把蜂蜜、牛奶之类装瓶。蜂蜜可以从侧面泵入，也可以把装瓶机贴着离心机放，让它自动灌装。$(br2)装瓶机配上活塞还能把蜜蜂装进瓶子，详见{0}。",
+  "When installed in a hive, Lumber and Quarry bees will produce full blocks instead of chips.": "安装在蜂箱中时，木场蜜蜂和石料蜜蜂会直接产出完整方块，而不是碎片。",
+  "When installed in a hive, the operating range of Farmer and Collector/Hoarder bees is increased by 1 per upgrade, from default 4. When installed in a catcher, the Range upgrade will expand the area of operation by 1 block is all directions. Multiple range upgrades can be installed.": "安装在蜂箱中时，农夫蜜蜂与收集者／囤积者蜜蜂的作业范围会在默认的 4 格基础上，每装一个升级就扩大 1 格。安装在捕捉器中时，升级：范围会让作业区域向各个方向扩大 1 格。可以叠装多个范围升级。"
  },
  "link_texts": {
   "_why": "链接里的文字不一定是蜂名，也可能是「list of ingot bees」这种指路短语。蜂名走蜂名表，这里补剩下的。",

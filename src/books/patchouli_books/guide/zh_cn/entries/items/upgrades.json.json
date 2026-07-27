@@ -1,6 +1,6 @@
 {
  "src": "data/productivebees/patchouli_books/guide/en_us/entries/items/upgrades.json",
- "sha1": "8e9ac478a4eb0cee22eb40ab897d1488494d6cdf",
+ "sha1": "78d954d8b17ba530c16fd5164e646295e78d7dbe",
  "t": [
   [
    [
@@ -75,6 +75,15 @@
   [
    [
     "pages",
+    4,
+    "text"
+   ],
+   "Usable in: $(l:hives/advanced_hives#expanded)Expanded Hives$(/l), $(l:blocks/honey_generator)Honey Generator(/l).",
+   "可用于：$(l:hives/advanced_hives#expanded)扩容蜂箱$(/l)、$(l:blocks/honey_generator)蜂蜜发电机(/l)。"
+  ],
+  [
+   [
+    "pages",
     5,
     "text"
    ],
@@ -89,6 +98,15 @@
    ],
    "Usable in: $(l:hives/advanced_hives#expanded)Expanded Hives$(/l), $(l:blocks/centrifuge)Centrifuge$(/l), $(l:blocks/incubator)Incubator$(/l).",
    "可用于：$(l:hives/advanced_hives#expanded)扩容蜂箱$(/l)、$(l:blocks/centrifuge)离心机$(/l)、$(l:blocks/incubator)小蜜蜂孵化器$(/l)。"
+  ],
+  [
+   [
+    "pages",
+    6,
+    "text"
+   ],
+   "Usable in: $(l:hives/advanced_hives#expanded)Expanded Hives$(/l), $(l:blocks/centrifuge)Centrifuge$(/l), $(l:blocks/incubator)Incubator$(/l), $(l:blocks/honey_generator)Honey Generator(/l).",
+   "可用于：$(l:hives/advanced_hives#expanded)扩容蜂箱$(/l)、$(l:blocks/centrifuge)离心机$(/l)、$(l:blocks/incubator)小蜜蜂孵化器$(/l)、$(l:blocks/honey_generator)蜂蜜发电机(/l)。"
   ],
   [
    [
@@ -147,6 +165,15 @@
   [
    [
     "pages",
+    11,
+    "text"
+   ],
+   "When installed in a hive, the operating range of Farmer and Collector/Hoarder bees is increased by 1 per upgrade, from default 4. When installed in a catcher, the Range upgrade will expand the area of operation by 1 block is all directions. Multiple range upgrades can be installed.",
+   "安装在蜂箱中时，农夫蜜蜂与收集者／囤积者蜜蜂的作业范围会在默认的 4 格基础上，每装一个升级就扩大 1 格。安装在捕捉器中时，升级：范围会让作业区域向各个方向扩大 1 格。可以叠装多个范围升级。"
+  ],
+  [
+   [
+    "pages",
     13,
     "text"
    ],
@@ -179,6 +206,15 @@
    ],
    "When installed in a hive, bees will produce full comb blocks instead of honeycombs.",
    "安装在蜂箱中后，蜜蜂产出的将是完整的蜜脾块，而不是蜜脾。"
+  ],
+  [
+   [
+    "pages",
+    17,
+    "text"
+   ],
+   "When installed in a hive, Lumber and Quarry bees will produce full blocks instead of chips.",
+   "安装在蜂箱中时，木场蜜蜂和石料蜜蜂会直接产出完整方块，而不是碎片。"
   ],
   [
    [
