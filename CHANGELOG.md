@@ -2,8 +2,7 @@
 
 ## 1.0.0-beta.4
 
-这一版修的四处问题，全部来自 [十一月の风筝](https://space.bilibili.com/2041176282)
-的逐版本实测——日志、截图、复现步骤都是他给的。
+测试：[十一月の风筝](https://space.bilibili.com/2041176282)
 
 **修「绿宝石蜜蜂蜜蜂」。** `entity.productivebees.bee_configurable` 的英文原文是
 **裸的一个 `%s`**——整条内容都来自运行期传进来的那个参数（数据包定义的蜂，名字
