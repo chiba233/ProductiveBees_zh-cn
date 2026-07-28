@@ -291,6 +291,10 @@ public final class AddonNames {
                 copy.putAll(add);
                 f.set(holder, copy);
             }
+            // 学到东西才出一行。这个功能的全部意义就是「有没有学到」，
+            // 出问题时没有这一行就只能靠猜。学不到就一声不吭。
+            System.out.println("[productivebees_zh_cn] 从已装模组现学补上 "
+                    + add.size() + " 条整合包蜂名");
         } catch (Throwable ignored) {
             // 显示层永远不许把游戏搞崩：宁可不翻
         }
