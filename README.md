@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/logo.png" width="160" height="160" alt="资源蜜蜂 简体中文汉化">
+</p>
+
 # 资源蜜蜂 简体中文汉化
 
 [Productive Bees](https://www.curseforge.com/minecraft/mc-mods/productivebees) 的中文

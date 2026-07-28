@@ -362,6 +362,9 @@ modId="{modid}_zh_cn"
 version="{ver}"
 displayName="{zh} 汉化"
 authors="星野夢華 (Hoshino Yumeka)"
+logoFile="logo.png"
+# 像素画，别让加载器把它抹糊
+logoBlur=false
 {dt}description=\'\'\'
 {zh}（{en}）的简体中文汉化：物品、方块、蜜蜂、界面，内置导览书全部页面，
 以及基因样本 tooltip 里那行**运行期拼出来的蜂种名**（那一行资源包碰不到，
@@ -436,6 +439,13 @@ def build(man, jar, ver, t):
     print('  pack.mcmeta 照 %s 抄：%s' % (Path(jar).name, json.dumps(
         {k: v for k, v in meta['pack'].items() if k != 'description'},
         ensure_ascii=False)))
+    # mods.toml 里 logoFile 指的是 jar 根目录下的文件
+    logo = ROOT / 'src' / 'logo.png'
+    if logo.is_file():
+        shutil.copy2(logo, res / 'logo.png')
+    else:
+        sys.exit('❌ 缺 src/logo.png，mods.toml 里却写了 logoFile')
+
     # 两份都进 jar：LICENSE 讲清楚三类东西各归各的，GPL 正文给代码那部分
     (res / 'LICENSE').write_bytes((ROOT / 'LICENSE').read_bytes())
     (res / 'LICENSE-GPL-3.0').write_bytes((ROOT / 'LICENSE-GPL-3.0').read_bytes())
