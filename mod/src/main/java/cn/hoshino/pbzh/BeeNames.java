@@ -64,6 +64,11 @@ public final class BeeNames {
     private BeeNames() {
     }
 
+    /** 「蜂 id → 中文名」，给 {@link BeeData} 改 NBT 用。表是构建时生成的。 */
+    static Map<String, String> idTable() {
+        return ID2ZH;
+    }
+
     private static List<String> quotedLongestFirst(Iterable<String> keys) {
         List<String> out = new ArrayList<>();
         for (String k : keys) {

@@ -32,11 +32,17 @@ public final class ForgeEntry {
         try {
             MinecraftForge.EVENT_BUS.addListener(
                     (net.minecraftforge.event.TickEvent.ClientTickEvent e) ->
-                            AddonNames.refresh());
+                            tick());
         } catch (Throwable ignored) {
             // 注册不上顶多是整合包自定义的蜂名不翻，不能因此让 mod 装不上
         }
         ServerCompat.ignoreOnServers();
+    }
+
+    /** 每 tick 一次；两个方法自己都先比对象身份，没换过立刻返回。 */
+    private static void tick() {
+        AddonNames.refresh();
+        BeeData.refresh();
     }
 
     static void onItemTooltip(ItemTooltipEvent event) {

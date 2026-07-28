@@ -56,6 +56,13 @@ NEO = ('https://maven.neoforged.net/releases/net/neoforged/neoforge/'
 # 1.20.1 的 NeoForge 是 47.x 那一支，targets.json 里记的是 Forge 版本号
 NEO_FOR_MC = {'1.20.1': '47.1.106'}
 OS_NAME, ARCH = 'osx', 'arm64'
+CENTRAL = 'https://repo1.maven.org/maven2'
+# 1.16 及更早自带的 LWJGL 是 3.2.x，那一代的 GLFW 在现代 macOS 上起不来
+# （`Cocoa: Failed to find service port for display`）。启动器给 Apple Silicon
+# 玩家的做法就是把 LWJGL 顶到 3.3.x，这里照做——被测的是我们的 mod，不是 LWJGL。
+LWJGL_NEW = '3.3.3'
+LWJGL_MODS = ('lwjgl', 'lwjgl-glfw', 'lwjgl-jemalloc', 'lwjgl-openal',
+              'lwjgl-opengl', 'lwjgl-stb', 'lwjgl-tinyfd')
 # 探针：材料的中文放 zh_cn（冒充「玩家装了那个模组的汉化」），
 # 蜂键放 en_us（冒充「整合包加了自己的蜂，没人译」）
 PROBE_ZH = {
@@ -178,6 +185,45 @@ def vanilla(mc):
             if i % 500 == 0 and i:
                 print('      %d/%d' % (i, len(todo)))
     return d
+
+
+def lwjgl_override(java_arch):
+    """取一套 3.3.3 的 LWJGL（含原生库），返回 (classpath 列表, natives 目录)。"""
+    cls = 'natives-macos-arm64' if java_arch == 'arm64' else 'natives-macos'
+    jars, nat = [], E2E / 'lwjgl' / (LWJGL_NEW + '-' + cls)
+    nat.mkdir(parents=True, exist_ok=True)
+    for m in LWJGL_MODS:
+        base = '%s/org/lwjgl/%s/%s/%s-%s' % (CENTRAL, m, LWJGL_NEW, m, LWJGL_NEW)
+        jars.append(fetch(base + '.jar', E2E / 'lwjgl' / ('%s-%s.jar' % (m, LWJGL_NEW))))
+        nj = fetch('%s-%s.jar' % (base, cls),
+                   E2E / 'lwjgl' / ('%s-%s-%s.jar' % (m, LWJGL_NEW, cls)))
+        with zipfile.ZipFile(nj) as z:
+            for e in z.namelist():
+                if e.endswith(('.dylib', '.jnilib')):
+                    z.extract(e, nat)
+    return jars, nat
+
+
+def strip_icons(mc):
+    """把客户端 jar 里的窗口图标去掉，另存一份给测试用。
+
+    顶到 LWJGL 3.3 之后，MC 1.15/1.16 调 `glfwSetWindowIcon` 会收到
+    `Cocoa: Regular windows do not have icons on macOS`，而 MC 的 GLFW 错误回调
+    直接抛，游戏起不来。MC 读图标那段是包在 try/catch IOException 里的——
+    图标文件不存在它就记一行日志跳过。所以拿掉图标是最小侵入的绕法，
+    动的是原版资源，不是被测的 mod。
+    """
+    src = MC / 'versions' / mc / (mc + '.jar')
+    dst = E2E / 'noicon' / (mc + '.jar')
+    if dst.is_file():
+        return dst
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(src) as zi, zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zo:
+        for e in zi.infolist():
+            if '/icons/' in e.filename and e.filename.endswith('.png'):
+                continue
+            zo.writestr(e, zi.read(e.filename))
+    return dst
 
 
 def native_key(lib):
@@ -320,8 +366,30 @@ def run_one(tag, t, jar, timeout=420):
             if q.is_file():
                 cp.append(q)
     cp.append(MC / 'versions' / t['minecraft'] / (t['minecraft'] + '.jar'))
+    # 同一个库出现两遍（Forge 的与原版的）会让 1.17+ 的 SecureJar 抛
+    # IllegalStateException: Duplicate key。按 组:构件 去重，先出现的（Forge 的）优先。
+    seen, uniq = set(), []
+    for q in cp:
+        key = q.name.rsplit('-', 1)[0]
+        if key in seen:
+            continue
+        seen.add(key)
+        uniq.append(q)
+    cp = uniq
     nat = E2E / 'natives' / t['minecraft']
     nat.mkdir(parents=True, exist_ok=True)
+    # 老版本自带的 LWJGL 3.2.x 在现代 macOS 上 GLFW 起不来，换 3.3.3
+    old_lwjgl = [q for q in cp if q.name.startswith('lwjgl')
+                 and re.search(r'-3\.2\.\d+\.jar$', q.name)]
+    if old_lwjgl:
+        arch = 'x64' if t['java'] <= 8 else 'arm64'
+        jars, lnat = lwjgl_override(arch)
+        cp = [q for q in cp if not q.name.startswith('lwjgl')] + jars
+        nat = lnat
+        noicon = strip_icons(t['minecraft'])
+        cp = [noicon if q.name == t['minecraft'] + '.jar' else q for q in cp]
+        print('   LWJGL 3.2.x → %s（%s），否则现代 macOS 上 GLFW 起不来'
+              % (LWJGL_NEW, arch))
     for lib in d['libraries']:
         if not allowed(lib.get('rules')):
             continue
