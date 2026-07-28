@@ -23,7 +23,7 @@ public final class ProductiveBeesZhCn {
         // 每 tick 一次；方法自己先比语言表对象身份，没换过立刻返回。
         // 资源重载后语言表是新对象，那一次才真正去学整合包自己加的蜂名。
         NeoForge.EVENT_BUS.addListener(
-                net.neoforged.neoforge.event.tick.ClientTickEvent.Post.class,
+                net.neoforged.neoforge.client.event.ClientTickEvent.Post.class,
                 e -> AddonNames.refresh());
     }
 }
