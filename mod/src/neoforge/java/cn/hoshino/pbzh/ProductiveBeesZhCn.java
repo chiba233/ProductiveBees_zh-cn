@@ -22,8 +22,12 @@ public final class ProductiveBeesZhCn {
         NeoForge.EVENT_BUS.addListener(TooltipHook::onItemTooltip);
         // 每 tick 一次；方法自己先比语言表对象身份，没换过立刻返回。
         // 资源重载后语言表是新对象，那一次才真正去学整合包自己加的蜂名。
-        NeoForge.EVENT_BUS.addListener(
-                net.neoforged.neoforge.client.event.ClientTickEvent.Post.class,
-                e -> AddonNames.refresh());
+        try {
+            NeoForge.EVENT_BUS.addListener(
+                    net.neoforged.neoforge.client.event.ClientTickEvent.Post.class,
+                    e -> AddonNames.refresh());
+        } catch (Throwable ignored) {
+            // 注册不上顶多是整合包自定义的蜂名不翻，不能因此让 mod 装不上
+        }
     }
 }

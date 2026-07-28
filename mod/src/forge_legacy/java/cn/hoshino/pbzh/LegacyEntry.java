@@ -56,9 +56,13 @@ public final class LegacyEntry {
         MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
         // 每 tick 一次，但方法自己先比语言表的对象身份，没换过立刻返回。
         // 资源重载后语言表是新对象，那一次才真正去学整合包自己加的蜂名。
-        MinecraftForge.EVENT_BUS.addListener(
-                (net.minecraftforge.event.TickEvent.ClientTickEvent e) ->
-                        AddonNames.refresh());
+        try {
+            MinecraftForge.EVENT_BUS.addListener(
+                    (net.minecraftforge.event.TickEvent.ClientTickEvent e) ->
+                            AddonNames.refresh());
+        } catch (Throwable ignored) {
+            // 注册不上顶多是整合包自定义的蜂名不翻，不能因此让 mod 装不上
+        }
         // 「服务端没有这个 mod 也没关系」——这一声明各版本写法不同，统一收在 ServerCompat
         ServerCompat.ignoreOnServers();
     }

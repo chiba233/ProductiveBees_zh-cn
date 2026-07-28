@@ -296,7 +296,19 @@ public final class AddonNames {
         }
     }
 
-    /** 当前的语言表对象。类名各版本不同，静态无参、返回自身类型的那个方法就是取实例。 */
+    /**
+     * 当前的语言表对象。
+     *
+     * <p>**读静态字段，不调方法。** 拿官方混淆表核过：1.16.5 与 1.21.1 的
+     * {@code Language} 上都有**两个**静态无参、返回自身类型的方法——
+     * {@code getInstance()} 和 {@code loadDefault()}。后者会当场读一份全新的
+     * 默认语言表回来，抓错了就是每次重载都做一遍无用的 I/O，还把词条塞进一个
+     * 没人用的临时对象。而静态字段 {@code instance} 是唯一的，读它没有副作用。
+     *
+     * <p>字段名各版本不同（老版本是 SRG 的 {@code field_xxxxx}），所以按**类型**
+     * 认：类型就是这个类自己的那个静态字段。真找不到才退回去调名字正好叫
+     * {@code getInstance} 的方法，绝不按形状乱挑。
+     */
     private static Object languageHolder() throws Exception {
         for (String name : new String[] {"net.minecraft.locale.Language",
                                          "net.minecraft.util.text.LanguageMap"}) {
@@ -306,17 +318,43 @@ public final class AddonNames {
             } catch (Throwable notThisVersion) {
                 continue;
             }
-            for (Method m : c.getMethods()) {
-                if (Modifier.isStatic(m.getModifiers()) && m.getParameterCount() == 0
-                        && c.isAssignableFrom(m.getReturnType())) {
-                    Object o = m.invoke(null);
+            for (Field f : c.getDeclaredFields()) {
+                if (Modifier.isStatic(f.getModifiers()) && c.isAssignableFrom(f.getType())) {
+                    f.setAccessible(true);
+                    Object o = f.get(null);
                     if (o != null) {
                         return o;
                     }
                 }
             }
+            try {
+                Method m = c.getMethod("getInstance");
+                if (Modifier.isStatic(m.getModifiers())) {
+                    Object o = m.invoke(null);
+                    if (o != null) {
+                        return o;
+                    }
+                }
+            } catch (Throwable noSuchMethod) {
+                continue;
+            }
         }
         return null;
+    }
+
+    /** 原版一定有的几个键：拿它们确认手上这张 Map 真的是语言表，而不是别的缓存。 */
+    private static final String[] VANILLA = {"gui.done", "gui.cancel", "menu.options"};
+
+    private static boolean looksLikeLang(Map<?, ?> m) {
+        if (m.size() < 100) {
+            return false;
+        }
+        for (String k : VANILLA) {
+            if (m.containsKey(k)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** 语言表对象里装词条的那个 Map 字段。 */
@@ -331,7 +369,8 @@ public final class AddonNames {
                 try {
                     f.setAccessible(true);
                     Object v = f.get(holder);
-                    if (v instanceof Map && !((Map<?, ?>) v).isEmpty()) {
+                    // 不只看「是不是 Map」：得真的是语言表才动它
+                    if (v instanceof Map && looksLikeLang((Map<?, ?>) v)) {
                         return f;
                     }
                 } catch (Throwable ignored) {
