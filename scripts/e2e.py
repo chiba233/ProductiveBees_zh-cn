@@ -54,7 +54,7 @@ FORGE = ('https://maven.minecraftforge.net/net/minecraftforge/forge/'
 NEO = ('https://maven.neoforged.net/releases/net/neoforged/neoforge/'
        '%s/neoforge-%s-installer.jar')
 # 1.20.1 的 NeoForge 是 47.x 那一支，targets.json 里记的是 Forge 版本号
-NEO_FOR_MC = {'1.20.1': '47.1.106'}
+NEO_FOR_MC = {}   # 1.20.1 的 NeoForge 是 Forge 47.x 的分支，装 Forge 即可
 OS_NAME, ARCH = 'osx', 'arm64'
 CENTRAL = 'https://repo1.maven.org/maven2'
 # 1.16 及更早自带的 LWJGL 是 3.2.x，那一代的 GLFW 在现代 macOS 上起不来
@@ -66,21 +66,21 @@ LWJGL_MODS = ('lwjgl', 'lwjgl-glfw', 'lwjgl-jemalloc', 'lwjgl-openal',
 # 探针：材料的中文放 zh_cn（冒充「玩家装了那个模组的汉化」），
 # 蜂键放 en_us（冒充「整合包加了自己的蜂，没人译」）
 PROBE_ZH = {
-    'item.pbzhprobe.tiberium_ingot': '泰伯利亚锭',
-    'block.pbzhprobe.tiberium_block': '泰伯利亚块',
-    'item.pbzhprobe.uru_metal_ingot': '乌鲁金属锭',
-    'block.pbzhprobe.uru_metal_block': '乌鲁金属块',
+    "item.pbzhprobe.zzalphium_ingot": "甲元素锭",
+    "block.pbzhprobe.zzalphium_block": "甲元素块",
+    "item.pbzhprobe.zzbetalloy_ingot": "乙合金锭",
+    "block.pbzhprobe.zzbetalloy_block": "乙合金块"
 }
 PROBE_EN = {
-    'entity.productivebees.tiberium_bee': 'Tiberium Bee',
-    'item.productivebees.honeycomb_tiberium': 'Tiberium Comb',
-    'block.productivebees.comb_tiberium': 'Tiberium Comb Block',
-    'entity.productivebees.uru_metal_bee': 'Uru Metal Bee',
-    'item.productivebees.honeycomb_uru_metal': 'Uru Metal Comb',
-    # 反面：没有任何模组给过它中文，必须学不出，保持英文
-    'entity.productivebees.zzznosuchthing_bee': 'Zzznosuchthing Bee',
+    "entity.productivebees.zzalphium_bee": "Zzalphium Bee",
+    "item.productivebees.honeycomb_zzalphium": "Zzalphium Comb",
+    "block.productivebees.comb_zzalphium": "Zzalphium Comb Block",
+    "entity.productivebees.zzbetalloy_bee": "Zzbetalloy Bee",
+    "item.productivebees.honeycomb_zzbetalloy": "Zzbetalloy Comb",
+    "block.productivebees.comb_zzbetalloy": "Zzbetalloy Comb Block",
+    "entity.productivebees.zzznosuchthing_bee": "Zzznosuchthing Bee"
 }
-EXPECT = 5                            # 上面 6 条里应当学出来的条数
+EXPECT = 6                            # 上面 6 条里应当学出来的条数
 
 
 def get(url, timeout=300):
@@ -204,26 +204,36 @@ def lwjgl_override(java_arch):
     return jars, nat
 
 
-def strip_icons(mc):
-    """把客户端 jar 里的窗口图标去掉，另存一份给测试用。
+def strip_icons(jar):
+    """把 jar 里的窗口图标去掉，另存一份。
 
-    顶到 LWJGL 3.3 之后，MC 1.15/1.16 调 `glfwSetWindowIcon` 会收到
+    顶到 LWJGL 3.3 之后，MC 1.17 及更早调 `glfwSetWindowIcon` 会收到
     `Cocoa: Regular windows do not have icons on macOS`，而 MC 的 GLFW 错误回调
-    直接抛，游戏起不来。MC 读图标那段是包在 try/catch IOException 里的——
-    图标文件不存在它就记一行日志跳过。所以拿掉图标是最小侵入的绕法，
-    动的是原版资源，不是被测的 mod。
+    直接抛，游戏起不来（1.18 起 Mojang 自己在 macOS 上跳过了这一步，所以没事）。
+
+    MC 读图标那段包在 try/catch IOException 里——图标文件不存在它就记一行日志
+    跳过。所以拿掉图标是最小侵入的绕法。图标可能在原版 jar 里，也可能在加载器
+    打过补丁的那份里，所以按内容找，不按文件名猜。
     """
-    src = MC / 'versions' / mc / (mc + '.jar')
-    dst = E2E / 'noicon' / (mc + '.jar')
+    jar = Path(jar)
+    dst = E2E / 'noicon' / jar.name
     if dst.is_file():
         return dst
     dst.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(src) as zi, zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zo:
+    with zipfile.ZipFile(jar) as zi, zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zo:
         for e in zi.infolist():
             if '/icons/' in e.filename and e.filename.endswith('.png'):
                 continue
             zo.writestr(e, zi.read(e.filename))
     return dst
+
+
+def has_icons(jar):
+    try:
+        with zipfile.ZipFile(jar) as z:
+            return any('/icons/' in n and n.endswith('.png') for n in z.namelist())
+    except Exception:                                      # noqa: BLE001
+        return False
 
 
 def native_key(lib):
@@ -287,7 +297,9 @@ def loader(tag, t):
     new = sorted(after - before)
     if not new:
         # 装过一次了，按版本号找回来
-        cand = [n for n in after if ver.split('-')[-1] in n and mc in n]
+        # NeoForge 的版本目录叫 `neoforge-21.1.241`，里面不含 MC 版本号，
+        # 所以只按加载器版本号找，不要求目录名里有 MC 版本。
+        cand = [n for n in after if ver.split('-')[-1] in n]
         if not cand:
             return None, '装完没找到加载器的版本目录'
         new = cand
@@ -365,7 +377,11 @@ def run_one(tag, t, jar, timeout=420):
             q = MC / 'libraries' / Path(*g.split('.')) / a / v / ('%s-%s.jar' % (a, v))
             if q.is_file():
                 cp.append(q)
-    cp.append(MC / 'versions' / t['minecraft'] / (t['minecraft'] + '.jar'))
+    # 1.17 起加载器自带一份打过补丁的 minecraft 模块，再把原版 jar 放进 classpath
+    # 就是两个模块导出同一批包，启动时 ResolutionException。老版本没有模块系统，
+    # 反而必须放。
+    if int(t['minecraft'].split('.')[1]) <= 16:
+        cp.append(MC / 'versions' / t['minecraft'] / (t['minecraft'] + '.jar'))
     # 同一个库出现两遍（Forge 的与原版的）会让 1.17+ 的 SecureJar 抛
     # IllegalStateException: Duplicate key。按 组:构件 去重，先出现的（Forge 的）优先。
     seen, uniq = set(), []
@@ -386,8 +402,8 @@ def run_one(tag, t, jar, timeout=420):
         jars, lnat = lwjgl_override(arch)
         cp = [q for q in cp if not q.name.startswith('lwjgl')] + jars
         nat = lnat
-        noicon = strip_icons(t['minecraft'])
-        cp = [noicon if q.name == t['minecraft'] + '.jar' else q for q in cp]
+        # 图标可能在原版 jar 里，也可能在加载器打过补丁的那份里，逐个看内容
+        cp = [strip_icons(q) if has_icons(q) else q for q in cp]
         print('   LWJGL 3.2.x → %s（%s），否则现代 macOS 上 GLFW 起不来'
               % (LWJGL_NEW, arch))
     for lib in d['libraries']:
