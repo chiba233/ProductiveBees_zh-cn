@@ -85,5 +85,20 @@ jobs:
       - name: 编译 + 自测（1.21.1 NeoForge）
         run: python3 scripts/build.py 0.0.0-rc.1 1.21.1-neoforge
 
+      # 整合包自己加的蜂：材料名能不能从玩家装的模组里现学出来。
+      # 正反两面都验——该学出的要学对，拿不准的**必须学不出**：
+      # 学错是张冠李戴，学不出只是显示英文，后者可以接受。
+      - name: 整合包蜂名现学自验
+        run: |
+          set -euo pipefail
+          python3 scripts/addon_probe.py --selftest /tmp/pbzh-addon.json
+          GSON=$(find build -name 'gson-*.jar' | head -1)
+          [ -n "$GSON" ] || { echo "❌ 找不到 gson" >&2; exit 1; }
+          mkdir -p /tmp/pbzh-an
+          javac -nowarn -cp "$GSON" -d /tmp/pbzh-an \
+              mod/src/main/java/cn/hoshino/pbzh/AddonNames.java \
+              mod/test/TestAddonNames.java
+          java -cp "/tmp/pbzh-an:$GSON" TestAddonNames /tmp/pbzh-addon.json
+
       - name: Python 语法
         run: python3 -m compileall -q scripts
