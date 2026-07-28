@@ -102,6 +102,12 @@ def sanity(jar, root):
     z = zipfile.ZipFile(jar)
     TOK = re.compile(r'%(?:(\d+)\$)?(\d+)?(?:\.(\d+))?([a-zA-Z%])')
     TRAIL = re.compile(r'(?<!%)%$')
+    # 英文原文除了占位符和标点一个字母都没有 → 这一条的内容整个来自运行期传进来
+    # 的那个参数，我们**不能往上加字**。加了就直接贴在人家后面：
+    # `entity.productivebees.bee_configurable` 英文就是裸的 `%s`，被译成
+    # `%s蜜蜂` 之后，1.15.2–1.16.4 里显示成「绿宝石蜜蜂蜜蜂」「Lapis Bee蜜蜂」。
+    BARE = re.compile(r'^(?:%(?:\d+\$)?[a-zA-Z%]|[\s:：/,，.。\-—]|\\n)*$')
+    CJK = re.compile(r'[一-鿿]')
 
     def profile(t):
         prof, seq = {}, 0
@@ -128,6 +134,9 @@ def sanity(jar, root):
             e = en.get(k)
             if e is None:
                 continue
+            if BARE.match(e) and CJK.search(v):
+                bad.append('lang %s 的英文原文只有占位符（%r），译文却加了字（%r）'
+                           '——那几个字会直接贴在运行期传进来的内容后面' % (k, e, v))
             pe, pz = profile(e), profile(v)
             if set(pz) - set(pe):
                 bad.append('lang %s 多出占位符 %s（运行时参数不足会抛异常）'
@@ -190,6 +199,30 @@ def pack_format(mc):
         if v >= need:
             return fmt
     return 5
+
+
+def pack_meta(jar, man, t):
+    """`pack.mcmeta` 同样照参考 jar 抄，只把 description 换成我们的。
+
+    这里有个比「版本号 → 格式号」更细的东西：一个 jar 同时带 `assets/` 与
+    `data/` 时，资源包格式号与数据包格式号在 1.19 那几版**不是同一个数**
+    （9 与 10）。只写一个 `pack_format`，游戏拿它去校验数据包那一侧，对不上就
+    把这个包判成不兼容——列在数据包界面里标红，建世界时还要弹一句「这个世界
+    启用了实验性选项，随时都有可能崩溃」。
+
+    Forge 为此加了 `forge:resource_pack_format` 与 `forge:data_pack_format`，
+    上游 jar 正是这么写的。与其在这里再维护一张「哪个版本要写哪几个字段」的
+    表，不如照抄——目标那一版的资源蜜蜂 jar 装在同一个 mods 目录里、由同一个
+    游戏读，它没被标红，它那份就是对的。
+    """
+    try:
+        p = {k: v for k, v in json.loads(
+            zipfile.ZipFile(jar).read('pack.mcmeta').decode('utf-8-sig'))['pack'].items()
+            if not k.startswith('_')}                      # `_comment` 是人家写给自己看的
+    except Exception:                                      # noqa: BLE001
+        p = {'pack_format': pack_format(t['minecraft'])}   # 参考 jar 没有就自己推
+    p['description'] = '%s 简体中文汉化' % man['zh_name']
+    return {'pack': p}
 
 
 def loader_meta(jar):
@@ -337,11 +370,12 @@ def build(man, jar, ver, t):
     print('  元数据照 %s 的 %s 写：%s' % (Path(jar).name, lm['file'], lm['marker']))
     (res / 'META-INF').mkdir()
     (res / 'META-INF' / lm['file']).write_text(toml, encoding='utf-8')
-    fmt = pack_format(t['minecraft'])
-    (res / 'pack.mcmeta').write_text(json.dumps({'pack': {
-        'pack_format': fmt,
-        'description': '%s 简体中文汉化' % man['zh_name'],
-    }}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    meta = pack_meta(jar, man, t)
+    (res / 'pack.mcmeta').write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print('  pack.mcmeta 照 %s 抄：%s' % (Path(jar).name, json.dumps(
+        {k: v for k, v in meta['pack'].items() if k != 'description'},
+        ensure_ascii=False)))
     # 两份都进 jar：LICENSE 讲清楚三类东西各归各的，GPL 正文给代码那部分
     (res / 'LICENSE').write_bytes((ROOT / 'LICENSE').read_bytes())
     (res / 'LICENSE-GPL-3.0').write_bytes((ROOT / 'LICENSE-GPL-3.0').read_bytes())
