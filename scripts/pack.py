@@ -174,6 +174,62 @@ def sanity(jar, root):
     return bad
 
 
+BEE_DATA = 'data/%s/%s/' % (NS, NS)
+
+
+def bee_data_names(jar, res, tables):
+    """给数据包定义的蜂补一个中文 `name` 字段。
+
+    这些蜂的名字**不走翻译键**。`BeeCreator.create` 是这么写的：
+
+        nbt.putString("name", json.has("name") ? json.get("name").getAsString()
+                                               : idToName(id) + " Bee");
+
+    没给 `name` 就按 id 拼一个英文的，原样写进实体 NBT；显示时走
+    `entity.productivebees.bee_configurable`（原文就是裸的 `%s`），把那个字符串
+    整个塞进去。所以资源包够不着它：物品栏的 tooltip 我们还能在
+    `ItemTooltipEvent` 里改，手持时屏幕上方那行名字、以及 JEI 的蜂种条目走的是
+    另外两条渲染路径，事件根本不经过。
+
+    但 `name` 这个字段是我们**能给**的——照抄上游那份数据文件，只填 `name`，
+    其余字段一个不动（少一个蜂就没颜色、没花、没巢偏好）。填上之后那三条路径
+    读到的就都是中文，一处代码都不用动。
+
+    只对**真的用 `bee_configurable` 那几版**做：再往后的版本蜂名走的是注册实体的
+    翻译键，本来就是中文，往 NBT 里塞名字反而是多此一举。
+    """
+    z = zipfile.ZipFile(jar)
+    if not any(n.endswith('.class') and b'bee_configurable' in z.read(n)
+               for n in z.namelist()):
+        return 0
+    id2zh, en2zh = tables.get('id2zh', {}), tables.get('en2zh', {})
+    n = 0
+    for name in z.namelist():
+        if not (name.startswith(BEE_DATA) and name.endswith('.json')):
+            continue
+        try:
+            d = json.loads(z.read(name).decode('utf-8-sig'))
+        except Exception:                                  # noqa: BLE001
+            continue
+        if not isinstance(d, dict):
+            continue
+        # 上游多数文件自己写了 `name`，写的是英文——那正是要翻的东西，按它查；
+        # 没写的那些，代码会按 id 拼名字，所以按 id 查。
+        zh = en2zh.get(d['name']) if isinstance(d.get('name'), str) else None
+        if zh is None:
+            # 文件可能在子目录下（`gems/emerald.json`），蜂的身份看末段
+            zh = id2zh.get(name.rsplit('/', 1)[-1][:-len('.json')])
+        if not zh or zh == d.get('name'):
+            continue                      # 查不到译名就别动人家的文件
+        d['name'] = zh
+        p = res / name
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n',
+                     encoding='utf-8')
+        n += 1
+    return n
+
+
 def book_name(jar, root):
     """导览书的中文名：上游 book.json 的 name 过一遍我们的 lang。不许手写。"""
     z = zipfile.ZipFile(jar)
@@ -348,6 +404,10 @@ def build(man, jar, ver, t):
 
     n_book = books.generate(jar, res)
     tables = names.write(jar, res / 'pbzh' / 'bees.json')
+    n_bee = bee_data_names(jar, res, tables)
+    if n_bee:
+        print('  给 %d 只数据包定义的蜂补了中文 name 字段（手持与 JEI 那两处'
+              '够不着事件，只能从数据这一侧给）' % n_bee)
 
     rate, fails = coverage(jar, res, man['coverage_floor'])
     for k, v in sorted(rate.items()):
