@@ -1,22 +1,18 @@
-# 这个仓库只放源与配置。产物、生成物、别人的东西，一律不入库。
-
-# 上游仓库的浅克隆（译文与生成器都在那边，按 SOURCE.lock 的 commit 现拉）
-upstream/
-
-# 构建中间物：模组 jar、Gradle 发行版、摊出来的上游出货树、自测 class
-build/
-dist/
 
 # **由 Python 从上游现摊**的 mod 资源（lang / 导览书 / 蜂名表 / mods.toml / pack.mcmeta）。
-# 这些是生成物不是源。入库等于在这里又存了一份译文，必然与上游漂移。
-mod/src/main/resources/
-
 # Gradle 与 IDE 的本地状态
-mod/.gradle/
-mod/build/
+# 上游仓库的浅克隆（译文与生成器都在那边，按 SOURCE.lock 的 commit 现拉）
+# 构建中间物：模组 jar、Gradle 发行版、摊出来的上游出货树、自测 class
+# 这个仓库只放源与配置。产物、生成物、别人的东西，一律不入库。
+# 这些是生成物不是源。入库等于在这里又存了一份译文，必然与上游漂移。
+*.iml
+.DS_Store
 .gradle/
 .idea/
-*.iml
-
-.DS_Store
 __pycache__/
+build/
+dist/
+mod/.gradle/
+mod/build/
+mod/src/main/resources/
+upstream/
