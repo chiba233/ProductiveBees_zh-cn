@@ -100,8 +100,8 @@ def coverage():
                       '{:,}'.format(x['downloads'])))
     if len(packs) > TOP:
         out.append('| …另有 %d 个 | | |' % (len(packs) - TOP))
-    out += ['', '没列出来的整合包也照样能用：本汉化覆盖模组本体的全部词条，'
-            '自定义蜂名只是额外多兜的一层。', '', CEND]
+    out += ['', '未列出的整合包同样适用：本汉化覆盖模组本体的全部词条，'
+            '整合包自定义的蜂名是额外补充的一层。', '', CEND]
     return '\n'.join(out)
 
 
