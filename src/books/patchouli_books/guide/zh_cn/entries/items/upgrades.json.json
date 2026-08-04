@@ -52,7 +52,7 @@
     "text"
    ],
    "When installed in a hive, the BaBee upgrade will give a small chance for the bees living inside the hive to breed and produce new offspring without your involvement. Note that bees which can't breed normally do not work with this upgrade. $(br)When installed in a $(l:blocks/catcher)catcher$(/l), only BaBees will be caught and put in cages.",
-   "安装在蜂箱中时，升级：繁殖会让居住在蜂箱内的蜜蜂有小概率自行繁殖并产生新的后代，无需你的参与。请注意，原本无法正常繁殖的蜜蜂无法使用此升级。$(br)安装在$(l:blocks/catcher)捕手$(/l)中时，则只会捕捉 BaBee 并将其装入蜂笼。"
+   "安装在蜂箱中时，升级：繁殖会让居住在蜂箱内的蜜蜂有小概率自行繁殖并产生新的后代，无需你的参与。请注意，原本无法正常繁殖的蜜蜂无法使用此升级。$(br)安装在$(l:blocks/catcher)捕捉器$(/l)中时，则只会捕捉 BaBee 并将其装入蜂笼。"
   ],
   [
    [
@@ -61,7 +61,7 @@
     "text"
    ],
    "When installed in a hive, the BaBee upgrade will give a small chance for the bees living inside the hive to breed and produce new offspring without your involvement. $(br)When installed in a $(l:blocks/catcher)catcher$(/l), only BaBees will be caught and put in cages.",
-   "安装在蜂箱中时，升级：繁殖会让居住在蜂箱内的蜜蜂有小概率自行繁殖并产生新的后代，无需你的参与。$(br)安装在$(l:blocks/catcher)捕手$(/l)中时，则只会捕捉 BaBee 并将其装入蜂笼。"
+   "安装在蜂箱中时，升级：繁殖会让居住在蜂箱内的蜜蜂有小概率自行繁殖并产生新的后代，无需你的参与。$(br)安装在$(l:blocks/catcher)捕捉器$(/l)中时，则只会捕捉 BaBee 并将其装入蜂笼。"
   ],
   [
    [
@@ -133,7 +133,7 @@
     "text"
    ],
    "Right click on a bee to add it to the filter. Put the filter in a crafting grid to clear it. When installed in a hive, only bees specified on the filter will be allowed to enter. $(br)When installed in a catcher, only the bees specified on the filter will be picked up.",
-   "对一只蜜蜂右键即可将其添加到过滤器中。将过滤器放入合成网格即可清空。安装在蜂箱中时，只允许过滤器中指定的蜜蜂进入。$(br)安装在捕手中时，则只会拾取过滤器中指定的蜜蜂。"
+   "对一只蜜蜂右键即可将其添加到过滤器中。将过滤器放入合成网格即可清空。安装在蜂箱中时，只允许过滤器中指定的蜜蜂进入。$(br)安装在捕捉器中时，则只会拾取过滤器中指定的蜜蜂。"
   ],
   [
    [
@@ -151,7 +151,7 @@
     "text"
    ],
    "When installed in a hive, the operating range of Farmer and Collector/Hoarder bees is increased by 1 per upgrade, from default 4. When installed in a catcher, the Range upgrade will expand the area of operation by 1 block in all directions. Multiple range upgrades can be installed.",
-   "安装在蜂箱中时，农夫蜜蜂和收集者/囤积者蜜蜂的工作范围每个升级增加 1 格，默认范围为 4 格。安装在捕手中时，范围升级会将工作区域向所有方向各扩大 1 格。可以安装多个范围升级。"
+   "安装在蜂箱中时，农夫蜜蜂和收集者/囤积者蜜蜂的工作范围每个升级增加 1 格，默认范围为 4 格。安装在捕捉器中时，范围升级会将工作区域向所有方向各扩大 1 格。可以安装多个范围升级。"
   ],
   [
    [
