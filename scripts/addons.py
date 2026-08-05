@@ -331,17 +331,55 @@ def scan(limit, workers=5, shard=None):
     return report(res)
 
 
+def fold(cur, new):
+    """同一个项目的两份扫描结果合成一份：**key 取并集**。
+
+    一个项目会在多个分片里各出现一次——分片是按「项目 × 游戏版本」切的，
+    同一个模组的 1.20.1 那份和 1.21.1 那份落在不同片里。原先这里是
+    `res[id] = v` 直接覆盖，于是**谁最后被读到谁说了算**：
+
+        resultsmod-6  enderio_evolution-3.1.3-NeoForge-1.21.1.jar  keys=8
+        resultsmod-7  enderio_evolution-1.1.5-Forge-1.20.1.jar     keys=0  ← 把上面那条顶掉
+
+    末影接口：进化的 8 条蜂名就是这么丢的：1.20.1 那一版没带资源蜜蜂的语言文件，
+    它那份空结果盖住了 1.21.1 那份。更糟的是这依赖分片顺序——同一份数据换个
+    分法就是另一个结论，扫描结果因此不可复现。
+
+    取并集之后，一个项目只要**有任何一个版本**带了 key，那些 key 就留得住。
+    """
+    if cur is None:
+        return dict(new)
+    out = dict(cur)
+    keys = dict(cur.get('keys') or {})
+    keys.update(new.get('keys') or {})
+    if keys:
+        out['keys'] = keys
+        out.pop('error', None)             # 有一版扫成了，就不算这个项目失败
+        # 留下真正带 key 的那一版的文件名，复查时能直接对上
+        if not (cur.get('keys') or {}):
+            out['file'], out['version'] = new.get('file'), new.get('version')
+    elif not new.get('error'):
+        out.pop('error', None)
+    out['downloads'] = max(cur.get('downloads') or 0, new.get('downloads') or 0)
+    out['name'] = cur.get('name') or new.get('name')
+    out['platform'] = cur.get('platform') or new.get('platform')
+    return out
+
+
 def merge():
     """把两个平台、各分片的结果合到一起再统计。
 
     CurseForge 有反向依赖接口，Modrinth 没有——那边只能把一万七千个整合包
     全列一遍逐个翻。两边拆包与认 key 用的是同一份代码，所以结果可以直接合。
+
+    同一个项目在多个分片里各有一份，按 {@link fold} 取并集，不许互相顶掉。
     """
     res = {}
     for d, pref in ((CACHE, 'cf'), (ROOT / 'build' / 'modrinth', 'mr')):
         for p in sorted(d.glob('results*.json')):
             for k, v in json.loads(p.read_text(encoding='utf-8')).items():
-                res['%s:%s' % (pref, k)] = v
+                rid = '%s:%s' % (pref, k)
+                res[rid] = fold(res.get(rid), v)
     save_results(res)
     print('合并 %d 个项目的扫描结果' % len(res))
     return report(res)
@@ -453,6 +491,28 @@ def verify_synthetic():
     assert not bad, '合成用例不过：多/少了 %s' % bad
     print('  ✅ 别人命名空间里的 PB key 收得到；zh_cn / 别家 key / '
           'productivebeesfoo 都没误收；两层内嵌钻得进去；坏 zip 只跳过不中断')
+
+    # 同一个项目在多个分片里各出现一次（每个游戏版本一份文件）。合并时**取并集**，
+    # 不许后读的把先读的顶掉——末影接口：进化的 8 条蜂名就是这么丢过一次：
+    # 1.20.1 那一版没带资源蜜蜂语言文件，它那份 keys={} 盖住了 1.21.1 那份。
+    # 反着也要验：真·失败的项目不能因为合并就被当成扫成功了。
+    a = {'name': 'X', 'version': 'v3', 'file': 'x-1.21.1.jar',
+         'keys': {'entity.productivebees.crude_steel_bee': 'Crude Steel Bee'},
+         'downloads': 9255, 'platform': 'modrinth-mod'}
+    b = {'name': 'X', 'version': 'v1', 'file': 'x-1.20.1.jar',
+         'keys': {}, 'downloads': 9255, 'platform': 'modrinth-mod'}
+    for order, tag in (((a, b), '带 key 的先读'), ((b, a), '带 key 的后读')):
+        got = None
+        for r in order:
+            got = fold(got, r)
+        assert got.get('keys') == a['keys'], '%s：并集丢了 %s' % (tag, got.get('keys'))
+        assert not got.get('error'), '%s：不该判失败' % tag
+    err = fold(fold(None, {'error': '404'}), {'error': 'timeout'})
+    assert err.get('error'), '两份都失败时必须还是失败'
+    ok = fold(fold(None, {'error': '404'}), {'keys': {'k': 'v'}})
+    assert not ok.get('error') and ok['keys'] == {'k': 'v'}, '有一版扫成了就不算失败'
+    print('  ✅ 同项目多分片取并集：两种读入顺序结果一致，'
+          '全失败仍判失败，一成一败判成功')
 
 
 def brute(blob):
