@@ -50,36 +50,36 @@ mod。**放进 `mods/` 即可**，不需要资源包，也不需要改配置。
 
 <!-- 覆盖范围开始 · 由 scripts/readme.py 生成，勿手改 -->
 
-已逐个翻过 **17549** 个整合包与模组（CurseForge 2440 个、Modrinth 整合包 15316 个；207 个取不到文件）。其中 **62** 个自带蜂名——它们用数据包加了自己的蜂，名字不在模组本体里。这些名字**也在本汉化里**：
+已逐个翻过 **71824** 个整合包与模组（CurseForge 2490 个、Modrinth 整合包 18294 个、Modrinth 模组 51403 个；363 个取不到文件）。其中 **68** 个自带蜂名——它们用数据包加了自己的蜂，名字不在模组本体里。这些名字**也在本汉化里**：
 
 | 整合包 | 自定义条目 | 下载量 |
 |---|---:|---:|
-| MineColonies - Cobblemon Conquest | 32 | 27,014 |
-| MineColonies - Create & Conquer | 16 | 140,015 |
-| TechEv \|\| Discovery | 16 | 7,739 |
-| MOTCraft server | 16 | 1,149 |
-| Nightwing Diamond | 15 | 166 |
-| MartinClan2026 | 15 | 117 |
-| Dungeons, Dragons and Space Shuttles 2 | 14 | 56,753 |
-| ATM : All Tech Mods | 14 | 13,542 |
-| Aoura MC | 13 | 216 |
-| Mordant Minds | 12 | 138 |
-| Psi: Tweaks and Additions | 11 | 1,938 |
-| Phoenix Forge Technologies | 11 | 1,466 |
-| WithTheCat (Second Edition) | 10 | 505 |
-| Bee Proud | 9 | 7,458 |
-| DivineRPG: Compatability | 6 | 140,765 |
-| Journey Through The Abyss | 6 | 5,873 |
-| Bee Master | 6 | 888 |
-| Sky Bees Reborn | 5 | 16,456 |
-| Dungeons and Shuttles Evolution | 5 | 3,194 |
-| Fated Curse | 5 | 701 |
-| Impostor Syndrome - Reimagined | 4 | 298 |
-| FTB Skies Expert | 3 | 22,862 |
-| Every Compat (Wood Good) | 2 | 46,269,727 |
-| Productive Trees | 2 | 21,466,412 |
-| Medival, Magic & Tech NeoForge | 2 | 24,343 |
-| …另有 37 个 | | |
+| MineColonies - Cobblemon Conquest | 32 | 27,460 |
+| MineColonies - Create & Conquer | 16 | 143,689 |
+| TechEv \|\| Discovery | 16 | 7,977 |
+| MOTCraft server | 16 | 1,196 |
+| Nightwing Diamond | 15 | 170 |
+| MartinClan2026 | 15 | 120 |
+| Dungeons, Dragons and Space Shuttles 2 | 14 | 58,090 |
+| ATM : All Tech Mods | 14 | 13,918 |
+| Aoura MC | 13 | 243 |
+| Mordant Minds | 12 | 142 |
+| Psi: Tweaks and Additions | 11 | 2,498 |
+| Phoenix Forge Technologies | 11 | 1,586 |
+| WithTheCat (Second Edition) | 10 | 511 |
+| Bee Proud | 9 | 7,694 |
+| Ender IO: Evolution | 8 | 9,564 |
+| DivineRPG | 6 | 510,028 |
+| DivineRPG: Compatability | 6 | 142,039 |
+| DivineRPG Compatability | 6 | 12,485 |
+| Journey Through The Abyss | 6 | 5,897 |
+| Bee Master | 6 | 897 |
+| Sky Bees Reborn | 5 | 16,979 |
+| Dungeons and Shuttles Evolution | 5 | 3,220 |
+| Fated Curse | 5 | 708 |
+| Civilization Isolaria | 5 | 96 |
+| Cobblemon Add-on: Mega Showdown Ores | 4 | 11,158 |
+| …另有 43 个 | | |
 
 未列出的整合包同样适用：本汉化覆盖模组本体的全部词条，整合包自定义的蜂名是额外补充的一层。
 

@@ -1,321 +1,352 @@
 {
- "scanned": 17549,
- "failed": 207,
+ "scanned": 71824,
+ "failed": 363,
  "total": 2440,
  "platforms": {
-  "curseforge": 2440,
-  "modrinth": 15316
+  "curseforge": 2490,
+  "modrinth": 18294,
+  "modrinth-mod": 51403
  },
- "keys": 1550,
+ "keys": 1566,
  "packs": [
   {
    "name": "MineColonies - Cobblemon Conquest",
-   "downloads": 27014,
+   "downloads": 27460,
    "keys": 32
   },
   {
    "name": "MineColonies - Create & Conquer",
-   "downloads": 140015,
+   "downloads": 143689,
    "keys": 16
   },
   {
    "name": "TechEv || Discovery",
-   "downloads": 7739,
+   "downloads": 7977,
    "keys": 16
   },
   {
    "name": "MOTCraft server",
-   "downloads": 1149,
+   "downloads": 1196,
    "keys": 16
   },
   {
    "name": "Nightwing Diamond",
-   "downloads": 166,
+   "downloads": 170,
    "keys": 15
   },
   {
    "name": "MartinClan2026",
-   "downloads": 117,
+   "downloads": 120,
    "keys": 15
   },
   {
    "name": "Dungeons, Dragons and Space Shuttles 2",
-   "downloads": 56753,
+   "downloads": 58090,
    "keys": 14
   },
   {
    "name": "ATM : All Tech Mods",
-   "downloads": 13542,
+   "downloads": 13918,
    "keys": 14
   },
   {
    "name": "Aoura MC",
-   "downloads": 216,
+   "downloads": 243,
    "keys": 13
   },
   {
    "name": "Mordant Minds",
-   "downloads": 138,
+   "downloads": 142,
    "keys": 12
   },
   {
    "name": "Psi: Tweaks and Additions",
-   "downloads": 1938,
+   "downloads": 2498,
    "keys": 11
   },
   {
    "name": "Phoenix Forge Technologies",
-   "downloads": 1466,
+   "downloads": 1586,
    "keys": 11
   },
   {
    "name": "WithTheCat (Second Edition)",
-   "downloads": 505,
+   "downloads": 511,
    "keys": 10
   },
   {
    "name": "Bee Proud",
-   "downloads": 7458,
+   "downloads": 7694,
    "keys": 9
   },
   {
+   "name": "Ender IO: Evolution",
+   "downloads": 9564,
+   "keys": 8
+  },
+  {
+   "name": "DivineRPG",
+   "downloads": 510028,
+   "keys": 6
+  },
+  {
    "name": "DivineRPG: Compatability",
-   "downloads": 140765,
+   "downloads": 142039,
+   "keys": 6
+  },
+  {
+   "name": "DivineRPG Compatability",
+   "downloads": 12485,
    "keys": 6
   },
   {
    "name": "Journey Through The Abyss",
-   "downloads": 5873,
+   "downloads": 5897,
    "keys": 6
   },
   {
    "name": "Bee Master",
-   "downloads": 888,
+   "downloads": 897,
    "keys": 6
   },
   {
    "name": "Sky Bees Reborn",
-   "downloads": 16456,
+   "downloads": 16979,
    "keys": 5
   },
   {
    "name": "Dungeons and Shuttles Evolution",
-   "downloads": 3194,
+   "downloads": 3220,
    "keys": 5
   },
   {
    "name": "Fated Curse",
-   "downloads": 701,
+   "downloads": 708,
    "keys": 5
   },
   {
+   "name": "Civilization Isolaria",
+   "downloads": 96,
+   "keys": 5
+  },
+  {
+   "name": "Cobblemon Add-on: Mega Showdown Ores",
+   "downloads": 11158,
+   "keys": 4
+  },
+  {
    "name": "Impostor Syndrome - Reimagined",
-   "downloads": 298,
+   "downloads": 372,
    "keys": 4
   },
   {
    "name": "FTB Skies Expert",
-   "downloads": 22862,
+   "downloads": 23073,
    "keys": 3
   },
   {
    "name": "Every Compat (Wood Good)",
-   "downloads": 46269727,
+   "downloads": 46434157,
    "keys": 2
   },
   {
    "name": "Productive Trees",
-   "downloads": 21466412,
+   "downloads": 21701833,
    "keys": 2
   },
   {
    "name": "Medival, Magic & Tech NeoForge",
-   "downloads": 24343,
+   "downloads": 24415,
    "keys": 2
   },
   {
    "name": "FTB Inferno",
-   "downloads": 24043,
+   "downloads": 24303,
    "keys": 2
   },
   {
    "name": "Enchanted Genesis ",
-   "downloads": 19359,
+   "downloads": 19490,
    "keys": 2
   },
   {
    "name": "Adventure of Tech V",
-   "downloads": 5698,
+   "downloads": 5766,
    "keys": 2
   },
   {
    "name": "Artifice & Industry",
-   "downloads": 4653,
+   "downloads": 4691,
    "keys": 2
   },
   {
    "name": "Friends United 2.1",
-   "downloads": 4584,
+   "downloads": 4603,
    "keys": 2
   },
   {
    "name": "WildLouna",
-   "downloads": 3119,
+   "downloads": 3170,
    "keys": 2
   },
   {
    "name": "RockTown Tech World 2",
-   "downloads": 2531,
+   "downloads": 2582,
    "keys": 2
   },
   {
    "name": "Eternal-Gaming Communitypack",
-   "downloads": 2270,
+   "downloads": 2276,
    "keys": 2
   },
   {
    "name": "Farmtastic!",
-   "downloads": 2125,
+   "downloads": 2152,
    "keys": 2
   },
   {
    "name": "Stargates, Colonies, And Ridiculous Tech",
-   "downloads": 1727,
+   "downloads": 1752,
    "keys": 2
   },
   {
    "name": "Dimensional Cobblemon",
-   "downloads": 1516,
+   "downloads": 1519,
    "keys": 2
   },
   {
    "name": "Dark Matter: To The Sky!",
-   "downloads": 1463,
+   "downloads": 1478,
    "keys": 2
   },
   {
    "name": "Colonial Command",
-   "downloads": 1296,
+   "downloads": 1311,
    "keys": 2
   },
   {
    "name": "Vanilla Supreme",
-   "downloads": 1177,
+   "downloads": 1188,
    "keys": 2
   },
   {
    "name": "SteefPack 2",
-   "downloads": 1041,
+   "downloads": 1060,
    "keys": 2
   },
   {
    "name": "MOTCraft",
-   "downloads": 926,
+   "downloads": 944,
    "keys": 2
   },
   {
    "name": "Adventures In Create",
-   "downloads": 700,
+   "downloads": 712,
    "keys": 2
   },
   {
    "name": "BecksCraft",
-   "downloads": 611,
+   "downloads": 669,
    "keys": 2
   },
   {
    "name": "Kilo Create Max",
-   "downloads": 454,
+   "downloads": 458,
    "keys": 2
   },
   {
    "name": "Technical Farming 2.0",
-   "downloads": 324,
+   "downloads": 329,
    "keys": 2
   },
   {
    "name": "ATGC Meltdown 2",
-   "downloads": 311,
-   "keys": 2
-  },
-  {
-   "name": "Calamity Kitchen Sink",
-   "downloads": 223,
+   "downloads": 319,
    "keys": 2
   },
   {
    "name": "Dxstopia SMP",
-   "downloads": 214,
+   "downloads": 232,
+   "keys": 2
+  },
+  {
+   "name": "Calamity Kitchen Sink",
+   "downloads": 228,
+   "keys": 2
+  },
+  {
+   "name": "Create Revolution",
+   "downloads": 218,
    "keys": 2
   },
   {
    "name": "Future Tech Frontier",
-   "downloads": 141,
+   "downloads": 145,
    "keys": 2
   },
   {
    "name": "Rata-craft",
-   "downloads": 124,
+   "downloads": 127,
    "keys": 2
   },
   {
    "name": "Diablocraft: Hardcore",
-   "downloads": 106,
+   "downloads": 109,
    "keys": 2
   },
   {
    "name": "Gnome Depot",
-   "downloads": 92,
+   "downloads": 95,
    "keys": 2
   },
   {
    "name": "Notorious Quests 2",
-   "downloads": 71,
+   "downloads": 75,
    "keys": 2
   },
   {
    "name": "Easy Livin - Open Horizons",
-   "downloads": 49,
+   "downloads": 54,
    "keys": 2
   },
   {
    "name": "SyFy Traveler by neo",
-   "downloads": 49,
+   "downloads": 51,
    "keys": 2
   },
   {
    "name": "Impostor Syndrome",
-   "downloads": 18047,
+   "downloads": 18328,
    "keys": 1
   },
   {
    "name": " دعم المودات للغة العربية رسوس باك-Arabic Mod Support-Resource Packs",
-   "downloads": 4047,
+   "downloads": 4247,
    "keys": 1
   },
   {
    "name": "Winter Leveling",
-   "downloads": 691,
+   "downloads": 699,
    "keys": 1
   },
   {
    "name": "ForcePatch",
-   "downloads": 518,
+   "downloads": 532,
    "keys": 1
   },
   {
    "name": "Mekanism-Cosmogenic-Core-Builder",
-   "downloads": 428,
+   "downloads": 433,
    "keys": 1
   },
   {
    "name": "TCC: Fractured Reality",
-   "downloads": 422,
+   "downloads": 428,
    "keys": 1
   },
   {
    "name": "Winter Leveling LITE",
-   "downloads": 186,
+   "downloads": 189,
    "keys": 1
   }
  ]
