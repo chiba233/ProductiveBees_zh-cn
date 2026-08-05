@@ -14189,6 +14189,75 @@
    "1.21-neoforge",
    "1.21.1-neoforge"
   ],
+  "item.productivelib.upgrade_adult": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_anti_teleport": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_base": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_biome": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_block": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_child": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_entity_filter": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_gene_sampler": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_pollen_sieve": [
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_productivity": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_productivity_2": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_productivity_3": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_productivity_4": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_range": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_simulator": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_stability": [
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_time": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "item.productivelib.upgrade_time_2": [
+   "1.21.1-neoforge"
+  ],
   "itemGroup.productivebees": [
    "1.15.2-forge",
    "1.16.1-forge",
@@ -17605,6 +17674,40 @@
    "1.20.1-forge",
    "1.20.1-neoforge",
    "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.extend": [
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.install_help": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.upgrade_entity_filter.clear": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.upgrade_entity_filter.empty": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.upgrade_entity_filter.list_header": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.upgrade_entity_filter.list_item": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.valid_blocks.list_header": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.valid_blocks.list_item": [
+   "1.21-neoforge",
+   "1.21.1-neoforge"
+  ],
+  "productivelib.information.upgrade.valid_blocks.list_item_content": [
    "1.21.1-neoforge"
   ],
   "tag.fluid.forge.honey": [
