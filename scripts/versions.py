@@ -164,6 +164,8 @@ def probe(jar):
 def scan():
     files = list_files()
     print('CurseForge 上共 %d 个文件' % len(files))
+    old = json.loads((VERSIONS / 'targets.json').read_text(encoding='utf-8')) \
+        if (VERSIONS / 'targets.json').is_file() else {}
     targets, keys, books = {}, defaultdict(list), defaultdict(list)
     picked = pick_targets(files)
     print('按 (MC 版本, 加载器) 取最新，共 %d 个目标' % len(picked))
@@ -186,6 +188,12 @@ def scan():
             'jar': jar.name, 'curseforge_project_id': PROJECT,
             'curseforge_file_id': f['id'], 'sha256': sha,
             'lang_keys': len(en), 'book_files': len(bk),
+            # `loader_version` 不是从 jar 里能读出来的，是外面那个加载器的发行版本，
+            # 由人填、绿了就别动（见 derive 的注释）。这里是**整条重建**，不把老值
+            # 带过来的话跑一次 scan 就把它抹了——而 build.py 那边是
+            # `t['loader_version']`，不带默认值，键一消失 12 个 legacy 平台直接
+            # KeyError 编不出来。抹掉是静默的：targets.json 看着只是少了一行。
+            'loader_version': old.get(tag, {}).get('loader_version'),
         }
         for k in en:
             keys[k].append(tag)
