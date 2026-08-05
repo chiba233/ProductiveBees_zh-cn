@@ -233,6 +233,8 @@ jobs:
           path: |
             versions/addon_keys.json
             versions/addon_scan.json
-            build/dependents/results.json
+            build/dependents/results-*.json
             build/modrinth/results*.json
           if-no-files-found: error
+      # 上传的是**各分片的原始结果**，不是 merge 存下的 build/dependents/results.json：
+      # 那个文件是合并产物，拿它再 merge 一次会把每个项目算两遍。

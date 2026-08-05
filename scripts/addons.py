@@ -377,6 +377,11 @@ def merge():
     res = {}
     for d, pref in ((CACHE, 'cf'), (ROOT / 'build' / 'modrinth', 'mr')):
         for p in sorted(d.glob('results*.json')):
+            # `results.json` 是上一次 merge 自己存下的**合并结果**，再读进来就是把
+            # 每个项目算两遍（`cf:mr:xxx` 与 `mr:xxx` 各一份），README 的覆盖数直接
+            # 翻倍。CI 每次全新 checkout 碰不到，本地拿 artifact 复算一次就中招。
+            if p == RESULTS:
+                continue
             for k, v in json.loads(p.read_text(encoding='utf-8')).items():
                 rid = '%s:%s' % (pref, k)
                 res[rid] = fold(res.get(rid), v)
