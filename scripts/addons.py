@@ -357,12 +357,19 @@ def fold(cur, new):
         out.pop('error', None)             # 有一版扫成了，就不算这个项目失败
         # 留下真正带 key 的那一版的文件名，复查时能直接对上
         if not (cur.get('keys') or {}):
-            out['file'], out['version'] = new.get('file'), new.get('version')
+            for f in ('file', 'version'):
+                if new.get(f) is not None:
+                    out[f] = new[f]
     elif not new.get('error'):
         out.pop('error', None)
     out['downloads'] = max(cur.get('downloads') or 0, new.get('downloads') or 0)
-    out['name'] = cur.get('name') or new.get('name')
-    out['platform'] = cur.get('platform') or new.get('platform')
+    # 两边都没有的字段**不许凭空写成 None**：下游是 `r.get('platform', 'curseforge')`
+    # 这种「键不在才走默认值」的写法，被写进一个 None 就等于默认值失效——
+    # CurseForge 的项目数会从两千多掉到三百，另外多出一个叫 null 的平台。
+    for f in ('name', 'platform'):
+        v = cur.get(f) or new.get(f)
+        if v is not None:
+            out[f] = v
     return out
 
 
@@ -407,12 +414,19 @@ def report(res=None):
     # 只数**模组本体没有的** key：有些整合包自带一份别的语言的翻译资源包，
     # 里面是模组本体那一千多条 key，算进「自定义」就把表带偏了。
     base = json.loads((VERSIONS / 'keys.json').read_text(encoding='utf-8'))['lang']
-    packs = sorted(
-        ({'name': r.get('name'), 'downloads': r.get('downloads') or 0,
-          'keys': len([k for k in (r.get('keys') or {}) if k not in base])}
-         for r in res.values() if r.get('keys')),
-        key=lambda x: (-x['keys'], -x['downloads']))
-    packs = [x for x in packs if x['keys']]
+    # 同一个整合包/模组两个平台各上架一份（`cf:…` 与 `mr:…` 两条记录），
+    # 按名字并成一行再排，否则 README 的表里会出现同名两行、下载量还不一样。
+    by_name = {}
+    for r in res.values():
+        if not r.get('keys'):
+            continue
+        row = by_name.setdefault(r.get('name'), {'name': r.get('name'),
+                                                 'downloads': 0, 'keys': 0})
+        row['downloads'] = max(row['downloads'], r.get('downloads') or 0)
+        row['keys'] = max(row['keys'],
+                          len([k for k in r['keys'] if k not in base]))
+    packs = sorted((x for x in by_name.values() if x['keys']),
+                   key=lambda x: (-x['keys'], -x['downloads']))
     plat = {}
     for r in res.values():
         p = r.get('platform', 'curseforge')
@@ -516,8 +530,17 @@ def verify_synthetic():
     assert err.get('error'), '两份都失败时必须还是失败'
     ok = fold(fold(None, {'error': '404'}), {'keys': {'k': 'v'}})
     assert not ok.get('error') and ok['keys'] == {'k': 'v'}, '有一版扫成了就不算失败'
+    # 两边都没有的字段不许凭空写成 None：下游 `r.get('platform', 'curseforge')`
+    # 是「键不在才走默认值」，写进一个 None 就让默认值失效，CurseForge 的项目数
+    # 会从两千多掉到三百、并多出一个叫 null 的平台。
+    bare = fold({'keys': {'k': 'v'}}, {'keys': {}})
+    assert 'platform' not in bare and 'name' not in bare, '凭空写出了 %s' % bare
+    one = fold({'keys': {}}, {'keys': {'k': 'v'}, 'platform': 'modrinth-mod',
+                              'name': 'X', 'file': 'x.jar'})
+    assert (one['platform'] == 'modrinth-mod' and one['name'] == 'X'
+            and one['file'] == 'x.jar'), one
     print('  ✅ 同项目多分片取并集：两种读入顺序结果一致，'
-          '全失败仍判失败，一成一败判成功')
+          '全失败仍判失败，一成一败判成功，空字段不写成 None')
 
 
 def brute(blob):
