@@ -15,6 +15,7 @@
 三道闸，过不了不出包：覆盖率、占位符与结构、以及构建收尾对着**打好的 jar** 跑的自测。
 「装上去只翻了一半」比没翻还糟——玩家不会来报，只会觉得这包很烂。
 """
+import io
 import json
 import re
 import shutil
@@ -27,6 +28,43 @@ import names
 
 ROOT = Path(__file__).resolve().parent.parent
 NS = 'productivebees'
+
+
+def bundled_langs(jar):
+    """这一版 jar 里**所有**语言表：本体的，加上它内嵌的那些 jar 里的。
+
+    资源蜜蜂 1.21.1 起把升级组件搬进了 `productivelib`，而那个 mod 是
+    **打包在自己 jar 里**发的（`META-INF/jarjar/productivelib-….jar`）。
+    只认 `assets/productivebees/` 的话，那 18 个升级组件在游戏里全是英文，
+    而且我们这边一点异常都看不到——键表里根本没有它们，覆盖率照样 100%。
+
+    返回 `{命名空间: {key: 英文原文}}`。
+    """
+    out = {}
+    z = zipfile.ZipFile(jar)
+
+    def take(zf, prefix=''):
+        for n in zf.namelist():
+            m = re.match(r'^assets/([^/]+)/lang/en_us\.json$', n)
+            if not m:
+                continue
+            try:
+                d = json.loads(zf.read(n).decode('utf-8-sig'))
+            except Exception:                          # noqa: BLE001
+                continue
+            if isinstance(d, dict):
+                out.setdefault(m.group(1), {}).update(
+                    {k: v for k, v in d.items() if isinstance(v, str)})
+        for n in zf.namelist():
+            if not prefix and n.startswith('META-INF/jarjar/') and n.endswith('.jar'):
+                try:
+                    with zipfile.ZipFile(io.BytesIO(zf.read(n))) as inner:
+                        take(inner, n)
+                except Exception:                      # noqa: BLE001
+                    continue
+
+    take(z)
+    return out
 
 
 def apply_variants(lang, jar):
@@ -58,11 +96,15 @@ def coverage(jar, root, floor):
     """对着 jar 的 en_us 与导览书逐个点名。"""
     z = zipfile.ZipFile(jar)
     bad, rate = {}, {}
-    en_path = 'assets/%s/lang/en_us.json' % NS
-    if en_path in z.namelist():
-        en = json.loads(z.read(en_path))
-        f = root / 'assets' / NS / 'lang' / 'zh_cn.json'
-        zh = json.loads(f.read_text(encoding='utf-8')) if f.is_file() else {}
+    # 覆盖率要把**内嵌 jar 的命名空间**一起算进来：漏掉它的话，升级组件整批
+    # 显示英文而这里照样报 100%——1.21.1 就这么漏了 18 个物品名。
+    en, zh = {}, {}
+    for ns, sub in sorted(bundled_langs(jar).items()):
+        en.update(sub)
+        f = root / 'assets' / ns / 'lang' / 'zh_cn.json'
+        if f.is_file():
+            zh.update(json.loads(f.read_text(encoding='utf-8')))
+    if en:
         miss = sorted(set(en) - set(zh))
         rate['lang_keys'] = (len(en) - len(miss)) / max(1, len(en))
         if miss:
@@ -402,6 +444,23 @@ def build(man, jar, ver, t):
     lang_dst.write_text(json.dumps(lang, ensure_ascii=False, indent=2) + '\n',
                         encoding='utf-8')
     n_lang = len(lang)
+
+    # 内嵌 jar 里的命名空间也要出货：1.21.1 起升级组件搬进了 productivelib，
+    # 那个 mod 是打包在资源蜜蜂 jar 里发的。只出 assets/productivebees 的话，
+    # 那 18 个升级组件在游戏里全是英文。哪些键属于哪个命名空间，看**那个命名空间的
+    # en_us 里有没有这个键**，不靠键名猜。
+    for ns, en in sorted(bundled_langs(jar).items()):
+        if ns == NS:
+            continue
+        sub = {k: v for k, v in lang.items() if k in en}
+        if not sub:
+            continue
+        f = res / 'assets' / ns / 'lang' / 'zh_cn.json'
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(json.dumps(dict(sorted(sub.items())), ensure_ascii=False,
+                                indent=2) + '\n', encoding='utf-8')
+        n_lang += len(sub)
+        print('  内嵌的 %s 有 %d 条，出货 %d 条' % (ns, len(en), len(sub)))
     if n_var:
         print('  这一版有 %d 条原文和最新版不同，改用对应的译文' % n_var)
 

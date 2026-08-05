@@ -140,12 +140,22 @@ def download(f):
 
 
 def probe(jar):
-    """抽出这一版的 en_us key 与导览书文件清单。"""
-    z = zipfile.ZipFile(jar)
-    try:
-        en = json.loads(z.read('assets/productivebees/lang/en_us.json'))
-    except KeyError:
+    """抽出这一版的 en_us key 与导览书文件清单。
+
+    key 取**本体加内嵌 jar** 的并集：1.21.1 起升级组件搬进了 `productivelib`，
+    而那个 mod 是打包在资源蜜蜂 jar 里（`META-INF/jarjar/`）发的。只认
+    `assets/productivebees/` 的话，那 18 个物品名不会出现在键表里，
+    缺口报表和覆盖率都看不见它们，游戏里却是实打实的英文。
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import pack                                          # noqa: PLC0415
+    langs = pack.bundled_langs(jar)
+    if not langs:
         return None, None
+    en = {}
+    for _, sub in sorted(langs.items()):
+        en.update(sub)
+    z = zipfile.ZipFile(jar)
     bk = sorted(n.split('guide/en_us/')[1][:-5] for n in z.namelist()
                 if 'guide/en_us/' in n and n.endswith('.json'))
     return en, bk
