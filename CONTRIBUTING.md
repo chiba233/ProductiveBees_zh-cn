@@ -7,6 +7,21 @@
 
 改完提交 PR 即可，CI 会跑全套检查。
 
+### 「玄钢蜜蜂蜜脾」这种重复，是已知的、不修
+
+没有专属蜜脾条目的蜂（约 522 只），蜜脾名由模组现拼，`Honeycomb#getName` 的做法是
+拿蜂名去掉结尾的 ` Bee` 再套 `item.productivebees.honeycomb_configurable`：
+
+    Dark Steel Bee  →  去掉 " Bee"  →  Dark Steel  →  "%s Comb"  →  Dark Steel Comb
+    玄钢蜜蜂         →  去不掉        →  玄钢蜜蜂     →  "%s蜜脾"    →  玄钢蜜蜂蜜脾
+
+中文构词方向和英文相反，这个字符串拼法从根上就接不住。**要真修只能上 Mixin 改
+`ItemStack#getHoverName`**——只改 `ItemTooltipEvent` 的话，JEI 物品列表和容器标题
+那两条渲染路径仍然是重复的名字，等于修一半。
+
+权衡下来不修：名字虽然啰嗦但意思不错，JEI 里照样搜得到。别再为它开 Mixin，
+也别把 `%s蜜脾` 改成 `%s`——那会让蜜脾显示成「玄钢蜜蜂」，比啰嗦更糟。
+
 ## 补还没翻的版本
 
 README 的支持矩阵里带「差 N 条」的，就是待办。列出某个版本缺哪些键：
