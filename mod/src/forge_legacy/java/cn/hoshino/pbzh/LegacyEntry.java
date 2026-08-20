@@ -6,6 +6,7 @@ package cn.hoshino.pbzh;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.common.Mod;
 
 import com.google.gson.Gson;
@@ -54,23 +55,26 @@ public final class LegacyEntry {
 
     public LegacyEntry() {
         BeeNames.hello("Forge");
-        MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
-        // 名牌是客户端事件，类在服务端不存在，用 try 兜住
-        try {
-            MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onRenderNameplate);
-        } catch (Throwable ignored) {
-            // 挂不上顶多是名牌还显示英文
+        // **显示层的监听器只在客户端注册。** 这几个事件类引用了客户端专有类型
+        // （1.15.2 的 ItemTooltipEvent 就带着 net.minecraft.client.util.ITooltipFlag），
+        // 而 EventBus 注册时要反射事件类的构造器——在专用服务器上就是
+        // NoClassDefFoundError，整个 mod 加载失败、服务器起不来。
+        // 这不是新引入的问题：把老版本装进服务端一直都会崩，只是以前没人这么装。
+        if (FMLEnvironment.dist.isClient()) {
+            MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
+            try {
+                MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onRenderNameplate);
+            } catch (Throwable ignored) {
+                // 挂不上顶多是名牌还显示英文
+            }
+            // 每 tick 一次；方法自己先比语言表的对象身份，没换过立刻返回
+            try {
+                MinecraftForge.EVENT_BUS.addListener(
+                        (net.minecraftforge.event.TickEvent.ClientTickEvent e) -> tick());
+            } catch (Throwable ignored) {
+                // 注册不上顶多是整合包自定义的蜂名不翻，不能因此让 mod 装不上
+            }
         }
-        // 每 tick 一次，但方法自己先比语言表的对象身份，没换过立刻返回。
-        // 资源重载后语言表是新对象，那一次才真正去学整合包自己加的蜂名。
-        try {
-            MinecraftForge.EVENT_BUS.addListener(
-                    (net.minecraftforge.event.TickEvent.ClientTickEvent e) ->
-                            tick());
-        } catch (Throwable ignored) {
-            // 注册不上顶多是整合包自定义的蜂名不翻，不能因此让 mod 装不上
-        }
-        // 「服务端没有这个 mod 也没关系」——这一声明各版本写法不同，统一收在 ServerCompat
         ServerCompat.ignoreOnServers();
     }
 

@@ -26,6 +26,7 @@ jar 编得出来、译名逻辑对。
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import urllib.request
@@ -80,6 +81,12 @@ def launch_cmd(home, java, tag):
     if not jars:
         raise SystemExit('❌ %s installServer 之后既没有 unix_args.txt 也没有 forge jar' % tag)
     return [str(java), '-Xmx2G', '-jar', jars[0].name, 'nogui']
+
+
+def installed(home):
+    """装好了没有：认它的启动入口，不认目录在不在——半截的安装目录也是「在」。"""
+    return bool(list(home.glob('libraries/**/unix_args.txt'))
+                or [p for p in home.glob('forge-*.jar') if 'installer' not in p.name])
 
 
 def server_classpath(home):
@@ -140,14 +147,23 @@ def one(tag, modjar, targets, lock):
     url = (NEO if t['loader'] == 'NeoForge' else FORGE) % {'v': lv}
     inst = get(url, WORK / 'installers' / url.rsplit('/', 1)[-1])
     java = e2e.jdk(t['java'])
-    if not home.is_dir():
-        home.mkdir(parents=True)
-        print('   装服务端（%s %s，Java %d）…' % (t['loader'], lv, t['java']))
-        r = subprocess.run([str(java), '-jar', str(inst), '--installServer', str(home)],
-                           capture_output=True, text=True)
-        if r.returncode != 0:
-            print(r.stdout[-1500:], r.stderr[-1500:])
-            return tag, False, '装不上'
+    if not installed(home):
+        # 老版本的安装器要从好几个 maven 拉几十个库，抽风是常事——它自己的报错
+        # 就写着「Try again」。**重试两次再判失败**，不然把网络抖动记成「装不上」。
+        for attempt in (1, 2, 3):
+            if home.is_dir():
+                shutil.rmtree(home)
+            home.mkdir(parents=True)
+            print('   装服务端（%s %s，Java %d）%s…'
+                  % (t['loader'], lv, t['java'], '' if attempt == 1 else '第 %d 次 ' % attempt))
+            r = subprocess.run([str(java), '-jar', str(inst), '--installServer', str(home)],
+                               capture_output=True, text=True)
+            if r.returncode == 0 and installed(home):
+                break
+            tail = (r.stdout or '').strip().splitlines()[-3:]
+            print('     没装上：%s' % ' / '.join(x.strip() for x in tail if x.strip()))
+        else:
+            return tag, False, '装不上（重试 3 次）'
     mods = home / 'mods'
     mods.mkdir(exist_ok=True)
     B.fetch_jar(t, mods)                       # 上游那一版，逐字节核过
@@ -173,9 +189,13 @@ def one(tag, modjar, targets, lock):
     if '[productivebees_zh_cn] 已加载' not in log:
         ok, _ = False, why.append('mod 没报到（没看到「已加载」那一行）')
     # 报错：只认致命的那种，模组自己的配方警告不算
+    # 只认**致命**的那种。别拿包名当关键字——我们自己那行 INFO 报到也带包名，
+    # 那样每次都会假阳性。
     fatal = [ln for ln in log.splitlines()
              if re.search(r'(Failed to start|A potential crash|Exception in thread|'
-                          r'ERROR.*productivebees_zh_cn|cn\.hoshino\.pbzh)', ln)]
+                          r'failed to load correctly|LoadingFailedException|'
+                          r'Failed to create mod instance)', ln)
+             or (re.search(r'(ERROR|FATAL)', ln) and 'pbzh' in ln)]
     if fatal:
         ok, _ = False, why.append('日志里有我们的报错：%s' % fatal[0][:120])
     print('   %s %s' % ('✅ 正常启动、无报错' if ok else '❌ ' + '；'.join(why),
