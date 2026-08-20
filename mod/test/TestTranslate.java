@@ -21,6 +21,21 @@ import java.util.Map;
 public class TestTranslate {
     static int failed = 0;
     static Method translate;
+    static Method rename;
+
+    static void checkRename(String label, String id, String cur, String want)
+            throws Exception {
+        Object got = rename.invoke(null, id, null, cur);
+        boolean ok = want == null ? got == null : want.equals(got);
+        if (!ok) {
+            failed++;
+        }
+        System.out.println((ok ? "  ok  " : "  ❌  ") + label + "  " + cur);
+        if (!ok) {
+            System.out.println("      期望 " + want);
+            System.out.println("      实得 " + got);
+        }
+    }
 
     static void check(String label, String in, String want) throws Exception {
         String got = (String) translate.invoke(null, in);
@@ -70,6 +85,44 @@ public class TestTranslate {
         // 表里没有的串原样透传
         check("陌生串透传", "Ancient Beekeeper Zzz", "Ancient Beekeeper Zzz");
         check("空串", "", "");
+
+        // 服务端那条：蜂笼/实体上**已经固化**的名字。改错玩家的物品比显示英文
+        // 严重得多，所以这里正反都验一遍。
+        Class<?> cg = Class.forName("cn.hoshino.pbzh.CageNames");
+        rename = cg.getDeclaredMethod("rename", String.class, String.class,
+                String.class);
+        rename.setAccessible(true);
+        // 找一对真的「英文系统名 ↔ id」：拿 id 的中文去 en2zh 里反查英文
+        JsonObject en2zh = tables.getAsJsonObject("en2zh");
+        String pickId = null;
+        String pickEn = null;
+        String pickZh = null;
+        for (Map.Entry<String, com.google.gson.JsonElement> e
+                : tables.getAsJsonObject("id2zh").entrySet()) {
+            String zh = e.getValue().getAsString();
+            for (Map.Entry<String, com.google.gson.JsonElement> f : en2zh.entrySet()) {
+                if (f.getValue().getAsString().equals(zh)) {
+                    pickId = e.getKey();
+                    pickEn = f.getKey();
+                    pickZh = zh;
+                    break;
+                }
+            }
+            if (pickId != null) {
+                break;
+            }
+        }
+        if (pickId == null) {
+            System.out.println("  ❌  蜂笼改名：表里找不到「英文名 ↔ id」成对的样本");
+            failed++;
+        } else {
+            checkRename("蜂笼改名", "productivebees:" + pickId, pickEn, pickZh);
+            checkRename("已是中文不碰", "productivebees:" + pickId, pickZh, null);
+            checkRename("玩家自定义名不碰", "productivebees:" + pickId,
+                    "My Best Bee 001", null);
+            checkRename("id 不认识就不改", "productivebees:zzz_not_a_bee", pickEn, null);
+            checkRename("空名不碰", "productivebees:" + pickId, "", null);
+        }
 
         System.out.println(failed == 0 ? "✅ 全部通过" : "❌ " + failed + " 项没过");
         if (failed > 0) {

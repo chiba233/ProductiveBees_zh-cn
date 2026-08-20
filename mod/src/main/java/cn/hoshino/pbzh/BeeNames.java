@@ -69,6 +69,17 @@ public final class BeeNames {
         return ID2ZH;
     }
 
+    /**
+     * 「英文整名 → 中文名」。给服务端那条改名路当**安全闸**用：只有当前这个名字
+     * 确实是模组自己生成的英文名时才允许改写，玩家用命名牌起的名字一律不碰。
+     *
+     * <p>生成期剔掉的那几个歧义名（两只蜂都叫 Amber Bee）不在表里，于是那几只的
+     * 蜂笼会保持英文——宁可少改，也不能把玩家的东西改坏。
+     */
+    static Map<String, String> enTable() {
+        return EN2ZH;
+    }
+
     private static List<String> quotedLongestFirst(Iterable<String> keys) {
         List<String> out = new ArrayList<>();
         for (String k : keys) {
