@@ -54,6 +54,12 @@ public final class LegacyEntry {
 
     public LegacyEntry() {
         MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
+        // 名牌是客户端事件，类在服务端不存在，用 try 兜住
+        try {
+            MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onRenderNameplate);
+        } catch (Throwable ignored) {
+            // 挂不上顶多是名牌还显示英文
+        }
         // 每 tick 一次，但方法自己先比语言表的对象身份，没换过立刻返回。
         // 资源重载后语言表是新对象，那一次才真正去学整合包自己加的蜂名。
         try {
@@ -133,6 +139,41 @@ public final class LegacyEntry {
             }
         } catch (Throwable ignored) {
             // 显示层永远不许把游戏搞崩：宁可不翻
+        }
+    }
+
+    /**
+     * 世界里那只蜂头顶的名牌——**显示层**，不碰任何数据。
+     *
+     * <p>只翻**系统生成名**：当前那串字必须在「模组自己生成的英文名」表里才动手，
+     * 玩家用命名牌起的名字原样显示。
+     *
+     * <p>新版本那几份还会先按实体类型过滤一道（`getType().getDescriptionId()`
+     * 里有没有 productivebees）。这一版**没有那道预过滤**：那两个方法在这个年代
+     * 都是 SRG 名，要为它再引两条映射；而名字表那道闸本身已经够——只有模组自己
+     * 生成的蜂名才会命中，而且这里只改渲染出来的字，一个字节的数据都不落。
+     */
+    static void onRenderNameplate(
+            net.minecraftforge.client.event.RenderNameplateEvent event) {
+        try {
+            init();
+            if (getString == null || newText == null) {
+                return;
+            }
+            ITextComponent c = event.getContent();
+            if (c == null) {
+                return;
+            }
+            String s = (String) getString.invoke(c);
+            if (!BeeNames.enTable().containsKey(s)) {
+                return;                        // 玩家自己起的名字，不碰
+            }
+            String zh = BeeNames.translate(s);
+            if (!zh.equals(s)) {
+                event.setContent((ITextComponent) newText.newInstance(zh));
+            }
+        } catch (Throwable ignored) {
+            // 显示层永远不许把游戏搞崩：宁可名牌还是英文
         }
     }
 }

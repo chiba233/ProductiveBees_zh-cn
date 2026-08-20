@@ -40,6 +40,12 @@ public final class ForgeEntry {
         } catch (Throwable ignored) {
             // 注册不上顶多是整合包自定义的蜂名不翻，不能因此让 mod 装不上
         }
+        // 名牌是客户端事件，类在服务端不存在，所以用 try 兜住
+        try {
+            MinecraftForge.EVENT_BUS.addListener(ForgeEntry::onRenderNameTag);
+        } catch (Throwable ignored) {
+            // 挂不上顶多是名牌还显示英文
+        }
         ServerCompat.ignoreOnServers();
     }
 
@@ -66,6 +72,35 @@ public final class ForgeEntry {
             }
         } catch (Exception ignored) {
             // 显示层永远不许把游戏搞崩：宁可不翻
+        }
+    }
+
+    /**
+     * 世界里那只蜂头顶的名牌——**显示层**，不碰任何数据。
+     *
+     * <p>只翻**系统生成名**：当前那串字必须在「模组自己生成的英文名」表里才动手，
+     * 玩家用命名牌起的名字原样显示，和物品栏、Jade 那边保持一致。
+     */
+    static void onRenderNameTag(net.minecraftforge.client.event.RenderNameplateEvent event) {
+        try {
+            if (!event.getEntity().getType().getDescriptionId()
+                    .contains("productivebees")) {
+                return;
+            }
+            Component c = event.getContent();
+            if (c == null) {
+                return;
+            }
+            String s = c.getString();
+            if (!BeeNames.enTable().containsKey(s)) {
+                return;                        // 玩家自己起的名字，不碰
+            }
+            String ns = BeeNames.translate(s);
+            if (!ns.equals(s)) {
+                event.setContent(new TextComponent(ns));
+            }
+        } catch (Throwable ignored) {
+            // 显示层永远不许把游戏搞崩：宁可名牌还是英文
         }
     }
 }
