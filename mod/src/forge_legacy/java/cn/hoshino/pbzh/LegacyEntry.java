@@ -6,7 +6,6 @@ package cn.hoshino.pbzh;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.common.Mod;
 
 import com.google.gson.Gson;
@@ -53,6 +52,29 @@ public final class LegacyEntry {
     private static Method setStyle;
     private static boolean ready;
 
+    /**
+     * 这一版跑在客户端还是专用服务器上。
+     *
+     * <p>**不走 FMLEnvironment**：那个类在 fmlloader 里，而这条路的编译类路径只有
+     * Forge 的 universal jar 和 Gson，编不到它。直接问「客户端专有类在不在」反而
+     * 更贴题——我们要防的就是「服务端上没有客户端类」这件事本身，问它等于直接
+     * 问到点子上，也不依赖 FML 的内部结构。
+     *
+     * <p>`initialize=false`：只看类在不在，不触发它的静态初始化。
+     *
+     * <p>问不出来就当**服务端**：宁可这几台客户端少翻几个字（那只是个 issue），
+     * 也不能让服务器起不来（那是 P0）。
+     */
+    private static boolean clientSide() {
+        try {
+            Class.forName("net.minecraft.client.Minecraft", false,
+                    LegacyEntry.class.getClassLoader());
+            return true;
+        } catch (Throwable notClient) {
+            return false;
+        }
+    }
+
     public LegacyEntry() {
         BeeNames.hello("Forge");
         // **显示层的监听器只在客户端注册。** 这几个事件类引用了客户端专有类型
@@ -60,7 +82,7 @@ public final class LegacyEntry {
         // 而 EventBus 注册时要反射事件类的构造器——在专用服务器上就是
         // NoClassDefFoundError，整个 mod 加载失败、服务器起不来。
         // 这不是新引入的问题：把老版本装进服务端一直都会崩，只是以前没人这么装。
-        if (FMLEnvironment.dist.isClient()) {
+        if (clientSide()) {
             MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
             try {
                 MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onRenderNameplate);
