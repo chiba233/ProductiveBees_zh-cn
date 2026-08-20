@@ -53,6 +53,7 @@ public final class LegacyEntry {
     private static boolean ready;
 
     public LegacyEntry() {
+        BeeNames.hello("Forge");
         MinecraftForge.EVENT_BUS.addListener(LegacyEntry::onItemTooltip);
         // 名牌是客户端事件，类在服务端不存在，用 try 兜住
         try {

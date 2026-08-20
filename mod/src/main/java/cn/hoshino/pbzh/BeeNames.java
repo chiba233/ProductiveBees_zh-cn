@@ -64,6 +64,18 @@ public final class BeeNames {
     private BeeNames() {
     }
 
+    /**
+     * 启动时报一声，把表的规模一并说出来。
+     *
+     * <p>不是装饰：**Forge 启动时根本不打印 mod 列表**（NeoForge 才打印），
+     * 服主没有任何办法确认这个 mod 到底装上没有、表有没有打进 jar。有了这一行，
+     * 「验证装对了没有」就有了第一条可自查的证据，服务端冒烟测试也有了判据。
+     */
+    static void hello(String where) {
+        System.out.println("[productivebees_zh_cn] 已加载（" + where + "）：蜂名 "
+                + ID2ZH.size() + " 条");
+    }
+
     /** 「蜂 id → 中文名」，给 {@link BeeData} 改 NBT 用。表是构建时生成的。 */
     static Map<String, String> idTable() {
         return ID2ZH;

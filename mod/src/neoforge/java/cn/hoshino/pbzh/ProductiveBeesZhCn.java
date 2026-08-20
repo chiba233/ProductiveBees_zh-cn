@@ -23,6 +23,7 @@ public final class ProductiveBeesZhCn {
     public static final String MODID = "productivebees_zh_cn";
 
     public ProductiveBeesZhCn(IEventBus modBus) {
+        BeeNames.hello("NeoForge");
         // ItemTooltipEvent 在游戏总线上，不在 mod 总线上；它是双端事件，
         // 服务端注册了也只是没人触发，不会出错
         NeoForge.EVENT_BUS.addListener(TooltipHook::onItemTooltip);
