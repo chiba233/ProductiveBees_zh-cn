@@ -5,13 +5,10 @@ package cn.hoshino.pbzh;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.List;
@@ -25,10 +22,11 @@ import java.util.List;
  * <p>两个入口，和判断逻辑分开：这里只负责把 NBT 掏出来、把结果写回去，
  * 「要不要改、改成什么」全在 {@link CageNames}（那个类不碰 Minecraft，能单测）。
  *
- * <ul>
- *   <li>玩家背包每 100 tick 扫一次：只看蜂笼，只改 `custom_data` 里的 `name`；</li>
- *   <li>实体进入世界时：只看**带自定义名**的资源蜜蜂实体（从蜂笼放出来的那些）。</li>
- * </ul>
+ * <p><b>只处理蜂笼</b>：需要服务端插手的只有蜂笼那份 NBT。从蜂笼放出来的蜜蜂，
+ * 它的 `CustomName` 就是蜂笼里存的那个名字——蜂笼修好了，放出来自然是中文，
+ * 不必再去动世界里的实体（那是改存档，风险大而且没必要）。
+ *
+ * <p>玩家背包每 100 tick 扫一次，只看蜂笼，只改 `custom_data` 里的 `name`。
  *
  * <p>整段包在 try/catch 里：这是显示层的锦上添花，**绝不允许它把服务器搞崩**。
  */
@@ -74,36 +72,6 @@ final class ServerNames {
             }
             tag.putString("name", zh);
             stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-        }
-    }
-
-    static void onEntityJoin(EntityJoinLevelEvent event) {
-        Entity e = event.getEntity();
-        if (event.getLevel().isClientSide() || !e.hasCustomName()) {
-            return;
-        }
-        try {
-            String type = e.getType().builtInRegistryHolder().key().location().toString();
-            if (!type.startsWith("productivebees:")) {
-                return;
-            }
-            Component name = e.getCustomName();
-            if (name == null) {
-                return;
-            }
-            // 数据包定义的蜂都是同一个实体类型，真实身份在它自己的 NBT 里
-            String inner = null;
-            CompoundTag nbt = new CompoundTag();
-            e.saveWithoutId(nbt);
-            if (nbt.contains("type")) {
-                inner = nbt.getString("type");
-            }
-            String zh = CageNames.rename(inner, type, name.getString());
-            if (zh != null) {
-                e.setCustomName(Component.literal(zh));
-            }
-        } catch (Throwable ignored) {
-            // 同上：改不动就算了
         }
     }
 }
