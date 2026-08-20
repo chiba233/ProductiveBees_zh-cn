@@ -148,30 +148,60 @@ public final class LegacyEntry {
      * <p>只翻**系统生成名**：当前那串字必须在「模组自己生成的英文名」表里才动手，
      * 玩家用命名牌起的名字原样显示。
      *
-     * <p>新版本那几份还会先按实体类型过滤一道（`getType().getDescriptionId()`
-     * 里有没有 productivebees）。这一版**没有那道预过滤**：那两个方法在这个年代
-     * 都是 SRG 名，要为它再引两条映射；而名字表那道闸本身已经够——只有模组自己
-     * 生成的蜂名才会命中，而且这里只改渲染出来的字，一个字节的数据都不落。
+     * <p><b>这一段整个走反射，因为同一套源码要编 1.15.2 和 1.16.x 两代，而它们的
+     * {@code RenderNameplateEvent} 形状不一样</b>——拿 Forge 官方 jar 核过：
+     *
+     * <pre>
+     *   1.15.2  String getContent()          / setContent(String)
+     *   1.16.x  ITextComponent getContent()  / setContent(ITextComponent)
+     * </pre>
+     *
+     * 直接写类型只能过一边（1.15.2 那次构建就是这么红的）。所以读回来什么就认什么：
+     * 是 String 就直接用，是组件就走 {@code getString}；写回去按**这一版
+     * setContent 真正声明的参数类型**给。
+     *
+     * <p>新版本那几份还会先按实体类型过滤一道。这一版没有：那两个方法在这个年代都是
+     * SRG 名，要为它再引两条映射；而名字表那道闸本身已经够——只有模组自己生成的蜂名
+     * 才会命中，何况这里只改渲染出来的字，一个字节的数据都不落。
      */
     static void onRenderNameplate(
             net.minecraftforge.client.event.RenderNameplateEvent event) {
         try {
             init();
-            if (getString == null || newText == null) {
+            if (newText == null) {
                 return;
             }
-            ITextComponent c = event.getContent();
+            Object c = event.getClass().getMethod("getContent").invoke(event);
             if (c == null) {
                 return;
             }
-            String s = (String) getString.invoke(c);
+            String s;
+            if (c instanceof String) {
+                s = (String) c;
+            } else if (getString != null) {
+                s = (String) getString.invoke(c);
+            } else {
+                return;
+            }
             if (!BeeNames.enTable().containsKey(s)) {
                 return;                        // 玩家自己起的名字，不碰
             }
             String zh = BeeNames.translate(s);
-            if (!zh.equals(s)) {
-                event.setContent((ITextComponent) newText.newInstance(zh));
+            if (zh.equals(s)) {
+                return;
             }
+            Method set = null;
+            for (Method m : event.getClass().getMethods()) {
+                if (m.getName().equals("setContent") && m.getParameterCount() == 1) {
+                    set = m;
+                    break;
+                }
+            }
+            if (set == null) {
+                return;
+            }
+            set.invoke(event, set.getParameterTypes()[0] == String.class
+                    ? zh : newText.newInstance(zh));
         } catch (Throwable ignored) {
             // 显示层永远不许把游戏搞崩：宁可名牌还是英文
         }
