@@ -57,21 +57,33 @@ final class ServerNames {
                     || !stack.getItem().getDescriptionId().contains("bee_cage")) {
                 continue;
             }
-            CustomData cd = stack.get(DataComponents.CUSTOM_DATA);
-            if (cd == null) {
-                continue;
-            }
-            CompoundTag tag = cd.copyTag();
-            if (!tag.contains("name")) {
-                continue;
-            }
-            String zh = CageNames.rename(tag.getString("type"),
-                    tag.getString("entity"), tag.getString("name"));
-            if (zh == null) {
-                continue;
-            }
-            tag.putString("name", zh);
-            stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            rename(stack);
         }
+    }
+
+    /**
+     * 把一个蜂笼上固化的名字改成中文；改了返回 true。
+     *
+     * <p>单独拆出来是**为了能测**：这段是纯组件读写（`CUSTOM_DATA` 取出来、
+     * 改一个字段、写回去），不需要世界也不需要玩家，起个原版 Bootstrap 就能验。
+     * 埋在背包循环里的话，只有真有玩家在线才走得到，等于没有机械兜底。
+     */
+    static boolean rename(ItemStack stack) {
+        CustomData cd = stack.get(DataComponents.CUSTOM_DATA);
+        if (cd == null) {
+            return false;
+        }
+        CompoundTag tag = cd.copyTag();
+        if (!tag.contains("name")) {
+            return false;
+        }
+        String zh = CageNames.rename(tag.getString("type"),
+                tag.getString("entity"), tag.getString("name"));
+        if (zh == null) {
+            return false;
+        }
+        tag.putString("name", zh);
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        return true;
     }
 }
