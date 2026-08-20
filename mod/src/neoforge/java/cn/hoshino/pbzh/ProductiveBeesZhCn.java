@@ -28,6 +28,14 @@ public final class ProductiveBeesZhCn {
         NeoForge.EVENT_BUS.addListener(TooltipHook::onItemTooltip);
         // 服务端那一条：蜂笼里固化的名字。只有蜂笼的 NBT 需要服务端插手
         NeoForge.EVENT_BUS.addListener(ServerNames::onPlayerTick);
+        // 名牌是客户端事件，类在服务端不存在，所以和下面那句一样用 try 兜住
+        try {
+            NeoForge.EVENT_BUS.addListener(
+                    net.neoforged.neoforge.client.event.RenderNameTagEvent.class,
+                    NameTagHook::onRenderNameTag);
+        } catch (Throwable ignored) {
+            // 挂不上顶多是名牌还显示英文
+        }
         // 每 tick 一次；方法自己先比语言表对象身份，没换过立刻返回。
         // 资源重载后语言表是新对象，那一次才真正去学整合包自己加的蜂名。
         try {
