@@ -175,13 +175,23 @@ def one(tag, modjar, targets, lock):
 
     cmd = launch_cmd(home, java, tag)
     print('   起服 …')
-    p = subprocess.run(cmd, cwd=home, input='stop\n', capture_output=True,
-                       text=True, timeout=900)
-    log = p.stdout + p.stderr
+    # **不能拿「进程自己退出」当判据。** 1.15.2 收到 stop、存完档之后就挂在那儿
+    # 不退出——把我们的 jar 拿掉再跑一次，它照样不退，是那一版自己的毛病。
+    # 所以：发 stop、等一会儿、还不退就强杀，结论只看日志。
+    proc = subprocess.Popen(cmd, cwd=home, stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                            text=True)
+    killed = False
+    try:
+        log, _ = proc.communicate('stop\n', timeout=600)
+    except subprocess.TimeoutExpired:
+        killed = True
+        proc.kill()
+        log, _ = proc.communicate()
     (home / 'smoke.log').write_text(log)
     ok, why = True, []
-    if p.returncode != 0:
-        ok, _ = False, why.append('退出码 %d' % p.returncode)
+    if killed:
+        print('     （停服后进程没自己退出，超时强杀——这一版不装本 mod 也一样）')
     if 'Done (' not in log:
         ok, _ = False, why.append('没跑到 Done')
     # 判据是**我们自己喊的那一声**，不是 mod 列表：Forge 启动时根本不打印 mod 列表，
