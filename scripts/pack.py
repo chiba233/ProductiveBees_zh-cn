@@ -164,11 +164,15 @@ def sanity(jar, root):
             prof.setdefault(idx, m.group(4))
         return prof
 
-    en_path = 'assets/%s/lang/en_us.json' % NS
-    if en_path in z.namelist():
-        en = json.loads(z.read(en_path))
-        zh = json.loads((root / 'assets' / NS / 'lang'
-                         / 'zh_cn.json').read_text(encoding='utf-8'))
+    # 占位符红线同样要覆盖内嵌 lib 的命名空间——`valid_blocks.list_item` 这类
+    # 带 %s 的条目现在出在 assets/productivelib 那份里，只看本体就查不到它。
+    en, zh = {}, {}
+    for ns, sub in sorted(bundled_langs(jar).items()):
+        en.update(sub)
+        f = root / 'assets' / ns / 'lang' / 'zh_cn.json'
+        if f.is_file():
+            zh.update(json.loads(f.read_text(encoding='utf-8')))
+    if en:
         for k, v in zh.items():
             if not isinstance(v, str):
                 bad.append('lang %s 的值不是字符串' % k)
@@ -439,11 +443,19 @@ def build(man, jar, ver, t):
 
     lang = json.loads((ROOT / 'src' / 'lang' / 'zh_cn.json').read_text(encoding='utf-8'))
     lang, n_var = apply_variants(lang, jar)
+    # 别的命名空间的键不许留在本体这份里：留着就是同一条译文在 jar 里存两份，
+    # 打开语言文件看到的是 item.productivebees.upgrade_time 和
+    # item.productivelib.upgrade_time 挨着、值一模一样。
+    owned = {}
+    for ns, en in sorted(bundled_langs(jar).items()):
+        if ns != NS:
+            owned.update(en)
+    main = {k: v for k, v in lang.items() if k not in owned}
     lang_dst = res / 'assets' / NS / 'lang' / 'zh_cn.json'
     lang_dst.parent.mkdir(parents=True, exist_ok=True)
-    lang_dst.write_text(json.dumps(lang, ensure_ascii=False, indent=2) + '\n',
+    lang_dst.write_text(json.dumps(main, ensure_ascii=False, indent=2) + '\n',
                         encoding='utf-8')
-    n_lang = len(lang)
+    n_lang = len(main)
 
     # 内嵌 jar 里的命名空间也要出货：1.21.1 起升级组件搬进了 productivelib，
     # 那个 mod 是打包在资源蜜蜂 jar 里发的。只出 assets/productivebees 的话，
